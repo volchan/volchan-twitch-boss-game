@@ -25,16 +25,6 @@ ActiveRecord::Schema.define(version: 20170810132524) do
     t.index ["bot_id"], name: "index_boss_games_on_bot_id", using: :btree
   end
 
-  create_table "bot_threads", force: :cascade do |t|
-    t.integer  "bot_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "name"
-    t.string   "channel"
-    t.string   "twitch_token"
-    t.index ["bot_id"], name: "index_bot_threads_on_bot_id", using: :btree
-  end
-
   create_table "bots", force: :cascade do |t|
     t.string   "name"
     t.string   "channel"
@@ -65,6 +55,5 @@ ActiveRecord::Schema.define(version: 20170810132524) do
   end
 
   add_foreign_key "boss_games", "bots"
-  add_foreign_key "bot_threads", "bots"
   add_foreign_key "bots", "users"
 end
