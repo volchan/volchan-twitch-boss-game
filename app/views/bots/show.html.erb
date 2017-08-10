@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3 col-lg-6 col-lg-offset-3">
+      <h3><%= @bot.name %></h3>
+      <p><%= @bot.channel %></p>
+      <p><%= @bot.twitch_token %></p>
+      <% if @bot.bot_threads.first.running? %>
+        <p>status: running</p>
+      <% else %>
+        <p>status: stoped</p>
+      <% end %>
+      <%= link_to 'Start bot', "/start_thread/#{@bot.bot_threads.first.id}", class: 'btn btn-primary', remote: true %>
+      <%= link_to 'Delete Bot', @bot, class: 'btn btn-danger', method: :delete %>
+    </div>
+  </div>
+</div>

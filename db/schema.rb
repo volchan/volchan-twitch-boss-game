@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807165144) do
+ActiveRecord::Schema.define(version: 20170810132524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,8 +27,11 @@ ActiveRecord::Schema.define(version: 20170807165144) do
 
   create_table "bot_threads", force: :cascade do |t|
     t.integer  "bot_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "name"
+    t.string   "channel"
+    t.string   "twitch_token"
     t.index ["bot_id"], name: "index_bot_threads_on_bot_id", using: :btree
   end
 
@@ -37,8 +40,9 @@ ActiveRecord::Schema.define(version: 20170807165144) do
     t.string   "channel"
     t.string   "twitch_token"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "running",      default: false
     t.index ["user_id"], name: "index_bots_on_user_id", using: :btree
   end
 
