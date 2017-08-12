@@ -47,9 +47,8 @@ class BotsController < ApplicationController
   end
 
   def check_token
-    if params[:token].nil? || @bot.token != params[:token]
-      flash.now[:atlert] = "You don't have access to this boss game !"
-      redirect_to :root
-    end
+    return unless params[:token].nil? || @bot.token != params[:token]
+    flash.now[:atlert] = "You don't have access to this boss game !"
+    redirect_to :root
   end
 end

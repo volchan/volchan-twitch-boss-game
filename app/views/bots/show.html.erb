@@ -4,7 +4,9 @@
       <h3><%= @bot.boss_game.name %></h3>
       <p><%= @bot.boss_game.current_hp %> / <%= @bot.boss_game.max_hp %></p>
       <p><%= @bot.boss_game.shield %></p>
-      <%= link_to 'Delete Bot', @bot, class: 'btn btn-danger', method: :delete %>
+      <% if @bot.boss_game.avatar? %>
+        <%= image_tag @bot.boss_game.avatar %>
+      <% end %>
     </div>
   </div>
 </div>
