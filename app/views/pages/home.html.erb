@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <% @bots.each do |bot| %>
-      <div class="col-sm-4 text-center">
+      <div class="col-sm-6 text-center">
         <h1><%= bot.name %></h1>
         <p>
           <%= bot.channel %>
@@ -14,7 +14,8 @@
         <% if bot.boss_game %>
           <h3>boss</h3>
           <p><span>image</span><%= bot.boss_game.name %></p>
-          <p><%= "bit-boss.volchan.fr/bots/#{bot.id}/#{bot.token}" %></p>
+          <%= bot.boss_game.update(current_hp: rand(1..9999)) %>
+          <p><%= "bit-boss.volchan.fr/bots/#{bot.id}?token=#{bot.token}" %></p>
         <% end %>
       </div>
     <% end %>
