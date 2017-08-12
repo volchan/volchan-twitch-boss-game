@@ -1,5 +1,7 @@
 class BotsController < ApplicationController
-  before_action :set_bot, only: %i[show destroy]
+  before_action :set_bot, only: %i[show destroy check_token]
+  skip_before_action :authenticate_user!, only: %i[show]
+  before_action :check_token, only: %i[show]
 
   def index; end
 
@@ -18,17 +20,6 @@ class BotsController < ApplicationController
     )
 
     if @bot.save
-      BotThread.create(
-        name: bot_params[:name],
-        channel: bot_params[:channel],
-        twitch_token: bot_params[:twitch_token],
-        bot: @bot
-      )
-
-      BossGame.create(
-        bot: @bot
-      )
-
       redirect_to @bot
     else
       render :new
@@ -53,5 +44,12 @@ class BotsController < ApplicationController
 
   def set_bot
     @bot = Bot.find(params[:id])
+  end
+
+  def check_token
+    if params[:token].nil? || @bot.token != params[:token]
+      flash.now[:atlert] = "You don't have access to this boss game !"
+      redirect_to :root
+    end
   end
 end

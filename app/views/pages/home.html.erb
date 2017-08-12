@@ -6,13 +6,16 @@
         <p>
           <%= bot.channel %>
           <span>
-            <%= link_to bot, method: :delete do %>
+            <%= link_to bot_path(bot), method: :delete do %>
               <i class="fa fa-remove"></i>
             <% end %>
           </span>
         </p>
-        <h3>boss</h3>
-        <p><%= bot.boss_game.name %></p>
+        <% if bot.boss_game %>
+          <h3>boss</h3>
+          <p><span>image</span><%= bot.boss_game.name %></p>
+          <%= bot.boss_game.update(current_hp: rand(1..9999)) %>
+        <% end %>
       </div>
     <% end %>
   </div>
