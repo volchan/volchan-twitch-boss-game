@@ -1,12 +1,22 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3 col-lg-6 col-lg-offset-3">
-      <h3><%= @bot.boss_game.name %></h3>
-      <p><%= @bot.boss_game.current_hp %> / <%= @bot.boss_game.max_hp %></p>
-      <p><%= @bot.boss_game.shield %></p>
-      <% if @bot.boss_game.avatar? %>
-        <%= image_tag @bot.boss_game.avatar %>
-      <% end %>
+      <div class="boss-card">
+        <div class="boss-card-img">
+          <% if @bot.boss_game.avatar? %>
+            <%= image_tag @bot.boss_game.avatar %>
+          <% end %>
+        </div>
+        <div class="boss-card-name">
+          <p><%= @bot.boss_game.name %></p>
+        </div>
+        <div class="boss-card-life">
+          <p><%= @bot.boss_game.current_hp %> / <%= @bot.boss_game.max_hp %></p>
+        </div>
+        <div class="boss-card-shield">
+          <p><%= @bot.boss_game.shield %></p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
