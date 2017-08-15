@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :bots, only: %i[destroy show]
 
   get :create_boss, to: 'boss_games#create_boss'
-  get :update_boss, to: 'boss_games#update_boss'
+  get 'update_boss/:id', to: 'boss_games#update_boss'
 end

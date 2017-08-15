@@ -9,13 +9,15 @@ class BossGamesController < ApplicationController
   end
 
   def update_boss
-    BossGame.update(boss_game_params)
+    boss_game = BossGame.find(params[:id])
+    boss_game.update(boss_game_params)
   end
 
   private
 
   def authenticate_token
-    return unless params[:token].nil? || bot.token != params[:token]
+    boss_game = BossGame.find(params[:id])
+    return unless params[:token].nil? || (boss_game && boss_game.bot.token) != params[:token]
   end
 
   def boss_game_params
