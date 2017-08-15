@@ -18,11 +18,11 @@ class BossGames < ApplicationController
 
   def boss_game_params
     {
-      bot: Bot.find(params[:bot_id]),
+      bot: Bot.find(params[:bot_id].to_i),
       name: params[:name],
-      max_hp: params[:max_hp],
-      current_hp: params[:current_hp],
-      shield: params[:shield],
+      max_hp: params[:max_hp].to_i,
+      current_hp: params[:current_hp].to_i,
+      shield: params[:shield].to_i,
       avatar: params[:avatar]
     }
   end
