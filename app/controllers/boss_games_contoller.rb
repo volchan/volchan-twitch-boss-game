@@ -1,5 +1,7 @@
 class BossGamesController < ApplicationController
 
+  skip_before_action :authenticate_user!
+
   before_action :authenticate_token
 
   def create_boss
