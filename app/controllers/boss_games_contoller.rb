@@ -1,29 +1,29 @@
 class BossGames < ApplicationController
-  def create
-    BossGame.create(
-      bot: Bot.find(boss_game_params[:bot_id]),
-      name: boss_game_params[:name],
-      max_hp: boss_game_params[:max_hp],
-      current_hp: boss_game_params[:current_hp],
-      shield: boss_game_params[:shield],
-      avatar: boss_game_params[:avatar]
-    )
+
+  before_action :authenticate_token
+
+  def create_boss
+    BossGame.create(boss_game_params)
   end
 
-  def update
-    BossGame.update(
-      bot: Bot.find(boss_game_params[:bot_id]),
-      name: boss_game_params[:name],
-      max_hp: boss_game_params[:max_hp],
-      current_hp: boss_game_params[:current_hp],
-      shield: boss_game_params[:shield],
-      avatar: boss_game_params[:avatar]
-    )
+  def update_boss
+    BossGame.update(boss_game_params)
   end
 
   private
 
+  def authenticate_token
+    return unless params[:token].nil? || @bot.token != params[:token]
+  end
+
   def boss_game_params
-    params.require(:boss_game).permit(:bot_id, :name, :max_hp, :current_hp, :shield, :avatar)
+    {
+      bot: Bot.find(params[:bot_id]),
+      name: params[:name],
+      max_hp: params[:max_hp],
+      current_hp: params[:current_hp],
+      shield: params[:shield],
+      avatar: params[:avatar]
+    }
   end
 end
