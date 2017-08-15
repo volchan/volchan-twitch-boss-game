@@ -13,7 +13,11 @@ class BossGame < ApplicationRecord
       boss_current_hp: current_hp,
       boss_max_hp: max_hp,
       boss_shield: shield,
-      boss_avatar: avatar
+      boss_avatar: avatar,
+      heal: current_hp_was < current_hp && !name_changed?,
+      damages: current_hp_was > current_hp,
+      shield: shield_was < shield,
+      new_boss: name_changed?
     )
   end
 end
