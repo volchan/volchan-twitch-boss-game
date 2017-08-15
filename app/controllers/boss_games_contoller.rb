@@ -1,4 +1,4 @@
-class BossGames < ApplicationController
+class BossGamesController < ApplicationController
 
   before_action :authenticate_token
 
