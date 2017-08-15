@@ -15,7 +15,7 @@ class BossGamesController < ApplicationController
   private
 
   def authenticate_token
-    return unless params[:token].nil? || @bot.token != params[:token]
+    return unless params[:token].nil? || bot.token != params[:token]
   end
 
   def boss_game_params
