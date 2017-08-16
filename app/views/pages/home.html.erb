@@ -15,7 +15,6 @@
         <% if bot.boss_game %>
           <h3>boss</h3>
           <p><span>image</span><%= bot.boss_game.name %></p>
-          <%= bot.boss_game.update(current_hp: rand(1..9999)) %>
         <% end %>
       </div>
     <% end %>
