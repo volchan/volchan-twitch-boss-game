@@ -1,6 +1,6 @@
 class BotsController < ApplicationController
-  before_action :set_bot, only: %i[show destroy check_token]
   skip_before_action :authenticate_user!, only: %i[show]
+  before_action :set_bot, only: %i[show destroy check_token]
   before_action :check_token, only: %i[show]
 
   def index; end

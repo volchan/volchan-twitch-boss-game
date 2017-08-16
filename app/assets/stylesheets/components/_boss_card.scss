@@ -1,0 +1,87 @@
+.boss-card {
+  display: flex;
+  height: 230px;
+  transition: all 0.5s ease;
+  &-img {
+    flex: 1;
+    border-radius: 4px 4px 0 4px;
+    background-size: cover;
+  }
+  &-content {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    &-top {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &-name {
+       color: #333;
+       p {
+         margin: 0;
+         font-weight: bold;
+       }
+      }
+    }
+    &-bottom {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      &-top {
+        flex: 2;
+        &-life {
+          flex: 1;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          border-radius: 0 4px 0 0;
+          text-align: center;
+          color: #ecf0f1;
+          position: relative;
+          p {
+            margin: 0;
+            width: 100%;
+            z-index: 2;
+          }
+          &-current {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+            width: 100%;
+            background: linear-gradient(to right, #27ae60 0%, #27ae60 75%, #c0392b 75%, #c0392b 100%);
+            border-radius: 0 4px 0 0;
+          }
+        }
+      }
+      &-bottom {
+        flex: 1;
+        &-shield {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          border-radius: 0 0 4px 0;
+          text-align: center;
+          color: #ecf0f1;
+          position: relative;
+          p {
+            margin: 0;
+            width: 100%;
+            z-index: 2
+          }
+          &-current {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+            width: 100%;
+            border-radius: 0 0 4px 0;
+            background: linear-gradient(to right, #3498db 0%, #3498db 10%, #34495e 10%, #34495e 100%);
+          }
+        }
+      }
+    }
+  }
+}
