@@ -13,13 +13,13 @@
           <div class="boss-card-content-bottom">
             <div class="boss-card-content-bottom-top">
               <div class="boss-card-content-bottom-top-life">
-                <p><%= @bot.boss_game.current_hp %> / <%= @bot.boss_game.max_hp %></p>
+                <p id="boss-life"><%= @bot.boss_game.current_hp %> / <%= @bot.boss_game.max_hp %></p>
                 <div class="boss-card-content-bottom-top-life-current"></div>
               </div>
             </div>
             <div class="boss-card-content-bottom-bottom">
               <div class="boss-card-content-bottom-bottom-shield">
-                <p><%= @bot.boss_game.shield %></p>
+                <p id="boss-shield"><%= @bot.boss_game.shield %></p>
                 <div class="boss-card-content-bottom-bottom-shield-current"></div>
               </div>
             </div>
