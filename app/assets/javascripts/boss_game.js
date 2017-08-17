@@ -1,14 +1,8 @@
-function bossBars() {
+function initBossBars() {
   var boss_current_hp = $('#boss-current-hp').text();
   var boss_max_hp = $('#boss-max-hp').text();
-  var health_percentage = (boss_current_hp / boss_max_hp) * 100
-  var health_width = health_percentage + '%'
-  $('.boss-card-content-bottom-top-life-current').animate({width: health_width}, 1000, function() {});
-
   var boss_shield = $('#boss-shield').text()
-  var shield_percentage = (boss_shield / boss_max_hp) * 100
-  var shield_width = shield_percentage + '%'
-  $('.boss-card-content-bottom-bottom-shield-current').animate({width: shield_width}, 1000, function() {});
+  updateBossBars(boss_current_hp, boss_max_hp, boss_shield)
 };
 
 function updateBossBars(current_hp, max_hp, shield) {
@@ -48,5 +42,5 @@ function updateBoss(data) {
 }
 
 $(document).ready(function() {
-  bossBars();
+  initBossBars();
 });

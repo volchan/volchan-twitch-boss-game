@@ -1,9 +1,16 @@
 class BotsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
+
   before_action :set_bot, only: %i[show destroy check_token]
   before_action :check_token, only: %i[show]
 
-  def index; end
+  def index
+    @bots = Bot.all
+    unless current_user.admin?
+      flash[:alert] = 'You don\'t have access to this page !'
+      redirect_to :root
+    end
+  end
 
   def show; end
 
@@ -32,7 +39,7 @@ class BotsController < ApplicationController
 
   def destroy
     @bot.destroy
-    flash.now[:notice] = 'Succèssfully deleted !'
+    flash[:notice] = 'Succèssfully deleted !'
     redirect_to :root
   end
 
@@ -47,8 +54,8 @@ class BotsController < ApplicationController
   end
 
   def check_token
-    return unless params[:token].nil? || @bot.token != params[:token]
-    flash.now[:atlert] = "You don't have access to this boss game !"
+    return unless params[:token].blank? || @bot.token != params[:token]
+    flash[:alert] = "You don't have access to this boss game !"
     redirect_to :root
   end
 end

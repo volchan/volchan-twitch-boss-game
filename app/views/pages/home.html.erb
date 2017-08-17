@@ -1,22 +1,10 @@
-<div class="container">
-  <div class="row">
-    <% @bots.each do |bot| %>
-      <div class="col-sm-6 text-center">
-        <h1><%= bot.name %></h1>
-        <p>
-          <%= bot.channel %>
-          <span>
-            <%= link_to bot_path(bot), method: :delete do %>
-              <i class="fa fa-remove"></i>
-            <% end %>
-          </span>
-        </p>
-        <p><%= "bit-boss.volchan.fr/bots/#{bot.id}?token=#{bot.token}" %></p>
-        <% if bot.boss_game %>
-          <h3>boss</h3>
-          <p><span>image</span><%= bot.boss_game.name %></p>
-        <% end %>
-      </div>
-    <% end %>
+<div class="site">
+  <div class="site-main">
+    <div class="site-banner">
+      <h1>Subs and Bits Boss Battle</h1>
+      <p>Let your subs and bit donators battle to become the new boss !</p>
+      <div class="btn btn-primary">contact me</div>
+    </div>
   </div>
+  <%= render 'shared/footer' %>
 </div>

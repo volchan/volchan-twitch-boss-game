@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <% @bots.each do |bot| %>
+      <div class="col-sm-6 text-center">
+        <h1><%= bot.name %></h1>
+        <p>
+          <%= bot.channel %>
+          <span>
+            <%= link_to bot_path(bot), method: :delete do %>
+              <i class="fa fa-remove"></i>
+            <% end %>
+          </span>
+        </p>
+        <p><%= "bit-boss.volchan.fr/bots/#{bot.id}?token=#{bot.token}" %></p>
+        <% if bot.boss_game %>
+          <h3>boss</h3>
+          <img src="<%= boss_image(bot.boss_game) %>" id="boss-avatar" class="img-responsive" alt="boss avatar">
+          <p><%= bot.boss_game.name %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
