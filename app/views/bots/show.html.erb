@@ -1,27 +1,29 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-      <div class="boss-card">
-        <div class="boss-card-img">
-          <img src="<%= boss_image(@bot.boss_game) %>" id="boss-avatar" class="img-responsive" alt="boss avatar">
-        </div>
-        <div class="boss-card-content">
-          <div class="boss-card-content-top">
-            <div class="boss-card-content-top-name">
-              <p id="boss-name"><%= @bot.boss_game.name %></p>
-            </div>
+<div class="show-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="boss-card">
+          <div class="boss-card-img">
+            <img src="<%= boss_image(@bot.boss_game) %>" id="boss-avatar" class="img-responsive" alt="boss avatar">
           </div>
-          <div class="boss-card-content-bottom">
-            <div class="boss-card-content-bottom-top">
-              <div class="boss-card-content-bottom-top-life">
-                <p><span id="boss-current-hp"><%= @bot.boss_game.current_hp %></span> / <span id="boss-max-hp"><%= @bot.boss_game.max_hp %></span></p>
-                <div class="boss-card-content-bottom-top-life-current"></div>
+          <div class="boss-card-content">
+            <div class="boss-card-content-top">
+              <div class="boss-card-content-top-name">
+                <p id="boss-name"><%= @bot.boss_game.name %></p>
               </div>
             </div>
-            <div class="boss-card-content-bottom-bottom">
-              <div class="boss-card-content-bottom-bottom-shield">
-                <p id="boss-shield"><%= @bot.boss_game.shield %></p>
-                <div class="boss-card-content-bottom-bottom-shield-current"></div>
+            <div class="boss-card-content-bottom">
+              <div class="boss-card-content-bottom-top">
+                <div class="boss-card-content-bottom-top-life">
+                  <p><span id="boss-current-hp"><%= @bot.boss_game.current_hp %></span> / <span id="boss-max-hp"><%= @bot.boss_game.max_hp %></span></p>
+                  <div class="boss-card-content-bottom-top-life-current"></div>
+                </div>
+              </div>
+              <div class="boss-card-content-bottom-bottom">
+                <div class="boss-card-content-bottom-bottom-shield">
+                  <p id="boss-shield"><%= @bot.boss_game.shield %></p>
+                  <div class="boss-card-content-bottom-bottom-shield-current"></div>
+                </div>
               </div>
             </div>
           </div>
