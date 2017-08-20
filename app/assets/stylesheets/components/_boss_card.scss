@@ -1,88 +1,162 @@
-.boss-card {
+.boss-wrapper {
+  height: 400px;
+  width: 400px;
   display: flex;
-  height: 230px;
-  &-img {
-    flex: 3;
-    overflow: hidden;
-    border-radius: 4px 4px 0 4px;
-    #boss-avatar {
-      min-height: 100%
-    }
+  align-items: center;
+  justify-content: center;
+	flex-direction: column;
+}
+
+.boss {
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  &-avatar {
+    height: 79%;
+    width: 79%;
+    border-radius: 50%;
+    background-size: cover;
+    z-index: 6;
   }
-  &-content {
-    flex: 7;
+  &-life-logo {
+    height: 40%;
+    width: 40%;
+    border-radius: 50%;
+    border: 6px solid #018404;
+    top: 0px;
+    left: -40px;
+    z-index: 8;
+    position: absolute;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: 50% 65%;
+    background-color: #0bc91d;
+    font-size: 25px;
+    font-family: $body-font;
+    font-weight: bold;
+    color: #f4f4f4;
     display: flex;
-    flex-direction: column;
-    &-top {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      &-name {
-       color: #333;
-       p {
-         margin: 0;
-         font-size: 60px;
-         font-weight: bold;
-       }
-      }
-    }
-    &-bottom {
-      flex: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      &-top {
-        flex: 2;
-        &-life {
-          flex: 1;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          border-radius: 0 4px 0 0;
-          text-align: center;
-          color: #ecf0f1;
-          background: #c0392b;
-          position: relative;
-          overflow: hidden;
-          p {
-            margin: 0;
-            font-size: 60px;
-            width: 100%;
-            z-index: 2;
-          }
-          &-current {
-            position: absolute;
-            height: 100%;
-            background: #27ae60;
-          }
-        }
-      }
-      &-bottom {
-        flex: 1;
-        &-shield {
-          height: 100%;
-          display: flex;
-          align-items: center;
-          border-radius: 0 0 4px 0;
-          text-align: center;
-          color: #ecf0f1;
-          background: #34495e;
-          position: relative;
-          overflow: hidden;
-          p {
-            margin: 0;
-            width: 100%;
-            font-size: 30px;
-            z-index: 2
-          }
-          &-current {
-            position: absolute;
-            height: 100%;
-            background: #3498db;
-          }
-        }
-      }
+    align-items: center;
+    justify-content: center;
+  }
+  &-life-inner-border {
+    height: 80%;
+    width: 80%;
+    border-radius: 50%;
+    z-index: 7;
+    position: absolute;
+    border: 6px solid #018404;
+  }
+  &-life-outter-border{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    z-index: 6;
+    position: absolute;
+    background: transparent;
+    border: 6px solid #018404;
+  }
+  &-life-fill {
+    height: 99%;
+    width: 99%;
+    border-radius: 50%;
+    z-index: 5;
+    position: absolute;
+    svg {
+      position: absolute;
+      transform: rotate3D(1,-1,0,180deg);
     }
   }
+  &-life-bg {
+    height: 99%;
+    width: 99%;
+    border-radius: 50%;
+    z-index: 1;
+    position: absolute;
+    background: #2f4425;
+  }
+  &-life-text {
+		font-size: 40px;
+		color: #0BC91D;
+		margin: -5px;
+    font-family: $body-font;
+    font-weight: bold;
+	}
+
+  &-shield-logo {
+    height: 40%;
+    width: 40%;
+    border-radius: 50%;
+    border: 6px solid #00aeef;
+    top: 0px;
+    left: -40px;
+    z-index: 8;
+    position: absolute;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: 50% 65%;
+    background-color: #006d96;
+    font-size: 25px;
+    font-family: $body-font;
+    font-weight: bold;
+    color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-shield-inner-border {
+    height: 80%;
+    width: 80%;
+    border-radius: 50%;
+    z-index: 7;
+    position: absolute;
+    border: 6px solid #018404;
+  }
+  &-shield-outter-border{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    z-index: 6;
+    position: absolute;
+    background: transparent;
+    border: 6px solid #018404;
+  }
+  &-shield-fill {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    z-index: 5;
+    position: absolute;
+    background: #018404;
+    svg {
+      position: absolute;
+      transform: rotate3D(1,-1,0,180deg);
+    }
+  }
+  &-shield-bg {
+    height: 99%;
+    width: 99%;
+    border-radius: 50%;
+    z-index: 3;
+    position: absolute;
+    background: #018404;
+  }
+	&-name {
+		font-size: 40px;
+    color: #f4f4f4;
+		margin: -10px;
+    font-family: $body-font;
+    font-weight: bold;
+	}
+	&-shield-text {
+		font-size: 40px;
+		color: #006d96;
+		margin: -5px;
+    font-family: $body-font;
+    font-weight: bold;
+	}
 }

@@ -1,7 +1,7 @@
 module ApplicationHelper
   def boss_image(boss)
     if boss.avatar.blank?
-      'https://www.wallstreetotc.com/wp-content/uploads/2014/10/facebook-anonymous-app.jpg'
+      'https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png'
     else
       boss.avatar
     end

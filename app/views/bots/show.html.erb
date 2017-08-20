@@ -1,36 +1,20 @@
 <div class="show-wrapper">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-10 col-xs-offset-1">
-        <div class="boss-card">
-          <div class="boss-card-img">
-            <img src="<%= boss_image(@bot.boss_game) %>" id="boss-avatar" class="img-responsive" alt="boss avatar">
-          </div>
-          <div class="boss-card-content">
-            <div class="boss-card-content-top">
-              <div class="boss-card-content-top-name">
-                <p id="boss-name"><%= @bot.boss_game.name %></p>
-              </div>
-            </div>
-            <div class="boss-card-content-bottom">
-              <div class="boss-card-content-bottom-top">
-                <div class="boss-card-content-bottom-top-life">
-                  <p><span id="boss-current-hp"><%= @bot.boss_game.current_hp %></span> / <span id="boss-max-hp"><%= @bot.boss_game.max_hp %></span></p>
-                  <div class="boss-card-content-bottom-top-life-current"></div>
-                </div>
-              </div>
-              <div class="boss-card-content-bottom-bottom">
-                <div class="boss-card-content-bottom-bottom-shield">
-                  <p id="boss-shield"><%= @bot.boss_game.shield %></p>
-                  <div class="boss-card-content-bottom-bottom-shield-current"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="boss-wrapper">
+		<div class="boss">
+			<div class="boss-avatar" style="background-image: url('<%= boss_image(@bot.boss_game) %>');"></div>
+			<div class="boss-life-logo" style="display: none; background-image: url('<%= image_url 'heart.svg' %>');"><span id="boss-life-percent"></span>%</div>
+			<div class="boss-life-outter-border" style="display: none;"></div>
+			<div class="boss-life-inner-border" style="display: none;"></div>
+			<div class="boss-life-fill" id="life-circle" style="display: none;"></div>
+			<div class="boss-shield-logo" style="background-image: url('<%= image_url 'shield.svg' %>')"><span id="boss-shield-percent"></span>%</div>
+      <div class="boss-shield-outter-border"></div>
+      <div class="boss-shield-inner-border"></div>
+			<div class="boss-shield-fill" id="shield-circle"></div>
+		</div>
+		<div class="boss-name"><%= @bot.boss_game.name %></div>
+		<div class="boss-life-text" style="display: none;"><span id="boss-current-hp"><%= @bot.boss_game.current_hp %></span>/<span id="boss-max-hp"><%= @bot.boss_game.max_hp %></span></div>
+		<div class="boss-shield-text"><span id="boss-current-shield"><%= @bot.boss_game.shield %></span>/<span id="boss-max-shield"><%= @bot.boss_game.max_hp %></span></div>
+	</div>
 </div>
 
 <%= content_for :after_js do %>
