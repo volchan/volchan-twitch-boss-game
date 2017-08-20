@@ -2,18 +2,18 @@
   <div class="boss-wrapper">
 		<div class="boss">
 			<div class="boss-avatar" style="background-image: url('<%= boss_image(@bot.boss_game) %>');"></div>
-			<div class="boss-life-logo" style="display: none; background-image: url('<%= image_url 'heart.svg' %>');"><span id="boss-life-percent"></span>%</div>
-			<div class="boss-life-outter-border" style="display: none;"></div>
-			<div class="boss-life-inner-border" style="display: none;"></div>
-			<div class="boss-life-fill" id="life-circle" style="display: none;"></div>
-			<div class="boss-shield-logo" style="background-image: url('<%= image_url 'shield.svg' %>')"><span id="boss-shield-percent"></span>%</div>
-      <div class="boss-shield-outter-border"></div>
-      <div class="boss-shield-inner-border"></div>
-			<div class="boss-shield-fill" id="shield-circle"></div>
+			<div class="boss-life-logo " style="background-image: url('<%= image_url 'heart.svg' %>');"><span id="boss-life-percent"></span>%</div>
+			<div class="boss-life-outter-border "></div>
+			<div class="boss-life-inner-border "></div>
+			<div class="boss-life-fill " id="life-circle"></div>
+			<div class="boss-shield-logo hidden" style="background-image: url('<%= image_url 'shield.svg' %>')"><span id="boss-shield-percent"></span>%</div>
+      <div class="boss-shield-outter-border hidden"></div>
+      <div class="boss-shield-inner-border hidden"></div>
+			<div class="boss-shield-fill hidden" id="shield-circle"></div>
 		</div>
 		<div class="boss-name"><%= @bot.boss_game.name %></div>
-		<div class="boss-life-text" style="display: none;"><span id="boss-current-hp"><%= @bot.boss_game.current_hp %></span>/<span id="boss-max-hp"><%= @bot.boss_game.max_hp %></span></div>
-		<div class="boss-shield-text"><span id="boss-current-shield"><%= @bot.boss_game.shield %></span>/<span id="boss-max-shield"><%= @bot.boss_game.max_hp %></span></div>
+		<div class="boss-life-text "><span id="boss-current-hp"><%= @bot.boss_game.current_hp %></span>/<span id="boss-max-hp"><%= @bot.boss_game.max_hp %></span></div>
+		<div class="boss-shield-text hidden"><span id="boss-current-shield"><%= @bot.boss_game.shield %></span>/<span id="boss-max-shield"><%= @bot.boss_game.max_hp %></span></div>
 	</div>
 </div>
 
