@@ -141,18 +141,29 @@
     z-index: 3;
     position: absolute;
   }
+  &-shield-text {
+    font-size: 35px;
+    color: #006d96;
+    margin: -8px;
+    font-family: $body-font;
+    font-weight: bold;
+  }
+
+  &-name-container {
+    width: 75%;
+		height: 50px;
+		overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 	&-name {
-		font-size: 35px;
+		font-size: 40px;
     color: #f4f4f4;
 		margin: -5px;
     font-family: $body-font;
     font-weight: bold;
-	}
-	&-shield-text {
-		font-size: 35px;
-		color: #006d96;
-		margin: -8px;
-    font-family: $body-font;
-    font-weight: bold;
+    position: absolute;
 	}
 }

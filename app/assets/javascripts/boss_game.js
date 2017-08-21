@@ -17,6 +17,11 @@ function initBossBars() {
     $('.boss-shield-fill').removeClass('hidden');
     $('.boss-shield-text').removeClass('hidden');
   }
+  if ($('.boss-name-container')[0].scrollWidth < $('.boss-name')[0].scrollWidth) {
+    $('.boss-name').addClass('scrolling-text');
+  } else {
+    $('.boss-name').removeClass('scrolling-text');
+  }
   life_bar.set(boss_current_hp / boss_max_hp);
   heal_bar.set(boss_current_hp / boss_max_hp);
   damage_bar.set(boss_current_hp / boss_max_hp);
@@ -106,6 +111,11 @@ function damageShield(current_shield, max_shield) {
 
 function changeBoss(data) {
   $('.boss-name').text(data['boss_name']);
+  if ($('.boss-name-container')[0].scrollWidth < $('.boss-name')[0].scrollWidth) {
+    $('.boss-name').addClass('scrolling-text');
+  } else {
+    $('.boss-name').removeClass('scrolling-text');
+  }
   var boss_avatar = data['boss_avatar'];
   if (boss_avatar == null || boss_avatar == '') {
     $('.boss-avatar').css('background-image', "url('https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png')");
@@ -132,11 +142,6 @@ function changeBoss(data) {
 };
 
 function updateBoss(data) {
-  var name = $('#boss-name').text()
-  if (name != data['boss_name']) {
-    $('#boss-name').text(data['boss_name']);
-  }
-
   var current_hp = $('#boss-current-hp').text();
   if (data['boss_current_hp'] < 0) {
     var new_hp = 0;
