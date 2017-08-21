@@ -31,7 +31,7 @@ function healBoss(current_hp, max_hp) {
   var health_percentage = current_hp / max_hp;
   heal_bar.set(health_percentage);
   damage_bar.set(health_percentage);
-  life_bar.animate(health_percentage, { duration: 1000 }, function() {
+  life_bar.animate(health_percentage, { duration: 2000 }, function() {
     if ($('#boss-current-hp').text() == max_hp) {
       $('.boss-life-logo').addClass('hidden');
       $('.boss-life-outter-border').addClass('hidden');
@@ -64,7 +64,7 @@ function damageBoss(current_hp, max_hp) {
   var health_percentage = current_hp / max_hp;
   heal_bar.set(health_percentage);
   life_bar.set(health_percentage);
-  damage_bar.animate(health_percentage, { duration: 1000 });
+  damage_bar.animate(health_percentage, { duration: 2000 });
 };
 
 function addShield(current_shield, max_shield) {
@@ -82,13 +82,13 @@ function addShield(current_shield, max_shield) {
   }
   var shield_percentage = current_shield / max_shield;
   shield_bar_bg.set(shield_percentage);
-  shield_bar.animate(shield_percentage, { duration: 1000 });
+  shield_bar.animate(shield_percentage, { duration: 2000 });
 };
 
 function damageShield(current_shield, max_shield) {
   var shield_percentage = current_shield / max_shield;
   shield_bar.set(shield_percentage);
-  shield_bar_bg.animate(shield_percentage, { duration: 1000 }, function() {
+  shield_bar_bg.animate(shield_percentage, { duration: 2000 }, function() {
     if ($('#boss-current-shield').text() == "0") {
       $('.boss-shield-logo').addClass('hidden');
       $('.boss-shield-outter-border').addClass('hidden');
@@ -114,7 +114,7 @@ function changeBoss(data) {
   }
   heal_bar.set(1);
   damage_bar.set(1);
-  life_bar.animate(1, { duration: 1000 }, function() {
+  life_bar.animate(1, { duration: 2000 }, function() {
     if ($('#boss-current-hp').text() == max_hp) {
       $('.boss-life-logo').addClass('hidden');
       $('.boss-life-outter-border').addClass('hidden');
@@ -143,24 +143,25 @@ function updateBoss(data) {
   } else {
     var new_hp = data['boss_current_hp'];
   }
-  $('#boss-current-hp').prop('number', current_hp).animateNumber({number: new_hp, easing: 'ease',}, 1000);
+  $('#boss-current-hp').prop('number', current_hp).animateNumber({number: new_hp, easing: 'ease',}, 2000);
 
   var max_hp = $('#boss-max-hp').text();
-  $('#boss-max-hp').prop('number', max_hp).animateNumber({number: data['boss_max_hp'], easing: 'ease',}, 1000);
+  $('#boss-max-hp').prop('number', max_hp).animateNumber({number: data['boss_max_hp'], easing: 'ease',}, 2000);
 
-  var current_hp_percent = (new_hp / max_hp) * 100;
-  var new_hp_percent = (new_hp / parseInt(data['boss_max_hp'])) * 100;
-  $('#boss-life-percent').prop('number', current_hp_percent).animateNumber({number: new_hp_percent, easing: 'ease',}, 1000);
+  var current_hp_percent = (current_hp / max_hp) * 100;
+  var new_hp_percent = (new_hp / data['boss_max_hp']) * 100;
+  console.log(new_hp_percent);
+  $('#boss-life-percent').prop('number', current_hp_percent).animateNumber({number: new_hp_percent, easing: 'ease',}, 2000);
 
   var current_shield = $('#boss-current-shield').text();
-  $('#boss-current-shield').prop('number', current_shield).animateNumber({number: data['boss_shield'], easing: 'ease',}, 1000);
+  $('#boss-current-shield').prop('number', current_shield).animateNumber({number: data['boss_shield'], easing: 'ease',}, 2000);
 
   var max_shield = $('#boss-max-shield').text();
-  $('#boss-max-shield').prop('number', max_shield).animateNumber({number: data['boss_max_hp'], easing: 'ease',}, 1000);
+  $('#boss-max-shield').prop('number', max_shield).animateNumber({number: data['boss_max_hp'], easing: 'ease',}, 2000);
 
   var current_shield_percent = (current_shield / max_shield) * 100;
   var new_shield_percent = (parseInt(data['boss_shield']) / parseInt(data['boss_max_hp'])) * 100;
-  $('#boss-shield-percent').prop('number', current_shield_percent).animateNumber({number: new_shield_percent, easing: 'ease',}, 1000);
+  $('#boss-shield-percent').prop('number', current_shield_percent).animateNumber({number: new_shield_percent, easing: 'ease',}, 2000);
 
   if (data['heal']) {
     healBoss(data['boss_current_hp'], data['boss_max_hp']);
@@ -177,32 +178,32 @@ function updateBoss(data) {
 
 $(document).ready(function() {
   shield_bar_green_bg = new ProgressBar.Circle('#shield-circle', {
-    strokeWidth: 12,
+    strokeWidth: 11,
     color: '#018404'
   });
 
   shield_bar_bg = new ProgressBar.Circle('#shield-circle', {
-    strokeWidth: 12,
+    strokeWidth: 11,
     color: '#006d96'
   });
 
   shield_bar = new ProgressBar.Circle('#shield-circle', {
-    strokeWidth: 12,
+    strokeWidth: 11,
     color: '#00aeef'
   });
 
   damage_bar = new ProgressBar.Circle('#life-circle', {
-    strokeWidth: 12,
+    strokeWidth: 11,
     color: '#940000'
   });
 
   heal_bar = new ProgressBar.Circle('#life-circle', {
-    strokeWidth: 12,
+    strokeWidth: 11,
     color: '#0BC91D'
   });
 
   life_bar = new ProgressBar.Circle('#life-circle', {
-    strokeWidth: 12,
+    strokeWidth: 11,
     color: '#018404'
   });
 
