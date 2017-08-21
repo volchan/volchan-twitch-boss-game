@@ -5,11 +5,24 @@ function initBossBars() {
   var boss_max_hp = $('#boss-max-hp').text();
   var boss_current_shield = $('#boss-current-shield').text();
   var boss_max_shield = $('#boss-max-shield').text();
+  if (boss_current_shield > "0") {
+    $('.boss-life-logo').addClass('hidden');
+    $('.boss-life-outter-border').addClass('hidden');
+    $('.boss-life-inner-border').addClass('hidden');
+    $('.boss-life-fill').addClass('hidden');
+    $('.boss-life-text').addClass('hidden');
+    $('.boss-shield-logo').removeClass('hidden');
+    $('.boss-shield-outter-border').removeClass('hidden');
+    $('.boss-shield-inner-border').removeClass('hidden');
+    $('.boss-shield-fill').removeClass('hidden');
+    $('.boss-shield-text').removeClass('hidden');
+  }
   life_bar.set(boss_current_hp / boss_max_hp);
   heal_bar.set(boss_current_hp / boss_max_hp);
   damage_bar.set(boss_current_hp / boss_max_hp);
   shield_bar.set(boss_current_shield / boss_max_shield);
   shield_bar_bg.set(boss_current_shield / boss_max_shield);
+  shield_bar_green_bg.set(1);
   $('#boss-life-percent').text(Math.floor(parseFloat(life_bar.value()) * 100));
   $('#boss-shield-percent').text(Math.floor(parseFloat(shield_bar.value()) * 100));
 };
@@ -55,6 +68,18 @@ function damageBoss(current_hp, max_hp) {
 };
 
 function addShield(current_shield, max_shield) {
+  if ($('.boss-life-logo').is(':visible')) {
+    $('.boss-life-logo').addClass('hidden');
+    $('.boss-life-outter-border').addClass('hidden');
+    $('.boss-life-inner-border').addClass('hidden');
+    $('.boss-life-fill').addClass('hidden');
+    $('.boss-life-text').addClass('hidden');
+    $('.boss-shield-logo').removeClass('hidden');
+    $('.boss-shield-outter-border').removeClass('hidden');
+    $('.boss-shield-inner-border').removeClass('hidden');
+    $('.boss-shield-fill').removeClass('hidden');
+    $('.boss-shield-text').removeClass('hidden');
+  }
   var shield_percentage = current_shield / max_shield;
   shield_bar_bg.set(shield_percentage);
   shield_bar.animate(shield_percentage, { duration: 1000 });
@@ -79,6 +104,33 @@ function damageShield(current_shield, max_shield) {
   });
 };
 
+function changeBoss(data) {
+  $('.boss-name').text(data['boss_name']);
+  var boss_avatar = data['boss_avatar'];
+  if (boss_avatar == null || boss_avatar == '') {
+    $('.boss-avatar').css('background-image', "url('https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png')");
+  } else {
+    $('.boss-avatar').css('background-image', "url('" + boss_avatar + "')");
+  }
+  heal_bar.set(1);
+  damage_bar.set(1);
+  life_bar.animate(1, { duration: 1000 }, function() {
+    if ($('#boss-current-hp').text() == max_hp) {
+      $('.boss-life-logo').addClass('hidden');
+      $('.boss-life-outter-border').addClass('hidden');
+      $('.boss-life-inner-border').addClass('hidden');
+      $('.boss-life-fill').addClass('hidden');
+      $('.boss-life-text').addClass('hidden');
+      $('.boss-shield-logo').removeClass('hidden');
+      $('.boss-shield-outter-border').removeClass('hidden');
+      $('.boss-shield-inner-border').removeClass('hidden');
+      $('.boss-shield-fill').removeClass('hidden');
+      $('.boss-shield-text').removeClass('hidden');
+      addShield($('#boss-current-shield').text(), $('#boss-max-shield').text());
+    }
+  });
+};
+
 function updateBoss(data) {
   var name = $('#boss-name').text()
   if (name != data['boss_name']) {
@@ -86,13 +138,18 @@ function updateBoss(data) {
   }
 
   var current_hp = $('#boss-current-hp').text();
-  $('#boss-current-hp').prop('number', current_hp).animateNumber({number: data['boss_current_hp'], easing: 'ease',}, 1000);
+  if (data['boss_current_hp'] < 0) {
+    var new_hp = 0;
+  } else {
+    var new_hp = data['boss_current_hp'];
+  }
+  $('#boss-current-hp').prop('number', current_hp).animateNumber({number: new_hp, easing: 'ease',}, 1000);
 
   var max_hp = $('#boss-max-hp').text();
   $('#boss-max-hp').prop('number', max_hp).animateNumber({number: data['boss_max_hp'], easing: 'ease',}, 1000);
 
-  var current_hp_percent = (current_hp / max_hp) * 100;
-  var new_hp_percent = (parseInt(data['boss_current_hp']) / parseInt(data['boss_max_hp'])) * 100;
+  var current_hp_percent = (new_hp / max_hp) * 100;
+  var new_hp_percent = (new_hp / parseInt(data['boss_max_hp'])) * 100;
   $('#boss-life-percent').prop('number', current_hp_percent).animateNumber({number: new_hp_percent, easing: 'ease',}, 1000);
 
   var current_shield = $('#boss-current-shield').text();
@@ -108,45 +165,44 @@ function updateBoss(data) {
   if (data['heal']) {
     healBoss(data['boss_current_hp'], data['boss_max_hp']);
   } else if (data['damages']) {
-    damageBoss(data['boss_current_hp'], data['boss_max_hp']);
+    damageBoss(new_hp, data['boss_max_hp']);
   } else if (data['add_shield']) {
     addShield(data['boss_shield'], data['boss_max_hp']);
   } else if (data['damage_shield']) {
     damageShield(data['boss_shield'], data['boss_max_hp']);
+  } else if (data['new_boss']) {
+    changeBoss(data);
   }
-
-  var boss_avatar = data['boss_avatar'];
-  if (boss_avatar == null || boss_avatar == '') {
-    var src = 'https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png';
-  } else {
-    var src = boss_avatar;
-  }
-  $('#boss-avatar').attr('src', src);
 };
 
 $(document).ready(function() {
+  shield_bar_green_bg = new ProgressBar.Circle('#shield-circle', {
+    strokeWidth: 12,
+    color: '#018404'
+  });
+
   shield_bar_bg = new ProgressBar.Circle('#shield-circle', {
-    strokeWidth: 20,
+    strokeWidth: 12,
     color: '#006d96'
   });
 
   shield_bar = new ProgressBar.Circle('#shield-circle', {
-    strokeWidth: 20,
+    strokeWidth: 12,
     color: '#00aeef'
   });
 
   damage_bar = new ProgressBar.Circle('#life-circle', {
-    strokeWidth: 10,
+    strokeWidth: 12,
     color: '#940000'
   });
 
   heal_bar = new ProgressBar.Circle('#life-circle', {
-    strokeWidth: 10,
+    strokeWidth: 12,
     color: '#0BC91D'
   });
 
   life_bar = new ProgressBar.Circle('#life-circle', {
-    strokeWidth: 10,
+    strokeWidth: 12,
     color: '#018404'
   });
 

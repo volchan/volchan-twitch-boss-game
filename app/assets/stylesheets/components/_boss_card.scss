@@ -131,7 +131,6 @@
     border-radius: 50%;
     z-index: 5;
     position: absolute;
-    background: #018404;
     svg {
       position: absolute;
       transform: rotate3D(1,-1,0,180deg);
@@ -143,7 +142,6 @@
     border-radius: 50%;
     z-index: 3;
     position: absolute;
-    background: #018404;
   }
 	&-name {
 		font-size: 35px;

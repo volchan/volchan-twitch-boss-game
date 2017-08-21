@@ -12,7 +12,7 @@
 			<div class="boss-shield-fill hidden" id="shield-circle"></div>
 		</div>
 		<div class="boss-name"><%= @bot.boss_game.name %></div>
-		<div class="boss-life-text "><span id="boss-current-hp"><%= @bot.boss_game.current_hp %></span>/<span id="boss-max-hp"><%= @bot.boss_game.max_hp %></span></div>
+		<div class="boss-life-text "><span id="boss-current-hp"><%= @bot.boss_game.current_hp < 0 ? '0' : @bot.boss_game.current_hp %></span>/<span id="boss-max-hp"><%= @bot.boss_game.max_hp %></span></div>
 		<div class="boss-shield-text hidden"><span id="boss-current-shield"><%= @bot.boss_game.shield %></span>/<span id="boss-max-shield"><%= @bot.boss_game.max_hp %></span></div>
 	</div>
 </div>
