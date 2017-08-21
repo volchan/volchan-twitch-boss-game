@@ -125,7 +125,7 @@ function changeBoss(data) {
   heal_bar.set(1);
   damage_bar.set(1);
   life_bar.animate(1, { duration: 2000 }, function() {
-    if ($('#boss-current-hp').text() == max_hp) {
+    if ($('#boss-current-hp').text() == data['boss_max_hp']) {
       $('.boss-life-logo').addClass('hidden');
       $('.boss-life-outter-border').addClass('hidden');
       $('.boss-life-inner-border').addClass('hidden');
