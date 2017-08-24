@@ -13,12 +13,12 @@ class BossGamesController < ApplicationController
     boss_game.update(boss_game_params)
   end
 
-  def current_hp
+  def update_current_hp
     boss_game = BossGame.find(params[:id])
     boss_game.update(params[:current_hp])
   end
 
-  def shield
+  def update_shield
     boss_game = BossGame.find(params[:id])
     boss_game.update(params[:shield])
   end
