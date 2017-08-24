@@ -13,6 +13,17 @@ class BossGamesController < ApplicationController
     boss_game.update(boss_game_params)
   end
 
+  def current_hp
+    boss_game = BossGame.find(params[:id])
+    boss_game.update(params[:current_hp])
+  end
+
+  def shield
+    boss_game = BossGame.find(params[:id])
+    boss_game.update(params[:shield])
+  end
+
+
   private
 
   def authenticate_token
@@ -23,11 +34,11 @@ class BossGamesController < ApplicationController
 
   def boss_game_params
     {
-      bot: Bot.find(params[:bot_id].to_i),
+      bot: Bot.find(params[:bot_id]),
       name: params[:name],
-      max_hp: params[:max_hp].to_i,
-      current_hp: params[:current_hp].to_i,
-      shield: params[:shield].to_i,
+      max_hp: params[:max_hp],
+      current_hp: params[:current_hp],
+      shield: params[:shield],
       avatar: params[:avatar]
     }
   end
