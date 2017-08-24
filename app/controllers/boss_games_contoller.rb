@@ -15,19 +15,19 @@ class BossGamesController < ApplicationController
 
   def update_current_hp
     boss_game = BossGame.find(params[:id])
-    boss_game.update(params[:current_hp])
+    boss_game.update(current_hp: params[:current_hp], saved_at: params[:saved_at])
   end
 
   def update_shield
     boss_game = BossGame.find(params[:id])
-    boss_game.update(params[:shield])
+    boss_game.update(shield: params[:shield], saved_at: params[:saved_at])
   end
 
 
   private
 
   def authenticate_token
-    bot = Bot.find(params[:bot_id].to_i)
+    bot = Bot.find(params[:bot_id])
     return unless params[:token].nil? || bot.token != params[:token]
     render :root
   end
