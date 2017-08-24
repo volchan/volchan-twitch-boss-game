@@ -10,4 +10,4 @@ test:
 
 production:
   <<: *default
-  url: 'redis://rediscloud:xhNQk4rptgZsFCRh@redis-16509.c2.eu-west-1-3.ec2.cloud.redislabs.com:16509'
+  url: 'redis://rediscloud:fAvPDuD9kKJ3pEbU@redis-17027.c2.eu-west-1-3.ec2.cloud.redislabs.com:17027'
