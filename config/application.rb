@@ -18,6 +18,7 @@ Bundler.require(*Rails.groups)
 
 module VolchanTwitchBossGame
   class Application < Rails::Application
+    config.active_job.queue_adapter = :sidekiq
     config.generators do |generate|
       generate.assets false
       generate.helper false

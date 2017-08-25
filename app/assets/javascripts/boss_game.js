@@ -1,4 +1,3 @@
-var life_bar, heal_bar, damage_bar, shield_bar, shield_bar_bg;
 
 function initBossBars() {
   var boss_current_hp = $('#boss-current-hp').text();
@@ -180,37 +179,3 @@ function updateBoss(data) {
     changeBoss(data);
   }
 };
-
-$(document).ready(function() {
-  shield_bar_green_bg = new ProgressBar.Circle('#shield-circle', {
-    strokeWidth: 11,
-    color: '#018404'
-  });
-
-  shield_bar_bg = new ProgressBar.Circle('#shield-circle', {
-    strokeWidth: 11,
-    color: '#006d96'
-  });
-
-  shield_bar = new ProgressBar.Circle('#shield-circle', {
-    strokeWidth: 11,
-    color: '#00aeef'
-  });
-
-  damage_bar = new ProgressBar.Circle('#life-circle', {
-    strokeWidth: 11,
-    color: '#940000'
-  });
-
-  heal_bar = new ProgressBar.Circle('#life-circle', {
-    strokeWidth: 11,
-    color: '#0BC91D'
-  });
-
-  life_bar = new ProgressBar.Circle('#life-circle', {
-    strokeWidth: 11,
-    color: '#018404'
-  });
-
-  initBossBars();
-});
