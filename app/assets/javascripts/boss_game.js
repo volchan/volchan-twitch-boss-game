@@ -124,6 +124,7 @@ function addShield(data) {
 
 function damageShield(data) {
   var new_shield = data['boss_shield'];
+  var max_shield = $('#boss-max-shield').text();
 
   var current_shield = $('#boss-current-shield').text();
   $('#boss-current-shield').prop('number', current_shield).animateNumber({number: new_shield, easing: 'ease',}, 2000);

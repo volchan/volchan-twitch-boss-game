@@ -28,6 +28,6 @@ class BossGame < ApplicationRecord
       event: event
     }
 
-    BossGameJob.set(wait: 3.seconds).perform_later(attr)
+    BossGameJob.perform_later(attr)
   end
 end
