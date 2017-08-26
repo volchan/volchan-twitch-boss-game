@@ -1,18 +1,15 @@
 class BossGameJob < ApplicationJob
   queue_as :default
 
-  def perform(id)
+  def perform(id, event)
     boss = BossGame.find(id)
-    if boss.current_hp_was > boss.current_hp && !boss.name_changed?
-      damage_boss(boss)
-    elsif boss.current_hp_was < boss.current_hp && !boss.name_changed?
-      heal_boss(boss)
-    elsif boss.shield_was < boss.shield && boss.current_hp == boss.max_hp
-      add_shield(boss)
-    elsif boss.shield_was > boss.shield
-      damage_shield(boss)
-    elsif boss.name_changed?
-      new_boss(boss)
+
+    case event
+    when 'damage_boss' then damage_boss(boss)
+    when 'heal_boss' then heal_boss(boss)
+    when 'add_shield' then add_shield(boss)
+    when 'damage_shield' then damage_shield(boss)
+    when 'new_boss' then new_boss(boss)
     end
   end
 
