@@ -17,6 +17,17 @@ class BossGame < ApplicationRecord
     elsif name_changed?
       event = 'new_boss'
     end
-    BossGameJob.set(wait: 3.seconds).perform_later(id, event)
+
+    attr = {
+      bot_id: bot.id,
+      name: name,
+      current_hp: current_hp,
+      max_hp: max_hp,
+      shield: shield,
+      avatar: avatar,
+      event: event
+    }
+
+    BossGameJob.set(wait: 3.seconds).perform_later(attr)
   end
 end
