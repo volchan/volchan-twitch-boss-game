@@ -90,6 +90,8 @@ function damageBoss(data) {
   heal_bar.set(health_percentage);
   life_bar.set(health_percentage);
   damage_bar.animate(health_percentage, { duration: 2000 });
+
+  $('.boss').animateCss('shake');
 };
 
 function addShield(data) {
@@ -149,6 +151,8 @@ function damageShield(data) {
       $('.boss-life-text').removeClass('hidden');
     }
   });
+  
+  $('.boss').animateCss('shake');
 };
 
 function changeBoss(data) {

@@ -8,13 +8,14 @@
 }
 
 .boss {
-  height: 300px;
-  width: 300px;
+  height: 280px;
+  width: 280px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  animation-duration: 0.5s;
   &-avatar {
     height: 79%;
     width: 79%;
