@@ -151,17 +151,19 @@ function damageShield(data) {
       $('.boss-life-text').removeClass('hidden');
     }
   });
-  
+
   $('.boss').animateCss('shake');
 };
 
 function changeBoss(data) {
   $('.boss-name').text(data['boss_name']);
+
   if ($('.boss-name-container')[0].scrollWidth < $('.boss-name')[0].scrollWidth) {
     $('.boss-name').addClass('scrolling-text');
   } else {
     $('.boss-name').removeClass('scrolling-text');
   }
+
   var boss_avatar = data['boss_avatar'];
   if (boss_avatar == null || boss_avatar == '') {
     $('.boss-avatar').css('background-image', "url('https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png')");
@@ -174,7 +176,13 @@ function changeBoss(data) {
   $('#boss-current-hp').prop('number', current_hp).animateNumber({number: new_hp, easing: 'ease',}, 2000);
 
   var max_hp = $('#boss-max-hp').text();
-  $('#boss-max-hp').prop('number', max_hp).animateNumber({number: data['boss_max_hp'], easing: 'ease',}, 2000);
+  var new_max_hp = data['boss_max_hp']
+  $('#boss-max-hp').prop('number', max_hp).animateNumber({number: new_max_hp, easing: 'ease',}, 2000);
+
+  var current_hp_percent = (current_hp / max_hp) * 100;
+  var new_hp_percent = (new_hp / new_max_hp) * 100;
+  console.log(new_hp_percent);
+  $('#boss-life-percent').prop('number', current_hp_percent).animateNumber({number: new_hp_percent, easing: 'ease',}, 2000);
 
   heal_bar.set(1);
   damage_bar.set(1);
