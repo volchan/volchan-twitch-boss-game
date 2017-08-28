@@ -55,6 +55,10 @@ function healBoss(data) {
   heal_bar.set(health_percentage);
   damage_bar.set(health_percentage);
   life_bar.animate(health_percentage, { duration: 2000 });
+  healAnim();
+  setTimeout(function () {
+    $('#heal-anim').remove()
+  }, 1000);
 };
 
 function damageBoss(data) {
@@ -91,6 +95,7 @@ function damageBoss(data) {
   life_bar.set(health_percentage);
   damage_bar.animate(health_percentage, { duration: 2000 });
 
+  strikeAnim(current_hp - new_hp);
   $('.boss').animateCss('shake');
 };
 
@@ -152,6 +157,7 @@ function damageShield(data) {
     }
   });
 
+  strikeAnim(current_hp - new_hp);
   $('.boss').animateCss('shake');
 };
 
