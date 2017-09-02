@@ -47,7 +47,7 @@ function strikeAnim (amount) {
   }
 
   var img_tag = '<img src="' + animLink + '?a=' + Math.random() + '" id="strike-anim" style="position: absolute; z-index: 100; height: 150%; width: 150%;" alt="">'
-  $('.boss').prepend(img_tag);
+  $('.boss').prepend(img_tag)
 };
 
 function healAnim () {
