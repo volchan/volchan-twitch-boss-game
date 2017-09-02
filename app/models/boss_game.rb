@@ -10,9 +10,9 @@ class BossGame < ApplicationRecord
       event = 'damage_boss'
     elsif current_hp_was < current_hp && !name_changed?
       event = 'heal_boss'
-    elsif !shield.nil? && shield_was < shield && current_hp == max_hp
+    elsif shield_was < shield && current_hp == max_hp
       event = 'add_shield'
-    elsif !shield.nil? && shield_was > shield
+    elsif shield_was > shield
       event = 'damage_shield'
     elsif name_changed?
       event = 'new_boss'
