@@ -78,22 +78,23 @@ function damageBoss (data) {
   } else {
     var new_hp = data['boss_current_hp'];
   }
-  $('#boss-current-hp').prop('number', current_hp).animateNumber({number: new_hp, easing: 'ease'}, 2000);
-
   var max_hp = $('#boss-max-hp').text();
-
   var current_hp_percent = (current_hp / max_hp) * 100;
   var new_hp_percent = (new_hp / max_hp) * 100;
   console.log(new_hp_percent);
-  $('#boss-life-percent').prop('number', current_hp_percent).animateNumber({number: new_hp_percent, easing: 'ease'}, 2000);
-
   var health_percentage = new_hp / max_hp;
-  heal_bar.set(health_percentage);
-  life_bar.set(health_percentage);
-  damage_bar.animate(health_percentage, { duration: 2000 });
-
+  
   strikeAnim(current_hp - new_hp);
-  $('.boss').animateCss('shake');
+
+  setTimeout(function () {
+      $('.boss').animateCss('shake');
+      $('#boss-current-hp').prop('number', current_hp).animateNumber({number: new_hp, easing: 'ease'}, 2000);
+      $('#boss-life-percent').prop('number', current_hp_percent).animateNumber({number: new_hp_percent, easing: 'ease'}, 2000);
+      heal_bar.set(health_percentage);
+      life_bar.set(health_percentage);
+      damage_bar.animate(health_percentage, { duration: 2000 });
+    }, 1000
+  );
 };
 
 function addShield (data) {
