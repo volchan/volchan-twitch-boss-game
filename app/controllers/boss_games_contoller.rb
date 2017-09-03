@@ -39,7 +39,8 @@ class BossGamesController < ApplicationController
       max_hp: params[:max_hp],
       current_hp: params[:current_hp],
       shield: params[:shield],
-      avatar: params[:avatar]
+      avatar: params[:avatar],
+      saved_at: params[:saved_at]
     }
   end
 end
