@@ -7,8 +7,8 @@ class BossesController < ApplicationController
 
   def update
     BossGameJob.perform_later(
-      event: bosses_params,
-      boss: @boss
+      bosses_params,
+      @boss
     )
   end
 

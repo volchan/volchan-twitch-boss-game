@@ -4,7 +4,7 @@ class Game
   end
 
   def sub_event(attr)
-    amount = sub_damage_or_heal(attr[:plan].to_i)
+    amount = sub_damage_or_heal(attr[:plan])
     if @boss.name == 'No boss yet!'
       new_boss(attr[:username])
     elsif attr[:username] == @boss.name
@@ -87,7 +87,7 @@ class Game
   def attack_boss(amount)
     damages = amount
     damages = attack_shield(damages) if @boss.shield.positive?
-    return if damages.positive?
+    return unless damages.positive?
     @boss.current_hp -= damages
     update_current_hp
   end

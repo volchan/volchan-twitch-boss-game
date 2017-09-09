@@ -1,11 +1,11 @@
 class Boss < ApplicationRecord
   belongs_to :bot
 
-  after_update :send_to_job
+  after_update :broadcast_to_cable
 
   private
 
-  def send_to_job
+  def broadcast_to_cable
     if current_hp_was > current_hp && !name_changed?
       damage_boss
     elsif current_hp_was < current_hp && !name_changed?
