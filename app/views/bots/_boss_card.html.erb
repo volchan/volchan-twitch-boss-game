@@ -1,6 +1,6 @@
 <div class="boss-wrapper">
   <div class="boss">
-    <div class="boss-avatar" style="background-image: url('<%= boss_image(bot.boss_game) %>');"></div>
+    <div class="boss-avatar" style="background-image: url('<%= boss_image(bot.boss) %>');"></div>
     <div class="boss-life-logo " style="background-image: url('<%= image_url 'heart.svg' %>');"><span id="boss-life-percent"></span>%</div>
     <div class="boss-life-outter-border "></div>
     <div class="boss-life-inner-border "></div>
@@ -11,8 +11,8 @@
     <div class="boss-shield-fill hidden" id="shield-circle"></div>
   </div>
   <div class="boss-name-container">
-    <div class="boss-name"><%= bot.boss_game.name %></div>
+    <div class="boss-name"><%= bot.boss.name %></div>
   </div>
-  <div class="boss-life-text "><span id="boss-current-hp"><%= bot.boss_game.current_hp < 0 ? '0' : bot.boss_game.current_hp %></span>/<span id="boss-max-hp"><%= bot.boss_game.max_hp %></span></div>
-  <div class="boss-shield-text hidden"><span id="boss-current-shield"><%= bot.boss_game.shield %></span>/<span id="boss-max-shield"><%= bot.boss_game.max_hp %></span></div>
+  <div class="boss-life-text "><span id="boss-current-hp"><%= bot.boss.current_hp < 0 ? '0' : bot.boss.current_hp %></span>/<span id="boss-max-hp"><%= bot.boss.max_hp %></span></div>
+  <div class="boss-shield-text hidden"><span id="boss-current-shield"><%= bot.boss.shield %></span>/<span id="boss-max-shield"><%= bot.boss.max_hp %></span></div>
 </div>

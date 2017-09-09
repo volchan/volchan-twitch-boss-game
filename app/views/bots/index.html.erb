@@ -7,15 +7,15 @@
             <div class="bot-card-channel">
               <%= bot.channel %>
             </div>
-            <% if bot.boss_game %>
+            <% if bot.boss %>
               <div class="bot-card-avatar">
-                <img src="<%= boss_image(bot.boss_game) %>" id="bot-card-boss-avatar" alt="boss avatar">
+                <img src="<%= boss_image(bot.boss) %>" id="bot-card-boss-avatar" alt="boss avatar">
               </div>
               <div class="bot-card-infos">
-                <p>boss name: <%= bot.boss_game.name %></p>
-                <p>boss hp: <%= "#{bot.boss_game.current_hp}/#{bot.boss_game.max_hp}" %></p>
-                <p>boss shield: <%= "#{bot.boss_game.shield}/#{bot.boss_game.max_hp}" %></p>
-                <p>saved at: <%= bot.boss_game.saved_at %></p>
+                <p>boss name: <%= bot.boss.name %></p>
+                <p>boss hp: <%= "#{bot.boss.current_hp}/#{bot.boss.max_hp}" %></p>
+                <p>boss shield: <%= "#{bot.boss.shield}/#{bot.boss.max_hp}" %></p>
+                <p>saved at: <%= bot.boss.saved_at %></p>
               </div>
             <% else %>
               <div class="bot-card-avatar"></div>

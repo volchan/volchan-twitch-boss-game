@@ -27,7 +27,14 @@ class BotsController < ApplicationController
     )
 
     if @bot.save
-      redirect_to @bot
+      Boss.create!(
+        bot: @bot,
+        name: 'No boss yet!',
+        current_hp: 0,
+        max_hp: 0,
+        shield: 0
+      )
+      redirect_to controller: :bots, action: :show, id: @bot.id, token: @bot.token
     else
       render :new
     end

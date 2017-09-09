@@ -1,6 +1,6 @@
-class BossGameChannel < ApplicationCable::Channel
+class BossChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "boss_game_#{params[:bot_id]}"
+    stream_from "boss_#{params[:bot_id]}"
   end
 
   def unsubscribed

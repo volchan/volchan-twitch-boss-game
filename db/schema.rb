@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824075333) do
+ActiveRecord::Schema.define(version: 20170909112352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "boss_games", force: :cascade do |t|
+  create_table "bosses", force: :cascade do |t|
     t.integer  "bot_id"
     t.string   "name"
     t.integer  "max_hp"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20170824075333) do
     t.integer  "shield",     default: 0
     t.string   "avatar"
     t.datetime "saved_at"
-    t.index ["bot_id"], name: "index_boss_games_on_bot_id", using: :btree
+    t.index ["bot_id"], name: "index_bosses_on_bot_id", using: :btree
   end
 
   create_table "bots", force: :cascade do |t|
@@ -59,6 +59,6 @@ ActiveRecord::Schema.define(version: 20170824075333) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "boss_games", "bots"
+  add_foreign_key "bosses", "bots"
   add_foreign_key "bots", "users"
 end

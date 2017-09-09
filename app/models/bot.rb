@@ -1,6 +1,6 @@
 class Bot < ApplicationRecord
   belongs_to :user
-  has_one :boss_game, dependent: :destroy
+  has_one :boss, dependent: :destroy
 
   validates :name, presence: true
   validates :channel, presence: true
