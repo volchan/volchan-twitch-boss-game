@@ -1,3 +1,8 @@
+
+var strike = false;
+var heal = false;
+var newBoss = false;
+
 function initBossBars () {
   var boss_current_hp = $('#boss-current-hp').text();
   var boss_max_hp = $('#boss-max-hp').text();
@@ -192,16 +197,20 @@ function changeBoss (data) {
   life_bar.animate(1, { duration: 2000 });
 };
 
+function animate() {
+
+}
+
 function updateBoss (data) {
   if (data['heal']) {
-    setTimeout(healBoss(data), 0);
+    healBoss(data);
   } else if (data['damages']) {
-    setTimeout(damageBoss(data), 0);
+    damageBoss(data);
   } else if (data['add_shield']) {
-    setTimeout(addShield(data), 0);
+    setTimeout(addShield(data), 3500);
   } else if (data['damage_shield']) {
-    setTimeout(damageShield(data), 0);
+    damageShield(data);
   } else if (data['new_boss']) {
-    setTimeout(changeBoss(data), 0);
+    setTimeout(changeBoss(data), 3500);
   }
 };
