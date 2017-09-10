@@ -1,4 +1,3 @@
-
 function initBossBars () {
   var boss_current_hp = $('#boss-current-hp').text();
   var boss_max_hp = $('#boss-max-hp').text();
@@ -83,7 +82,7 @@ function damageBoss (data) {
   var new_hp_percent = (new_hp / max_hp) * 100;
   console.log(new_hp_percent);
   var health_percentage = new_hp / max_hp;
-  
+
   strikeAnim(current_hp - new_hp);
 
   setTimeout(function () {
@@ -195,14 +194,14 @@ function changeBoss (data) {
 
 function updateBoss (data) {
   if (data['heal']) {
-    healBoss(data);
+    setTimeout(healBoss(data), 0);
   } else if (data['damages']) {
-    damageBoss(data);
+    setTimeout(damageBoss(data), 0);
   } else if (data['add_shield']) {
-    addShield(data);
+    setTimeout(addShield(data), 0);
   } else if (data['damage_shield']) {
-    damageShield(data);
+    setTimeout(damageShield(data), 0);
   } else if (data['new_boss']) {
-    changeBoss(data);
+    setTimeout(changeBoss(data), 0);
   }
 };
