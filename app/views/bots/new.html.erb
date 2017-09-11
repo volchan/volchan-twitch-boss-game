@@ -2,9 +2,10 @@
   <div class="row">
     <div class="col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3">
       <%= simple_form_for @bot do |f| %>
-        <%= f.input :name, required: true %>
         <%= f.input :channel, required: true %>
-        <%= f.input :twitch_token, required: true %>
+        <%= f.input :min_boss_hp, required: true %>
+        <%= f.input :max_boss_hp, required: true %>
+        <%= f.input :boss_hp_step, required: true %>
         <%= f.submit 'Create bot', class: 'btn btn-primary' %>
       <% end %>
     </div>

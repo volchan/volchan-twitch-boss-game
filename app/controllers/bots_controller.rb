@@ -20,9 +20,10 @@ class BotsController < ApplicationController
 
   def create
     @bot = Bot.new(
-      name: bot_params[:name],
       channel: bot_params[:channel],
-      twitch_token: bot_params[:twitch_token],
+      max_boss_hp: bot_params[:max_boss_hp],
+      min_boss_hp: bot_params[:min_boss_hp],
+      boss_hp_step: bot_params[:boss_hp_step],
       user: current_user
     )
 
@@ -53,7 +54,7 @@ class BotsController < ApplicationController
   private
 
   def bot_params
-    params.require(:bot).permit(:name, :channel, :twitch_token)
+    params.require(:bot).permit(:max_boss_hp, :min_boss_hp, :boss_hp_step, :channel)
   end
 
   def set_bot

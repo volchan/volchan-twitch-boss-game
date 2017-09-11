@@ -1,8 +1,3 @@
-
-var strike = false;
-var heal = false;
-var newBoss = false;
-
 function initBossBars () {
   var boss_current_hp = $('#boss-current-hp').text();
   var boss_max_hp = $('#boss-max-hp').text();
@@ -196,10 +191,6 @@ function changeBoss (data) {
   damage_bar.set(1);
   life_bar.animate(1, { duration: 2000 });
 };
-
-function animate() {
-
-}
 
 function updateBoss (data) {
   if (data['heal']) {

@@ -2,9 +2,10 @@ class Bot < ApplicationRecord
   belongs_to :user
   has_one :boss, dependent: :destroy
 
-  validates :name, presence: true
   validates :channel, presence: true
-  validates :twitch_token, presence: true
+  validates :max_boss_hp, presence: true, numericality: { only_integer: true }
+  validates :min_boss_hp, presence: true, numericality: { only_integer: true }
+  validates :boss_hp_step, presence: true, numericality: { only_integer: true }
 
   before_create :generate_token
 
