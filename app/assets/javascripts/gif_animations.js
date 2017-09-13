@@ -1,37 +1,37 @@
 function strikeAnim (amount) {
   var power1 = [
-    'http://i.imgur.com/axWaf1G.gif',
-    'http://i.imgur.com/vrkWxrQ.gif',
-    'http://i.imgur.com/T2RFqm3.gif',
-    'http://i.imgur.com/bIUYT4E.gif'
+    'https://i.imgur.com/axWaf1G.gif',
+    'https://i.imgur.com/vrkWxrQ.gif',
+    'https://i.imgur.com/T2RFqm3.gif',
+    'https://i.imgur.com/bIUYT4E.gif'
   ]
 
   var power100 = [
-    'http://i.imgur.com/qIGLfo8.gif',
-    'http://i.imgur.com/AxTcMpu.gif',
-    'http://i.imgur.com/ueYVt9V.gif',
-    'http://i.imgur.com/p8Wxr0m.gif'
+    'https://i.imgur.com/qIGLfo8.gif',
+    'https://i.imgur.com/AxTcMpu.gif',
+    'https://i.imgur.com/ueYVt9V.gif',
+    'https://i.imgur.com/p8Wxr0m.gif'
   ]
 
   var power500 = [
-    'http://i.imgur.com/TQPP9xT.gif',
-    'http://i.imgur.com/bvG9kkm.gif',
-    'http://i.imgur.com/QRI0GE5.gif',
-    'http://i.imgur.com/JpuqYpk.gif'
+    'https://i.imgur.com/TQPP9xT.gif',
+    'https://i.imgur.com/bvG9kkm.gif',
+    'https://i.imgur.com/QRI0GE5.gif',
+    'https://i.imgur.com/JpuqYpk.gif'
   ]
 
   var power1000 = [
-    'http://i.imgur.com/A6EIUy1.gif',
-    'http://i.imgur.com/ddgxLpl.gif',
-    'http://i.imgur.com/DBjwiB3.gif',
-    'http://i.imgur.com/Btlkt1D.gif'
+    'https://i.imgur.com/A6EIUy1.gif',
+    'https://i.imgur.com/ddgxLpl.gif',
+    'https://i.imgur.com/DBjwiB3.gif',
+    'https://i.imgur.com/Btlkt1D.gif'
   ]
 
   var power3000 = [
-    'http://i.imgur.com/koNnePN.gif',
-    'http://i.imgur.com/0HU0GFx.gif',
-    'http://i.imgur.com/f8aQMPt.gif',
-    'http://i.imgur.com/LCYgixP.gif'
+    'https://i.imgur.com/koNnePN.gif',
+    'https://i.imgur.com/0HU0GFx.gif',
+    'https://i.imgur.com/f8aQMPt.gif',
+    'https://i.imgur.com/LCYgixP.gif'
   ];
 
   if (amount < 100) {
@@ -51,7 +51,7 @@ function strikeAnim (amount) {
 };
 
 function healAnim () {
-  var img_tag = '<img src="http://i.imgur.com/fOvRfRk.gif?a=' + Math.random() + '" id="heal-anim" style="position: absolute; z-index: 100; height: 150%; width: 150%;" alt="">';
+  var img_tag = '<img src="https://i.imgur.com/fOvRfRk.gif?a=' + Math.random() + '" id="heal-anim" style="position: absolute; z-index: 100; height: 150%; width: 150%;" alt="">';
   $('.boss').prepend(img_tag);
   setTimeout(function () { $('#heal-anim').remove() }, 1000);
 };

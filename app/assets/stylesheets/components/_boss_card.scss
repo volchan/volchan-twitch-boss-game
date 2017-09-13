@@ -1,6 +1,6 @@
 .boss-wrapper {
-  height: 400px;
-  width: 400px;
+  height: 420px;
+  width: 420px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,19 +24,19 @@
     z-index: 6;
   }
   &-life-logo {
-    height: 40%;
-    width: 40%;
+    height: 50%;
+    width: 50%;
     border-radius: 50%;
     border: 6px solid #018404;
-    top: 0px;
-    left: -40px;
+    top: -10px;
+    left: -45px;
     z-index: 8;
     position: absolute;
-    background-size: 70%;
+    background-size: 85%;
     background-repeat: no-repeat;
-    background-position: 50% 65%;
+    background-position: 50% 83%;
     background-color: #0bc91d;
-    font-size: 25px;
+    font-size: 35px;
     font-family: $body-font;
     font-weight: bold;
     color: #f4f4f4;
