@@ -17,7 +17,8 @@
           console.log("<%= "[connected #{@bot.id}]" %>");
         },
         received: function(data) {
-          waitList.unshift(data)
+          waitList.unshift(data);
+          console.log(waitList);
           updateBoss(data);
         }
       }

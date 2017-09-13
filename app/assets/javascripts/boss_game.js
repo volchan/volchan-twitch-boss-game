@@ -209,9 +209,9 @@ function changeBoss (data) {
 };
 
 function updateBoss () {
-  console.log(waitList);
   if (!isDelayed && waitList.length > 0) {
     data = waitList.pop();
+    console.log(waitList);
     isDelayed = true;
     console.log(data);
     if (data['heal']) {
