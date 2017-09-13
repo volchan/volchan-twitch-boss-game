@@ -4,6 +4,9 @@
 
 <%= content_for :after_js do %>
   <script type="text/javascript">
+    var life_bar, heal_bar, damage_bar, shield_bar, shield_bar_bg;
+    var waitList = [];
+
     App.cable.subscriptions.create(
       {
         channel: 'BossChannel',
@@ -15,12 +18,11 @@
         },
         received: function(data) {
           console.log(data);
+          waitList.unshift(data)
           updateBoss(data);
         }
       }
     );
-
-    var life_bar, heal_bar, damage_bar, shield_bar, shield_bar_bg;
 
     $(document).ready(function() {
       shield_bar_green_bg = new ProgressBar.Circle('#shield-circle', {

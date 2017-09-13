@@ -1,3 +1,5 @@
+var isDelayed = false;
+
 function initBossBars () {
   var boss_current_hp = $('#boss-current-hp').text();
   var boss_max_hp = $('#boss-max-hp').text();
@@ -53,7 +55,10 @@ function healBoss (data) {
 
   heal_bar.set(health_percentage);
   damage_bar.set(health_percentage);
-  life_bar.animate(health_percentage, { duration: 2000 });
+  life_bar.animate(health_percentage, { duration: 2000 }, function () {
+    isDelayed = false;
+    updateBoss();
+  });
   healAnim();
 };
 
@@ -91,7 +96,10 @@ function damageBoss (data) {
       $('#boss-life-percent').prop('number', current_hp_percent).animateNumber({number: new_hp_percent, easing: 'ease'}, 2000);
       heal_bar.set(health_percentage);
       life_bar.set(health_percentage);
-      damage_bar.animate(health_percentage, { duration: 2000 });
+      damage_bar.animate(health_percentage, { duration: 2000 }, function () {
+        isDelayed = false;
+        updateBoss();
+      });
     }, 1000
   );
 };
@@ -123,7 +131,10 @@ function addShield (data) {
 
   var shield_percentage = new_shield / max_shield;
   shield_bar_bg.set(shield_percentage);
-  shield_bar.animate(shield_percentage, { duration: 2000 });
+  shield_bar.animate(shield_percentage, { duration: 2000 }, function () {
+    isDelayed = false;
+    updateBoss();
+  });
 };
 
 function damageShield (data) {
@@ -152,6 +163,8 @@ function damageShield (data) {
       $('.boss-life-fill').removeClass('hidden');
       $('.boss-life-text').removeClass('hidden');
     }
+    isDelayed = false;
+    updateBoss();
   });
 
   strikeAnim(current_hp - new_hp);
@@ -189,19 +202,28 @@ function changeBoss (data) {
 
   heal_bar.set(1);
   damage_bar.set(1);
-  life_bar.animate(1, { duration: 2000 });
+  life_bar.animate(1, { duration: 2000 }, function () {
+    isDelayed = false;
+    updateBoss();
+  });
 };
 
-function updateBoss (data) {
-  if (data['heal']) {
-    healBoss(data);
-  } else if (data['damages']) {
-    damageBoss(data);
-  } else if (data['add_shield']) {
-    setTimeout(addShield(data), 3500);
-  } else if (data['damage_shield']) {
-    damageShield(data);
-  } else if (data['new_boss']) {
-    setTimeout(changeBoss(data), 3500);
+function updateBoss () {
+  console.log(waitList);
+  if (!isDelayed && waitList.length > 0) {
+    data = waitList.pop();
+    isDelayed = true;
+    console.log(data);
+    if (data['heal']) {
+      healBoss(data);
+    } else if (data['damages']) {
+      damageBoss(data);
+    } else if (data['add_shield']) {
+      addShield(data);
+    } else if (data['damage_shield']) {
+      damageShield(data);
+    } else if (data['new_boss']) {
+      changeBoss(data);
+    }
   }
 };
