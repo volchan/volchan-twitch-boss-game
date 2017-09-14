@@ -6,6 +6,11 @@ class Bot < ApplicationRecord
   validates :boss_max_hp, presence: true, numericality: { only_integer: true }
   validates :boss_min_hp, presence: true, numericality: { only_integer: true }
   validates :boss_hp_step, presence: true, numericality: { only_integer: true }
+  validates :sub_prime_modifier, presence: true, numericality: { only_integer: true }
+  validates :sub_five_modifier, presence: true, numericality: { only_integer: true }
+  validates :sub_ten_modifier, presence: true, numericality: { only_integer: true }
+  validates :sub_twenty_five_modifier, presence: true, numericality: { only_integer: true }
+  validates :bits_modifier, presence: true, numericality: { only_integer: true }
 
   before_create :generate_token
 

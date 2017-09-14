@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3">
+      <%= simple_form_for @bot do |f| %>
+        <%= f.input :channel, required: true %>
+        <%= f.input :boss_min_hp, required: true %>
+        <%= f.input :boss_max_hp, required: true %>
+        <%= f.input :boss_hp_step, required: true %>
+        <%= f.input :sub_prime_modifier, required: true %>
+        <%= f.input :sub_five_modifier, required: true %>
+        <%= f.input :sub_ten_modifier, required: true %>
+        <%= f.input :sub_twenty_five_modifier, required: true %>
+        <%= f.input :bits_modifier, required: true %>
+        <%= f.submit 'Create bot', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

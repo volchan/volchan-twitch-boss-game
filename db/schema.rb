@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914140212) do
+ActiveRecord::Schema.define(version: 20170914160111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,12 +32,17 @@ ActiveRecord::Schema.define(version: 20170914140212) do
   create_table "bots", force: :cascade do |t|
     t.string   "channel"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "token"
-    t.integer  "boss_max_hp"
-    t.integer  "boss_min_hp"
-    t.integer  "boss_hp_step"
+    t.integer  "boss_max_hp",              default: 5000
+    t.integer  "boss_min_hp",              default: 1000
+    t.integer  "boss_hp_step",             default: 200
+    t.integer  "sub_prime_modifier",       default: 500
+    t.integer  "sub_five_modifier",        default: 500
+    t.integer  "sub_ten_modifier",         default: 1000
+    t.integer  "sub_twenty_five_modifier", default: 3000
+    t.integer  "bits_modifier",            default: 1
     t.index ["user_id"], name: "index_bots_on_user_id", using: :btree
   end
 

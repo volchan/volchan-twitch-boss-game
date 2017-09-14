@@ -17,12 +17,13 @@ class Game
   end
 
   def bits_event(attr)
+    amount = bits_damage_or_heal(attr[:amount].to_i)
     if @boss.name == 'No boss yet!'
       new_boss(attr[:username])
     elsif attr[:username] == @name
-      heal_boss(attr[:amount].to_i)
+      heal_boss(amount)
     else
-      attack_boss(attr[:amount].to_i)
+      attack_boss(amount)
       new_boss(attr[:username]) if @boss.current_hp <= 0
     end
   end
@@ -65,11 +66,15 @@ class Game
 
   def sub_damage_or_heal(plan)
     case plan
-    when 'Prime' then 500
-    when '1000' then 500
-    when '2000' then 1000
-    when '3000' then 3000
+    when 'Prime' then @bot.sub_prime_modifier
+    when '1000' then @bot.sub_five_modifier
+    when '2000' then @bot.sub_ten_modifier
+    when '3000' then @bot.sub_twenty_five_modifier
     end
+  end
+
+  def bits_damage_or_heal(amount)
+    amount * @bot.bits_modifier
   end
 
   def attack_shield(damages)
