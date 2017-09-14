@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   has_many :bots
 
+  validates_presence_of :time_zone
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

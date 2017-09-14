@@ -15,7 +15,7 @@
                 <p>boss name: <%= bot.boss.name %></p>
                 <p>boss hp: <%= "#{bot.boss.current_hp}/#{bot.boss.max_hp}" %></p>
                 <p>boss shield: <%= "#{bot.boss.shield}/#{bot.boss.max_hp}" %></p>
-                <p>updated at: <%= bot.boss.updated_at.in_time_zone('Paris') %></p>
+                <p>updated at: <%= bot.boss.updated_at.in_time_zone(current_user.time_zone) %></p>
               </div>
             <% else %>
               <div class="bot-card-avatar"></div>
