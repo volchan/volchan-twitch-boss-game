@@ -19,7 +19,7 @@ class BossesController < ApplicationController
   end
 
   def authenticate_token
-    return unless params[:token].nil? || boss.token != params[:token]
+    return unless params[:token].nil? || @boss.token != params[:token]
     render :root
   end
 
