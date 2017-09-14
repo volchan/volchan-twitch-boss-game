@@ -45,13 +45,13 @@ class Game
 
   def reset_hp
     if @boss.max_hp.zero?
-      @boss.max_hp = @bot.min_boss_hp
+      @boss.max_hp = @bot.boss_min_hp
       @boss.current_hp = @boss.max_hp
-    elsif @boss.max_hp >= @bot.min_boss_hp && @boss.max_hp <= (@bot.max_boss_hp - @bot.boss_hp_step)
+    elsif @boss.max_hp >= @bot.boss_min_hp && @boss.max_hp <= (@bot.boss_max_hp - @bot.boss_hp_step)
       @boss.max_hp += @bot.boss_hp_step
       @boss.current_hp = @boss.max_hp
-    elsif @boss.max_hp >= @bot.max_boss_hp
-      @boss.max_hp = @bot.min_boss_hp
+    elsif @boss.max_hp >= @bot.boss_max_hp
+      @boss.max_hp = @bot.boss_min_hp
       @boss.current_hp = @boss.max_hp
     end
   end

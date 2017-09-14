@@ -3,8 +3,8 @@ class Bot < ApplicationRecord
   has_one :boss, dependent: :destroy
 
   validates :channel, presence: true
-  validates :max_boss_hp, presence: true, numericality: { only_integer: true }
-  validates :min_boss_hp, presence: true, numericality: { only_integer: true }
+  validates :boss_max_hp, presence: true, numericality: { only_integer: true }
+  validates :boss_min_hp, presence: true, numericality: { only_integer: true }
   validates :boss_hp_step, presence: true, numericality: { only_integer: true }
 
   before_create :generate_token

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914130335) do
+ActiveRecord::Schema.define(version: 20170914140212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20170914130335) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "token"
-    t.integer  "max_boss_hp"
-    t.integer  "min_boss_hp"
+    t.integer  "boss_max_hp"
+    t.integer  "boss_min_hp"
     t.integer  "boss_hp_step"
     t.index ["user_id"], name: "index_bots_on_user_id", using: :btree
   end
