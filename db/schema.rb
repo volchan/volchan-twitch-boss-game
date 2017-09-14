@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914085257) do
+ActiveRecord::Schema.define(version: 20170914130335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,21 +20,20 @@ ActiveRecord::Schema.define(version: 20170914085257) do
     t.string   "name"
     t.integer  "max_hp"
     t.integer  "current_hp"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "shield",     default: 0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "current_shield", default: 0
     t.string   "avatar"
-    t.datetime "saved_at"
     t.string   "token"
+    t.integer  "max_shield"
     t.index ["bot_id"], name: "index_bosses_on_bot_id", using: :btree
   end
 
   create_table "bots", force: :cascade do |t|
     t.string   "channel"
     t.integer  "user_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.boolean  "running",      default: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "token"
     t.integer  "max_boss_hp"
     t.integer  "min_boss_hp"

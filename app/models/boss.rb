@@ -19,10 +19,10 @@ class Boss < ApplicationRecord
       damage_boss
     elsif current_hp_was < current_hp && !name_changed?
       heal_boss
-    elsif shield_was < shield && current_hp == max_hp
-      add_shield
-    elsif shield_was > shield
-      damage_shield
+    elsif current_shield_was < current_shield && current_hp == max_hp
+      add_current_shield
+    elsif current_shield_was > current_shield
+      damage_current_shield
     elsif name_changed?
       new_boss
     end
@@ -34,7 +34,8 @@ class Boss < ApplicationRecord
       boss_name: name,
       boss_current_hp: current_hp,
       boss_max_hp: max_hp,
-      boss_shield: shield,
+      boss_current_shield: current_shield,
+      boss_max_shield: max_shield,
       boss_avatar: avatar,
       new_boss: true
     )
@@ -56,19 +57,19 @@ class Boss < ApplicationRecord
     )
   end
 
-  def add_shield
+  def add_current_shield
     ActionCable.server.broadcast(
       "boss_#{bot.id}",
-      boss_shield: shield,
-      add_shield: true
+      boss_current_shield: current_shield,
+      add_current_shield: true
     )
   end
 
-  def damage_shield
+  def damage_current_shield
     ActionCable.server.broadcast(
       "boss_#{bot.id}",
-      boss_shield: shield,
-      damage_shield: true
+      boss_current_shield: current_shield,
+      damage_current_shield: true
     )
   end
 end
