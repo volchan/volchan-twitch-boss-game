@@ -1,9 +1,18 @@
 class Boss < ApplicationRecord
   belongs_to :bot
 
+  before_create :generate_token
   after_update :broadcast_to_cable
 
+  def generate_token
+    self.token = loop do
+      random_token = SecureRandom.urlsafe_base64(nil, false)
+      break random_token unless Bot.exists?(token: random_token)
+    end
+  end
+
   private
+
 
   def broadcast_to_cable
     if current_hp_was > current_hp && !name_changed?

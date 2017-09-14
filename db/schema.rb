@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914081326) do
+ActiveRecord::Schema.define(version: 20170914085257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20170914081326) do
     t.integer  "shield",     default: 0
     t.string   "avatar"
     t.datetime "saved_at"
+    t.string   "token"
     t.index ["bot_id"], name: "index_bosses_on_bot_id", using: :btree
   end
 
