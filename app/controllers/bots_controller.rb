@@ -1,7 +1,7 @@
 class BotsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
 
-  before_action :set_bot, only: %i[show destroy check_token]
+  before_action :set_bot, only: %i[show edit update destroy check_token]
   before_action :check_token, only: %i[show]
 
   def index
@@ -21,9 +21,6 @@ class BotsController < ApplicationController
   def create
     @bot = Bot.new(
       channel: bot_params[:channel],
-      max_boss_hp: bot_params[:max_boss_hp],
-      min_boss_hp: bot_params[:min_boss_hp],
-      boss_hp_step: bot_params[:boss_hp_step],
       user: current_user
     )
 
@@ -33,7 +30,8 @@ class BotsController < ApplicationController
         name: 'No boss yet!',
         current_hp: 0,
         max_hp: 0,
-        shield: 0
+        current_shield: 0,
+        max_shield: 0
       )
       redirect_to controller: :bots, action: :show, id: @bot.id, token: @bot.token
     else
@@ -43,7 +41,13 @@ class BotsController < ApplicationController
 
   def edit; end
 
-  def update; end
+  def update
+    if @bot.update(bot_params)
+      redirect_to controller: :bots, action: :show, id: @bot.id, token: @bot.token
+    else
+      render :edit
+    end
+  end
 
   def destroy
     @bot.destroy
@@ -54,7 +58,7 @@ class BotsController < ApplicationController
   private
 
   def bot_params
-    params.require(:bot).permit(:max_boss_hp, :min_boss_hp, :boss_hp_step, :channel)
+    params.require(:bot).permit(:boss_max_hp, :boss_min_hp, :boss_hp_step, :channel , :sub_prime_modifier, :sub_five_modifier, :sub_ten_modifier, :sub_twenty_five_modifier, :bits_modifier)
   end
 
   def set_bot

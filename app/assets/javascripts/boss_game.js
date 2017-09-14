@@ -118,7 +118,7 @@ function addShield (data) {
     $('.boss-shield-text').removeClass('hidden');
   }
 
-  var new_shield = data['boss_shield'];
+  var new_shield = data['boss_current_shield'];
 
   var current_shield = $('#boss-current-shield').text();
   $('#boss-current-shield').prop('number', current_shield).animateNumber({number: new_shield, easing: 'ease'}, 2000);
@@ -138,7 +138,7 @@ function addShield (data) {
 };
 
 function damageShield (data) {
-  var new_shield = data['boss_shield'];
+  var new_shield = data['boss_current_shield'];
   var max_shield = $('#boss-max-shield').text();
 
   var current_shield = $('#boss-current-shield').text();
@@ -167,7 +167,7 @@ function damageShield (data) {
     updateBoss();
   });
 
-  strikeAnim(current_hp - new_hp);
+  strikeAnim(current_shield - new_shield);
   $('.boss').animateCss('shake');
 };
 
@@ -200,6 +200,10 @@ function changeBoss (data) {
   console.log(new_hp_percent);
   $('#boss-life-percent').prop('number', current_hp_percent).animateNumber({number: new_hp_percent, easing: 'ease'}, 2000);
 
+  var max_shield = data['boss_max_shield'];
+  console.log(max_shield);
+  $('#boss-max-shield').text(max_shield);
+
   heal_bar.set(1);
   damage_bar.set(1);
   life_bar.animate(1, { duration: 2000 }, function () {
@@ -218,9 +222,9 @@ function updateBoss () {
       healBoss(data);
     } else if (data['damages']) {
       damageBoss(data);
-    } else if (data['add_shield']) {
+    } else if (data['add_current_shield']) {
       addShield(data);
-    } else if (data['damage_shield']) {
+    } else if (data['damage_current_shield']) {
       damageShield(data);
     } else if (data['new_boss']) {
       changeBoss(data);
