@@ -11,6 +11,7 @@ gem 'redis'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'rest-client'
+gem 'pundit'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
