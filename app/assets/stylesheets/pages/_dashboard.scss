@@ -1,0 +1,9 @@
+.tab-content {
+  display: none;
+  height: 572px;
+  padding: 10px;
+}
+
+.tab-content.active {
+  display: block;
+}

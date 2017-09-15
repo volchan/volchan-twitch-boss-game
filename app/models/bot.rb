@@ -2,7 +2,7 @@ class Bot < ApplicationRecord
   belongs_to :user
   has_one :boss, dependent: :destroy
 
-  validates :channel, presence: true
+  validates :channel, presence: true, uniqueness: true
   validates_presence_of :boss_max_hp, :boss_min_hp, :boss_hp_step, :channel, :sub_prime_modifier, :sub_five_modifier, :sub_ten_modifier, :sub_twenty_five_modifier, :bits_modifier
   validates :boss_min_hp, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: :boss_max_hp }, if: :boss_max_hp
   validates :boss_max_hp, numericality: { only_integer: true, greater_than: :boss_min_hp }, if: :boss_min_hp

@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col">
+    <%= simple_form_for @bot do |f| %>
+    <div class="row">
+      <div class="col">
+        <%= f.input :channel, input_html: { class: 'form-control-sm' }, readonly: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr>
+        <%= f.label 'Boss health' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <%= f.input :boss_min_hp, label: 'Minimum', input_html: { class: 'form-control-sm' } %>
+      </div>
+      <div class="col">
+        <%= f.input :boss_max_hp, label: 'Maximum', input_html: { class: 'form-control-sm' } %>
+      </div>
+      <div class="col">
+        <%= f.input :boss_hp_step, label: 'Steps', input_html: { class: 'form-control-sm' } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr>
+        <%= f.label 'Subscribes damages and heals' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <%= f.input :sub_prime_modifier, label: 'Prime', input_html: { class: 'form-control-sm' } %>
+      </div>
+      <div class="col">
+        <%= f.input :sub_five_modifier, label: '$4,99', input_html: { class: 'form-control-sm' } %>
+      </div>
+      <div class="col">
+        <%= f.input :sub_ten_modifier, label: '$9.99', input_html: { class: 'form-control-sm' } %>
+      </div>
+      <div class="col">
+        <%= f.input :sub_twenty_five_modifier, label: '$24.99', input_html: { class: 'form-control-sm' } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr>
+        <%= f.label 'Bits damages and heals' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <%= f.input :bits_modifier, label: 'Multiplier', input_html: { class: 'form-control-sm' } %>
+      </div>
+    </div>
+    <%= f.submit class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
