@@ -28,6 +28,13 @@ class Game
     end
   end
 
+  def update_from_dashboard(attr)
+    unless attr[:name] == @boss.name
+      name!(attr[:name])
+      boss_avatar!(attr[:name])
+    end
+  end
+
   private
 
   def name!(name)
@@ -45,6 +52,8 @@ class Game
   end
 
   def reset_hp
+    p @bot
+    p @boss
     if @boss.max_hp.zero?
       @boss.max_hp = @bot.boss_min_hp
       @boss.current_hp = @boss.max_hp
