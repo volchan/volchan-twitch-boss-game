@@ -29,13 +29,37 @@ class Game
   end
 
   def update_from_dashboard(attr)
-    unless attr[:name] == @boss.name
-      name!(attr[:name])
-      boss_avatar!(attr[:name])
-    end
+    dashboard_new_boss(attr)
+    dashboard_current_hp(attr)
+    dashboard_max_hp(attr)
+    dashboard_current_shield(attr)
+    dashboard_max_shield(attr)
+    @bot.save
   end
 
   private
+
+  def dashboard_new_boss(attr)
+    return unless attr[:name] == @boss.name
+    name!(attr[:name])
+    boss_avatar!(attr[:name])
+  end
+
+  def dashboard_current_hp(attr)
+    @boss.current_hp = attr[:current_hp] unless attr[:current_hp] == @boss.current_hp
+  end
+
+  def dashboard_max_hp(attr)
+    @boss.max_hp = attr[:max_hp] unless attr[:max_hp] == @boss.max_hp
+  end
+
+  def dashboard_current_shield(attr)
+    @boss.current_shield = attr[:current_shield] unless attr[:current_shield] == @boss.current_shield
+  end
+
+  def dashboard_max_shield(attr)
+    @boss.max_shield = attr[:max_shield] unless attr[:max_shield] == @boss.max_shield
+  end
 
   def name!(name)
     @boss.name = name
@@ -52,8 +76,6 @@ class Game
   end
 
   def reset_hp
-    p @bot
-    p @boss
     if @boss.max_hp.zero?
       @boss.max_hp = @bot.boss_min_hp
       @boss.current_hp = @boss.max_hp

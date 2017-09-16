@@ -212,6 +212,9 @@ function changeBoss (data) {
   });
 };
 
+function updateFromDashbord(data) {
+};
+
 function updateBoss () {
   if (!isDelayed && waitList.length > 0) {
     data = waitList.pop();
@@ -228,6 +231,8 @@ function updateBoss () {
       damageShield(data);
     } else if (data['new_boss']) {
       changeBoss(data);
+    } else if (data['dashboard']) {
+      updateFromDashbord(data);
     }
   }
 };
