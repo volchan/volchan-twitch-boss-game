@@ -3,7 +3,6 @@ class Boss < ApplicationRecord
 
   before_create :generate_token
   after_update :broadcast_to_cable
-  after_save :broadcast_from_dashboard
 
   def generate_token
     self.token = loop do
@@ -36,11 +35,21 @@ class Boss < ApplicationRecord
       add_current_shield
     elsif current_shield_was > current_shield
       damage_current_shield
-    elsif name_changed? && !current_hp.changed? && !max_hp.changed? && !current_shield.changed? && !max_shield.changed?
-      
+    elsif name_changed? && !current_hp_changed? && !max_hp_changed? && !current_shield_changed? && !max_shield_changed?
+      change_name_from_dashboard
     elsif name_changed?
       new_boss
     end
+  end
+
+  def change_name_from_dashboard
+    ActionCable.server.broadcast(
+      "boss_#{bot.id}",
+      boss_name: name,
+      boss_avatar: avatar,
+      name_from_dashboard: true
+    )
+
   end
 
   def new_boss

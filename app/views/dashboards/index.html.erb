@@ -8,20 +8,20 @@
           <div class="tab-link" data-tab="boss"><i class="fa fa-cog" aria-hidden="true"></i> Boss config</div>
         </div>
         <div class="dashboard-navbar-status">
-          <p>connected: <%= connected_in_chat?(@bot.channel) %></p>
-          <p>moderator: <%= moderator_in_chat?(@bot.channel) %></p>
+          <p>connected: <span id="bot-connected" data-channel="<%= current_user.bot.channel %>"></span></p>
+          <p>moderator: <span id="bot-moderator" data-channel="<%= current_user.bot.channel %>"></span></p>
         </div>
       </div>
       <div class="col-md-10">
         <div class="row">
           <div class="col-md-7">
-            <div class="tab-content active" id="logs">
-                <p>Logs are coming soon ;)</p>
+            <div class="tab-content" id="logs">
+              <p>Logs are coming soon ;)</p>
             </div>
             <div class="tab-content" id="bot">
-                <%= render 'bot_form' %>
+              <%= render 'bot_form' %>
             </div>
-            <div class="tab-content" id="boss">
+            <div class="tab-content active" id="boss">
               <%= render 'boss_form' %>
             </div>
           </div>

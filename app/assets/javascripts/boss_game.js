@@ -212,7 +212,21 @@ function changeBoss (data) {
   });
 };
 
-function updateFromDashbord(data) {
+function nameFromDashbord(data) {
+  $('.boss-name').text(data['boss_name']);
+
+  if ($('.boss-name-container')[0].scrollWidth < $('.boss-name')[0].scrollWidth) {
+    $('.boss-name').addClass('scrolling-text');
+  } else {
+    $('.boss-name').removeClass('scrolling-text');
+  }
+
+  var boss_avatar = data['boss_avatar']
+  if (boss_avatar == null || boss_avatar == '') {
+    $('.boss-avatar').css('background-image', "url('https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png')");
+  } else {
+    $('.boss-avatar').css('background-image', "url('" + boss_avatar + "')");
+  }
 };
 
 function updateBoss () {
@@ -231,8 +245,8 @@ function updateBoss () {
       damageShield(data);
     } else if (data['new_boss']) {
       changeBoss(data);
-    } else if (data['dashboard']) {
-      updateFromDashbord(data);
+    } else if (data['name_from_dashboard']) {
+      nameFromDashbord(data);
     }
   }
 };
