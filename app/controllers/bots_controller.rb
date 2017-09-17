@@ -12,7 +12,9 @@ class BotsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    render layout: 'on_stream'
+  end
 
   def new
     @bot = Bot.new

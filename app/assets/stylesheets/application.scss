@@ -17,11 +17,15 @@
 @import "pages/index";
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background: transparent;
 }
 
 .site {
-  height: 100%;
-  width: 100%;
-  background-color: #eeeeee;
+  flex: 1;
+  &-content {
+    flex: 1;
+  }
 }
