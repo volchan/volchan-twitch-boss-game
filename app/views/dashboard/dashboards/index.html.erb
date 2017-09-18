@@ -1,37 +1,5 @@
-<div class="site">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2">
-        <div class="dashbord-navbar">
-          <div class="tab-link active" data-tab="logs"><i class="fa fa-file-text-o" aria-hidden="true"></i> Bot logs</div>
-          <div class="tab-link" data-tab="bot"><i class="fa fa-cog" aria-hidden="true"></i> Bot config</div>
-          <div class="tab-link" data-tab="boss"><i class="fa fa-cog" aria-hidden="true"></i> Boss config</div>
-        </div>
-        <div class="dashboard-navbar-status">
-          <p>connected: <span id="bot-connected" data-channel="<%= current_user.bot.channel %>"></span></p>
-          <p>moderator: <span id="bot-moderator" data-channel="<%= current_user.bot.channel %>"></span></p>
-        </div>
-      </div>
-      <div class="col-md-10">
-        <div class="row">
-          <div class="col-md-7">
-            <div class="tab-content" id="logs">
-              <p>Logs are coming soon ;)</p>
-            </div>
-            <div class="tab-content" id="bot">
-              <%= render 'bot_form' %>
-            </div>
-            <div class="tab-content active" id="boss">
-              <%= render 'boss_form' %>
-            </div>
-          </div>
-          <div class="col-md-5 d-flex justify-content-center align-items-center">
-            <%= render 'bots/boss_card', bot: @bot %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<%= render 'bots/after_js_bot' %>
+<% if @bot.blank? %>
+  <%= render 'no_bot_index' %>
+<% else %>
+  <%= render 'with_bot_index' %>
+<% end %>
