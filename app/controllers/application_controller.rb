@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     Time.zone = current_user.time_zone if user_signed_in?
   end
 
+  def after_sign_in_path_for(resource)
+    dashboard_root_path
+  end
+
   protected
 
   def configure_permitted_parameters
