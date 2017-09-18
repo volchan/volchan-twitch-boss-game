@@ -1,5 +1,6 @@
 
 Rails.application.routes.draw do
+
   require 'sidekiq/web'
 
   authenticate :user, lambda { |u| u.admin } do
@@ -14,5 +15,11 @@ Rails.application.routes.draw do
   resources :bots
   resources :bosses, only: :update
 
-  get :dashboard, to: 'dashboards#index'
+  # get :dashboard, to: 'dashboards#index'
+
+  namespace :dashboard do
+    root to: 'dashboards#index'
+    resources :bots, only: %i[new create edit update delete]
+    resources :bosses, only: %i[edit update]
+  end
 end
