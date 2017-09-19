@@ -3,7 +3,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_one :bot
+  has_one :bot, dependent: :destroy
 
   validates :time_zone, presence: true
   validates :username, presence: true, uniqueness: true

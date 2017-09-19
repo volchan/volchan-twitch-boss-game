@@ -36,7 +36,7 @@
             <%= render 'dashboard/bots/bot_form', bot: @bot %>
           </div>
           <div class="tab-content" id="boss">
-            <%= render 'dashboard/dashboards/boss_form' %>
+            <%= render 'dashboard/bosses/boss_form', boss: @bot.boss %>
           </div>
         </div>
         <div class="col-md-5 d-flex justify-content-center align-items-center">

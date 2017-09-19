@@ -132,6 +132,7 @@ class Game
     damages = attack_shield(damages) if @boss.current_shield.positive?
     return unless damages.positive?
     @boss.current_hp -= damages
+    @boss.current_hp = 0 if @boss.current_hp.negative?
     update_current_hp
   end
 
