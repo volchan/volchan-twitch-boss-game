@@ -6,6 +6,9 @@
 
 // External libraries
 @import "bootstrap";
+@import 'bootstrap/functions';
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins';
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
@@ -14,6 +17,21 @@
 @import "layouts/index";
 @import "components/index";
 @import "pages/index";
+
+
+.has-invalid {
+  .invalid-feedback {
+    display: block;
+  }
+
+  label {
+    color: theme-color('danger');
+  }
+
+  .form-control {
+    border-color: theme-color('danger');
+  }
+}
 
 body {
   display: flex;

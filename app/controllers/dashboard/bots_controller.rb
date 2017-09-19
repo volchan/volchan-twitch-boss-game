@@ -1,13 +1,13 @@
 class Dashboard::BotsController < ApplicationController
+  before_action :set_bot, only: :update
+
   def new
     @bot = Bot.new
   end
 
   def create
-    @bot = Bot.new(
-      channel: bot_params[:channel],
-      user: current_user
-    )
+    @bot = Bot.new(bot_params)
+    @bot.user = current_user
 
     if @bot.save
       Boss.create!(
@@ -18,12 +18,33 @@ class Dashboard::BotsController < ApplicationController
         current_shield: 0,
         max_shield: 0
       )
-      redirect_to controller: :bots, action: :show, id: @bot.id, token: @bot.token
+      redirect_to controller: :dashboards, action: :index
     else
       render :new
     end
   end
-  def edit; end
-  def update; end
+
+  def update
+    respond_to do |format|
+      if @bot.update(bot_params)
+        flash.now[:notice] = 'Successfully updated !'
+        format.js { render 'dashboard/bots/update' }
+      else
+        format.json { render json: @bot.errors, status: :unprocessable_entity }
+        format.js   { render layout: false, content_type: 'text/javascript' }
+      end
+    end
+  end
+
   def delete; end
+
+  private
+
+  def set_bot
+    @bot = Bot.find(params[:id])
+  end
+
+  def bot_params
+    params.require(:bot).permit(:boss_max_hp, :boss_min_hp, :boss_hp_step, :channel , :sub_prime_modifier, :sub_five_modifier, :sub_ten_modifier, :sub_twenty_five_modifier, :bits_modifier)
+  end
 end
