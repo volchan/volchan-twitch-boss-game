@@ -54,7 +54,12 @@
           <%= f.input :bits_modifier, label: 'Multiplier', input_html: { class: 'form-control-sm' } %>
         </div>
       </div>
-      <%= f.submit class: 'btn btn-primary' %>
+      <div class="row">
+        <div class="col">
+          <%= f.submit class: 'btn btn-primary' %>
+          <%= link_to 'Delete bot !', dashboard_bot_path(bot), method: :delete, class: 'text-danger', remote: true %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

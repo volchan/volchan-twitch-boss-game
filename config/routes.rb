@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     root to: 'dashboards#index'
-    resources :bots, only: %i[new create edit update delete]
+    resources :bots, only: %i[new create edit update destroy]
     resources :bosses, only: %i[edit update]
   end
 end
