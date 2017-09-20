@@ -229,6 +229,14 @@ function nameFromDashbord(data) {
   }
 };
 
+function maxShieldHpFromDashboard(data) {
+  var max_hp = data['boss_max_hp'];
+  $('#boss-max-hp').text(max_hp);
+
+  var max_shield = data['boss_max_shield'];
+  $('#boss-max-shield').text(max_shield);
+};
+
 function updateBoss () {
   if (!isDelayed && waitList.length > 0) {
     data = waitList.pop();
@@ -247,6 +255,8 @@ function updateBoss () {
       changeBoss(data);
     } else if (data['name_from_dashboard']) {
       nameFromDashbord(data);
+    } else if (data['max_shield_hp_from_dashboard']) {
+      maxShieldHpFromDashboard(data);
     }
   }
 };

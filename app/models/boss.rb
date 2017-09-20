@@ -34,19 +34,30 @@ class Boss < ApplicationRecord
   end
 
   def broadcast_to_cable
-    if current_hp_was > current_hp && !name_changed?
+    if current_hp_was > current_hp && !name_changed? && !max_hp_changed? && !max_shield_changed?
       damage_boss
-    elsif current_hp_was < current_hp && !name_changed?
+    elsif current_hp_was < current_hp && !name_changed? && !max_hp_changed? && !max_shield_changed?
       heal_boss
-    elsif current_shield_was < current_shield && current_hp == max_hp
+    elsif current_shield_was < current_shield && current_hp == max_hp && !max_hp_changed? && !max_shield_changed?
       add_current_shield
-    elsif current_shield_was > current_shield
+    elsif current_shield_was > current_shield && !max_hp_changed? && !max_shield_changed?
       damage_current_shield
+    elsif max_shield_changed? || max_hp_changed? && !name_changed?
+      change_max_shield_hp_from_dashboard
     elsif name_changed? && !current_hp_changed? && !max_hp_changed? && !current_shield_changed? && !max_shield_changed?
       change_name_from_dashboard
     elsif name_changed?
       new_boss
     end
+  end
+
+  def change_max_shield_hp_from_dashboard
+    ActionCable.server.broadcast(
+      "boss_#{bot.id}",
+      boss_max_hp: max_hp,
+      boss_max_shield: max_shield,
+      max_shield_hp_from_dashboard: true
+    )
   end
 
   def change_name_from_dashboard
@@ -56,7 +67,6 @@ class Boss < ApplicationRecord
       boss_avatar: avatar,
       name_from_dashboard: true
     )
-
   end
 
   def new_boss
