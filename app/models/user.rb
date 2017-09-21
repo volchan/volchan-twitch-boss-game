@@ -3,9 +3,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :bots
+  has_one :bot, dependent: :destroy
 
-  validates_presence_of :time_zone
+  validates :time_zone, presence: true
+  validates :username, presence: true, uniqueness: true
+
+  validate :password_complexity
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -20,11 +23,13 @@ class User < ApplicationRecord
     end
   end
 
+  def password_complexity
+    return unless password.present? && !password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/)
+    errors.add :password, 'must be 6 character long, must include at least one lowercase letter, one uppercase letter, one digit and one special character'
+  end
+
   protected
 
-  # Attempt to find a user by it's email. If a record is found, send new
-  # password instructions to it. If not user is found, returns a new user
-  # with an email not found error.
   def self.send_reset_password_instructions attributes = {}
     recoverable = find_recoverable_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
     recoverable.send_reset_password_instructions if recoverable.persisted?

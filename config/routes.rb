@@ -1,6 +1,7 @@
 
 Rails.application.routes.draw do
-  require "sidekiq/web"
+
+  require 'sidekiq/web'
 
   authenticate :user, lambda { |u| u.admin } do
     mount Sidekiq::Web => '/sidekiq'
@@ -12,11 +13,14 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :bots
-
   resources :bosses, only: :update
 
-  get :create_boss, to: 'boss_games#create_boss'
-  get 'update_boss/:id', to: 'boss_games#update_boss'
-  get 'update_current_hp/:id', to: 'boss_games#update_current_hp'
-  get 'update_shield/:id', to: 'boss_games#update_shield'
+  # get :dashboard, to: 'dashboards#index'
+
+  namespace :dashboard do
+    root to: 'dashboards#index'
+    resources :bots, only: %i[new create edit update destroy]
+    resources :bosses, only: %i[edit update]
+    resources :bots_status, only: :index
+  end
 end
