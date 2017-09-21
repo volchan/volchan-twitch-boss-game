@@ -79,7 +79,7 @@
         connected: function(data) {
           console.log("<%= "[connected dashboard #{@bot.id}]" %>");
           $.get(
-            "<%= ENV['HEROKU_HOST'] %>/dashboard/bots_status?bot_id=<%= @bot.id %>",
+            "<%= dashboard_bots_status_index_url %>?bot_id=<%= @bot.id %>",
             null
           )
         },
