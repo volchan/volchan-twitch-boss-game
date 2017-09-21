@@ -3,7 +3,7 @@ class Boss < ApplicationRecord
 
   validates :name, presence: true
   validates_presence_of :current_hp, :max_hp, :current_shield, :max_shield
-  validates :current_hp, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: :max_hp }, if: :max_hp
+  validates :current_hp, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: :max_hp }, if: :max_hp
   validates :max_hp, numericality: { only_integer: true, greater_than_or_equal_to: :current_hp }, if: :current_hp
   validates :current_shield, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: :max_shield }, if: :max_shield
   validates :max_shield, numericality: { only_integer: true, equal_to: :max_hp }, if: :max_hp
@@ -42,11 +42,11 @@ class Boss < ApplicationRecord
       add_current_shield
     elsif current_shield_was > current_shield && !max_hp_changed? && !max_shield_changed?
       damage_current_shield
-    elsif max_shield_changed? || max_hp_changed? && !name_changed?
+    elsif !name_changed? && (max_shield_changed? || max_hp_changed?)
       change_max_shield_hp_from_dashboard
     elsif name_changed? && !current_hp_changed? && !max_hp_changed? && !current_shield_changed? && !max_shield_changed?
       change_name_from_dashboard
-    elsif name_changed?
+    elsif name_changed? && current_hp_changed? && max_hp_changed? && max_shield_changed?
       new_boss
     end
   end

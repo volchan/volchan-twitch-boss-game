@@ -5,6 +5,7 @@ class Game
   end
 
   def sub_event(attr)
+    p "event : #{attr}"
     amount = sub_damage_or_heal(attr[:plan])
     if @boss.name == 'No boss yet!'
       new_boss(attr[:username])
@@ -17,6 +18,7 @@ class Game
   end
 
   def bits_event(attr)
+    p "event : #{attr}"
     amount = bits_damage_or_heal(attr[:amount].to_i)
     if @boss.name == 'No boss yet!'
       new_boss(attr[:username])
@@ -34,6 +36,10 @@ class Game
     dashboard_max_hp(attr) unless attr[:max_hp] == @boss.max_hp
     dashboard_current_shield(attr) unless attr[:current_shield] == @boss.current_shield
     dashboard_max_shield(attr) unless attr[:max_shield] == @boss.max_shield
+    ActionCable.server.broadcast(
+      "dashboard_#{@bot.id}",
+      html: ApplicationController.renderer.render(partial: 'dashboard/bosses/boss_form', locals: { boss: @boss }, layout: false)
+    )
   end
 
   private
@@ -74,21 +80,26 @@ class Game
   end
 
   def reset_hp
-    if @boss.max_hp.zero?
+    p @boss.name
+    p @bot.boss_min_hp
+    if @boss.name == 'No boss yet!'
       @boss.max_hp = @bot.boss_min_hp
       @boss.current_hp = @boss.max_hp
+      @boss.max_shield = @boss.max_hp
     elsif @boss.max_hp >= @bot.boss_min_hp && @boss.max_hp <= (@bot.boss_max_hp - @bot.boss_hp_step)
       @boss.max_hp += @bot.boss_hp_step
       @boss.current_hp = @boss.max_hp
+      @boss.max_shield = @boss.max_hp
     elsif @boss.max_hp >= @bot.boss_max_hp
       @boss.max_hp = @bot.boss_min_hp
       @boss.current_hp = @boss.max_hp
+      @boss.max_shield = @boss.max_hp
     end
   end
 
   def new_boss(name)
-    name!(name)
     reset_hp
+    name!(name)
     boss_avatar!(name)
     update_boss
   end

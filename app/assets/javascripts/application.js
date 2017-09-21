@@ -4,6 +4,7 @@
 //= require bootstrap-sprockets
 //= require jquery-animatenumber
 //= require jquery-circle-progress
+//= require clipboard
 //= require_tree .
 
 $.fn.extend({
@@ -23,4 +24,15 @@ $(".tab-link").on("click", function(e){
   $(this).addClass('active');
   $('.tab-content').removeClass('active');
   $("#" + tab_id).addClass('active');
+});
+
+$(document).ready(function(){
+  var clipboard = new Clipboard('.clipboard-btn');
+  console.log(clipboard);
+
+  $('.clipboard-btn').popover().click(function () {
+    setTimeout(function () {
+        $('.clipboard-btn').popover('hide');
+    }, 2000);
+  });
 });

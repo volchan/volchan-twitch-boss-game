@@ -7,8 +7,9 @@ module Dashboard
         if validate_boss
           send_to_job
           flash.now[:notice] = 'Successfully updated !'
-          format.js { render 'dashboard/bosses/update' }
+          format.js { render 'dashboard/bosses/successfull_update' }
         else
+          p @boss.errors
           format.json { render json: @boss.errors, status: :unprocessable_entity }
           format.js { render layout: false, content_type: 'text/javascript' }
         end
@@ -18,9 +19,12 @@ module Dashboard
     private
 
     def validate_boss
-      boss = Boss.new(bosses_params)
-      boss.bot = @boss.bot
-      boss.valid?
+      @boss.name = bosses_params[:name]
+      @boss.current_hp = bosses_params[:current_hp]
+      @boss.max_hp = bosses_params[:max_hp]
+      @boss.current_shield = bosses_params[:current_shield]
+      @boss.max_shield = bosses_params[:max_shield]
+      @boss.valid?
     end
 
     def send_to_job

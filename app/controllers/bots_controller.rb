@@ -30,10 +30,10 @@ class BotsController < ApplicationController
       Boss.create!(
         bot: @bot,
         name: 'No boss yet!',
-        current_hp: 0,
-        max_hp: 0,
+        current_hp: 1,
+        max_hp: 1,
         current_shield: 0,
-        max_shield: 0
+        max_shield: 1
       )
       redirect_to controller: :bots, action: :show, id: @bot.id, token: @bot.token
     else

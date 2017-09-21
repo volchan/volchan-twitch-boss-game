@@ -21,5 +21,6 @@ Rails.application.routes.draw do
     root to: 'dashboards#index'
     resources :bots, only: %i[new create edit update destroy]
     resources :bosses, only: %i[edit update]
+    resources :bots_status, only: :index
   end
 end

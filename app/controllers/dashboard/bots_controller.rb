@@ -14,10 +14,10 @@ module Dashboard
         Boss.create!(
           bot: @bot,
           name: 'No boss yet!',
-          current_hp: 0,
-          max_hp: 0,
+          current_hp: 1,
+          max_hp: 1,
           current_shield: 0,
-          max_shield: 0
+          max_shield: 1
         )
         redirect_to controller: :dashboards, action: :index
       else
