@@ -42,7 +42,7 @@
             <div class="row">
               <div class="col">
                 <div class="input-group">
-                  <input id="link" type="text" class="form-control form-control-sm" aria-label="obs / xsplit link" value="<%= bot_url(@bot) %>?token=<%= @bot.token %>">
+                  <input id="link" type="text" class="form-control form-control-sm readonly" aria-label="obs / xsplit link" value="<%= bot_url(@bot) %>?token=<%= @bot.token %>" readonly>
                   <span class="input-group-btn">
                     <button class="btn btn-sm btn-primary clipboard-btn" data-clipboard-action="copy" data-clipboard-target="#link" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Copied!" type="button">Copy link!</button>
                   </span>
