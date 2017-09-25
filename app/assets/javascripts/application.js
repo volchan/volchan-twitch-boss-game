@@ -28,7 +28,6 @@ $(".tab-link").on("click", function(e){
 
 $(document).ready(function(){
   var clipboard = new Clipboard('.clipboard-btn');
-  console.log(clipboard);
 
   $('.clipboard-btn').popover().click(function () {
     setTimeout(function () {

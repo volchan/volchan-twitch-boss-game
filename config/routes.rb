@@ -1,6 +1,4 @@
-
 Rails.application.routes.draw do
-
   require 'sidekiq/web'
 
   authenticate :user, lambda { |u| u.admin } do
@@ -12,10 +10,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
 
-  resources :bots
+  resources :bots, only: :show
   resources :bosses, only: :update
-
-  # get :dashboard, to: 'dashboards#index'
 
   namespace :dashboard do
     root to: 'dashboards#index'
