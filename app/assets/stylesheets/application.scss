@@ -13,10 +13,10 @@
 @import "font-awesome";
 
 // Your CSS partials
-@import "vendor/index";
-@import "layouts/index";
-@import "components/index";
-@import "pages/index";
+@import "vendor/*";
+@import "layouts/*";
+@import "components/*";
+@import "pages/*";
 
 
 .has-invalid {
