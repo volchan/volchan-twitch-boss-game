@@ -38,4 +38,4 @@
       .row
         .col
           = f.submit class: 'btn btn-primary'
-          = link_to 'Delete bot !', dashboard_bot_path(bot), method: :delete, class: 'text-danger', remote: true
+          = link_to 'Delete bot !', dashboard_bot_path(bot), method: :delete, class: 'text-danger', data: {confirm: 'Are you sure ?'}, remote: true
