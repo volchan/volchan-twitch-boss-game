@@ -1,0 +1,41 @@
+.row
+  .col
+    = simple_form_for [:dashboard, bot], remote: true do |f|
+      .row
+        .col
+          = f.input :channel, input_html: { class: 'form-control-sm' }, readonly: true
+      .row
+        .col
+          %hr/
+          = f.label 'Boss health'
+      .row
+        .col
+          = f.input :boss_min_hp, label: 'Minimum', input_html: { class: 'form-control-sm' }
+        .col
+          = f.input :boss_max_hp, label: 'Maximum', input_html: { class: 'form-control-sm' }
+        .col
+          = f.input :boss_hp_step, label: 'Steps', input_html: { class: 'form-control-sm' }
+      .row
+        .col
+          %hr/
+          = f.label 'Subscribes damages and heals'
+      .row
+        .col
+          = f.input :sub_prime_modifier, label: 'Prime', input_html: { class: 'form-control-sm' }
+        .col
+          = f.input :sub_five_modifier, label: '$4,99', input_html: { class: 'form-control-sm' }
+        .col
+          = f.input :sub_ten_modifier, label: '$9.99', input_html: { class: 'form-control-sm' }
+        .col
+          = f.input :sub_twenty_five_modifier, label: '$24.99', input_html: { class: 'form-control-sm' }
+      .row
+        .col
+          %hr/
+          = f.label 'Bits damages and heals'
+      .row
+        .col
+          = f.input :bits_modifier, label: 'Multiplier', input_html: { class: 'form-control-sm' }
+      .row
+        .col
+          = f.submit class: 'btn btn-primary'
+          = link_to 'Delete bot !', dashboard_bot_path(bot), method: :delete, class: 'text-danger', remote: true

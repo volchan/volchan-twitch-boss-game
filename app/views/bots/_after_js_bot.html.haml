@@ -1,15 +1,15 @@
-<script type="text/javascript">
+:javascript
   var life_bar, heal_bar, damage_bar, shield_bar, shield_bar_bg;
   var waitList = [];
 
   App.cable.subscriptions.create(
     {
       channel: 'BossChannel',
-      bot_id: <%= @bot.id %>
+      bot_id: #{@bot.id}
     },
     {
       connected: function(data) {
-        console.log("<%= "[connected #{@bot.id}]" %>");
+        console.log("#{"[connected \#{@bot.id}]"}");
       },
       received: function(data) {
         waitList.unshift(data);
@@ -52,4 +52,3 @@
 
     initBossBars();
   });
-</script>
