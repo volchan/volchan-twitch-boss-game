@@ -1,8 +1,8 @@
 $arrow-width: 10px;
 
 .dashboard-navbar {
-  background-color: #0a111d;
-  color: #eeeeee;
+  background-color: $layout-bg;
+  color: $layout-text;
   padding: 0;
   font-size: 1rem; /* 16/16 */
   &-tabs {
@@ -16,12 +16,12 @@ $arrow-width: 10px;
       transition: all 0.25s ease;
       position: relative;
       &:hover {
-        background-color: lighten(#0a111d, 10%);
-        border-left: 4px solid rgba(#6a33f5, 0.50);
+        background-color: $tab-hover;
+        border-left: 4px solid $tab-hover-border;
         cursor: pointer;
       }
       &.active{
-        border-left: 4px solid #6a34f5;
+        border-left: 4px solid $tab-active-border;
         &:after {
           content: "";
           position: absolute;
