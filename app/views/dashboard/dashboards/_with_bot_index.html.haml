@@ -1,47 +1,43 @@
-.container-fluid
-  .row
-    .col-md-2
-      .dashbord-navbar
-        .tab-link.active{"data-tab" => "logs"}
-          %i.fa.fa-file-text-o{"aria-hidden" => "true"}
-          Bot logs
-        .tab-link{"data-tab" => "bot"}
-          %i.fa.fa-cog{"aria-hidden" => "true"}
-          Bot config
-        .tab-link{"data-tab" => "boss"}
-          %i.fa.fa-cog{"aria-hidden" => "true"}
-          Boss config
-      .dashboard-navbar-status
-        %p
-          connected:
-          %span#bot-connected{"data-channel" => current_user.bot.channel}
-            %i.fa.fa-question-circle.text-warning{"aria-hidden" => "true"}
-        %p
-          moderator:
-          %span#bot-moderator{"data-channel" => current_user.bot.channel}
-            %i.fa.fa-question-circle.text-warning{"aria-hidden" => "true"}
-    .col-md-10
-      .row
-        #dashboard-content.col-md-7
-          .bot-show-link
-            .row
-              .col
-                %label.string.optional{:for => "bot_Boss health"} OBS / Xsplit link
-            .row
-              .col
-                .input-group
-                  %input#link.form-control.form-control-sm.readonly{"aria-label" => "obs / xsplit link", :readonly => "readonly", :type => "text", :value => "#{bot_url(@bot)}?token=#{@bot.token}"}/
-                  %span.input-group-btn
-                    %button.btn.btn-sm.btn-primary.clipboard-btn{"data-clipboard-action" => "copy", "data-clipboard-target" => "#link", "data-container" => "body", "data-content" => "Copied!", "data-placement" => "bottom", "data-toggle" => "popover", :type => "button"} Copy link!
-                %hr/
-          #logs.tab-content.active
-            %p Logs are coming soon ;)
-          #bot.tab-content
-            = render 'dashboard/bots/bot_form', bot: @bot
-          #boss.tab-content
-            = render 'dashboard/bosses/boss_form', boss: @bot.boss
-        .col-md-5.d-flex.justify-content-center.align-items-center
-          = render 'bots/boss_card', bot: @bot
+.dashboard
+  .dashboard-navbar
+    .dashboard-navbar-tabs
+      .tab-link.active{data: {tab: 'logs'}}
+        %i.fa.fa-file-text-o{aria: {hidden: 'true'}}
+        &nbsp; Bot logs
+      .tab-link{data: {tab: 'bot'}}
+        %i.fa.fa-cog{aria: {hidden: 'true'}}
+        &nbsp; Bot config
+      .tab-link{data: {tab: 'boss'}}
+        %i.fa.fa-cog{aria: {hidden: 'true'}}
+        &nbsp; Boss config
+    .dashboard-navbar-status
+      %p
+        %i.fa.fa-plug{aria: {hidden: 'true'}}
+        &nbsp;connected:
+        %span#bot-connected{data: {channel: current_user.bot.channel}}
+          %i.fa.fa-question-circle.text-warning{aria: {hidden: 'true'}}
+      %p
+        %span= image_tag 'mod.png', id: 'mod'
+        &nbsp;moderator:
+        %span#bot-moderator{data: {channel: current_user.bot.channel}}
+          %i.fa.fa-question-circle.text-warning{aria: {hidden: 'true'}}
+  .dashboard-content
+    .bot-show-link
+      %label.string.optional{for: "bot_Boss health"} OBS / Xsplit link
+      .input-group
+        %input#link.form-control.form-control-sm.readonly{readonly: 'readonly', type: 'text', value: "#{bot_url(@bot)}?token=#{@bot.token}",aria: {label: 'obs / xsplit link'}, }
+        %span.input-group-btn
+          %button.btn.btn-sm.btn-primary.clipboard-btn{type: 'button', data: {container: 'body', content: 'Copied!', placement: 'bottom', toggle: 'popover', clipboard: {action: 'copy', target: '#link'}}} Copy link!
+      %hr
+    #logs.tab-content.active
+      %p Logs are coming soon ;)
+    #bot.tab-content
+      = render 'dashboard/bots/bot_form', bot: @bot
+    #boss.tab-content
+      = render 'dashboard/bosses/boss_form', boss: @bot.boss
+  .dashboard-boss
+    = render 'bots/boss_card', bot: @bot
+
 = content_for :after_js do
   :javascript
     App.cable.subscriptions.create(
@@ -51,7 +47,7 @@
       },
       {
         connected: function(data) {
-          console.log("#{"[connected dashboard \#{@bot.id}]"}");
+          console.log("#{"[connected dashboard #{@bot.id}]"}");
           $.get(
             "#{dashboard_bots_status_index_url}?bot_id=#{@bot.id}",
             null
@@ -67,4 +63,5 @@
         }
       }
     );
+    
   = render 'bots/after_js_bot'

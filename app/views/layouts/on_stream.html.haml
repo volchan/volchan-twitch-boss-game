@@ -7,7 +7,7 @@
     = csrf_meta_tags
     = action_cable_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
-  %body
+  %body.site
     = yield
     = javascript_include_tag 'application'
     = yield(:after_js)

@@ -34,15 +34,5 @@
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   background: transparent;
-}
-
-.site {
-  flex: 1;
-  &-content {
-    flex: 1;
-  }
 }

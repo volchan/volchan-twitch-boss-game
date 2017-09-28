@@ -1,13 +1,15 @@
 .boss-wrapper
   .boss
-    .boss-avatar{:style => "background-image: url('#{boss_image(bot.boss)}');"}
-    .boss-life-logo{:style => "background-image: url('#{image_url 'heart.svg'}');"}
+    .boss-avatar{style: "background-image: url('#{boss_image(bot.boss)}');"}
+    .boss-life-logo{style: "background-image: url('#{image_url 'heart.svg'}');"}
       %span#boss-life-percent
+      %span %
     .boss-life-outter-border
     .boss-life-inner-border
     #life-circle.boss-life-fill
-    .boss-shield-logo.hidden{:style => "background-image: url('#{image_url 'shield.svg'}')"}
+    .boss-shield-logo.hidden{style: "background-image: url('#{image_url 'shield.svg'}')"}
       %span#boss-shield-percent
+      %span %
     .boss-shield-outter-border.hidden
     .boss-shield-inner-border.hidden
     #shield-circle.boss-shield-fill.hidden
