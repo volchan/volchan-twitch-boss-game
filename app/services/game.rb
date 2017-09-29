@@ -22,7 +22,7 @@ class Game
     amount = bits_damage_or_heal(attr[:amount].to_i)
     if @boss.name == 'No boss yet!'
       new_boss(attr[:username])
-    elsif attr[:username] == @name
+    elsif attr[:username] == @boss.name
       heal_boss(amount)
     else
       attack_boss(amount)
