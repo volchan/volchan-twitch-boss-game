@@ -2,10 +2,11 @@ class Game
   def initialize(boss)
     @boss = boss
     @bot = boss.bot
+    @logger = GameLogger.new(@bot, @boss)
   end
 
   def sub_event(attr)
-    p "event : #{attr}"
+    @logger.sub_log(attr)
     amount = sub_damage_or_heal(attr[:plan])
     if @boss.name == 'No boss yet!'
       new_boss(attr[:username])
@@ -18,7 +19,7 @@ class Game
   end
 
   def bits_event(attr)
-    p "event : #{attr}"
+    @logger.bits_log(attr)
     amount = bits_damage_or_heal(attr[:amount].to_i)
     if @boss.name == 'No boss yet!'
       new_boss(attr[:username])
