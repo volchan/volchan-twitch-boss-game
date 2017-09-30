@@ -3,6 +3,7 @@ class Game
     @boss = boss
     @bot = boss.bot
     @logger = GameLogger.new(@bot, @boss)
+    @attacker = nil
   end
 
   def sub_event(attr)
@@ -13,6 +14,7 @@ class Game
     elsif attr[:username] == @boss.name
       heal_boss(amount)
     else
+      @attacker = attr[:username]
       attack_boss(amount)
       new_boss(attr[:username]) if @boss.current_hp <= 0
     end
@@ -26,6 +28,7 @@ class Game
     elsif attr[:username] == @boss.name
       heal_boss(amount)
     else
+      @attacker = attr[:username]
       attack_boss(amount)
       new_boss(attr[:username]) if @boss.current_hp <= 0
     end
@@ -141,6 +144,7 @@ class Game
 
   def attack_boss(amount)
     damages = amount
+    @logger.attack_log(@attacker, damages)
     damages = attack_shield(damages) if @boss.current_shield.positive?
     return unless damages.positive?
     @boss.current_hp -= damages
