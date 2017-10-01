@@ -5,23 +5,34 @@
 @import "config/utilities";
 
 // External libraries
-@import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'bootstrap/functions';
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins';
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
 // Your CSS partials
-@import "vendor/index";
-@import "layouts/index";
-@import "components/index";
-@import "pages/index";
+@import "vendor/*";
+@import "layouts/*";
+@import "components/*";
+@import "pages/*";
+
+
+.has-invalid {
+  .invalid-feedback {
+    display: block;
+  }
+
+  label {
+    color: theme-color('danger');
+  }
+
+  .form-control {
+    border-color: theme-color('danger');
+  }
+}
 
 body {
   background: transparent;
-}
-
-.site {
-  height: 100%;
-  width: 100%;
-  background-color: #eeeeee;
 }

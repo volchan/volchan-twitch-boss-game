@@ -7,6 +7,8 @@ class BossGameJob < ApplicationJob
       @game.sub_event(attr)
     elsif attr[:event_type] == 'bits'
       @game.bits_event(attr)
+    elsif attr[:event_type] == 'update from dashboard'
+      @game.update_from_dashboard(attr)
     end
   end
 end

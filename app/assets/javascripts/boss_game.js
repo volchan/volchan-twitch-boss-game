@@ -212,6 +212,31 @@ function changeBoss (data) {
   });
 };
 
+function nameFromDashbord(data) {
+  $('.boss-name').text(data['boss_name']);
+
+  if ($('.boss-name-container')[0].scrollWidth < $('.boss-name')[0].scrollWidth) {
+    $('.boss-name').addClass('scrolling-text');
+  } else {
+    $('.boss-name').removeClass('scrolling-text');
+  }
+
+  var boss_avatar = data['boss_avatar']
+  if (boss_avatar == null || boss_avatar == '') {
+    $('.boss-avatar').css('background-image', "url('https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png')");
+  } else {
+    $('.boss-avatar').css('background-image', "url('" + boss_avatar + "')");
+  }
+};
+
+function maxShieldHpFromDashboard(data) {
+  var max_hp = data['boss_max_hp'];
+  $('#boss-max-hp').text(max_hp);
+
+  var max_shield = data['boss_max_shield'];
+  $('#boss-max-shield').text(max_shield);
+};
+
 function updateBoss () {
   if (!isDelayed && waitList.length > 0) {
     data = waitList.pop();
@@ -228,6 +253,10 @@ function updateBoss () {
       damageShield(data);
     } else if (data['new_boss']) {
       changeBoss(data);
+    } else if (data['name_from_dashboard']) {
+      nameFromDashbord(data);
+    } else if (data['max_shield_hp_from_dashboard']) {
+      maxShieldHpFromDashboard(data);
     }
   }
 };

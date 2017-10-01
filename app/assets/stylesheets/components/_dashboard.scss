@@ -1,0 +1,24 @@
+.dashboard {
+  flex: 1;
+  display: flex;
+  &-content {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .bot-show-link {
+      padding: 10px;
+    }
+    .tab-content {
+      display: none;
+      padding: 10px;
+      &.active {
+        display: block;
+      }
+    }
+  }
+  &-boss {
+    display: flex;
+    justify-content: center;
+  }
+}

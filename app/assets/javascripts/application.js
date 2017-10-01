@@ -1,8 +1,10 @@
-//= require jquery
+//= require jquery3
 //= require jquery_ujs
+//= require popper
 //= require bootstrap-sprockets
 //= require jquery-animatenumber
 //= require jquery-circle-progress
+//= require clipboard
 //= require_tree .
 
 $.fn.extend({
@@ -14,4 +16,22 @@ $.fn.extend({
         });
         return this
     }
+});
+
+$(".tab-link").on("click", function(e){
+  var tab_id = $(this).attr('data-tab');
+  $(".tab-link").removeClass('active');
+  $(this).addClass('active');
+  $('.tab-content').removeClass('active');
+  $("#" + tab_id).addClass('active');
+});
+
+$(document).ready(function(){
+  var clipboard = new Clipboard('.clipboard-btn');
+
+  $('.clipboard-btn').popover().click(function () {
+    setTimeout(function () {
+        $('.clipboard-btn').popover('hide');
+    }, 2000);
+  });
 });

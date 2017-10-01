@@ -1,13 +1,17 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :null_session
+  protect_from_forgery with: :exception
 
-  before_filter :set_user_time_zone
+  before_action :set_user_time_zone
 
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def set_user_time_zone
     Time.zone = current_user.time_zone if user_signed_in?
+  end
+
+  def after_sign_in_path_for(resource)
+    dashboard_root_path
   end
 
   protected

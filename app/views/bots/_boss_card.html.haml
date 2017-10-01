@@ -1,0 +1,27 @@
+.boss-wrapper
+  .boss
+    .boss-avatar{style: "background-image: url('#{boss_image(bot.boss)}');"}
+    .boss-life-logo{style: "background-image: url('#{image_url 'heart.svg'}');"}
+      %span#boss-life-percent
+      %span %
+    .boss-life-outter-border
+    .boss-life-inner-border
+    #life-circle.boss-life-fill
+    .boss-shield-logo.hidden{style: "background-image: url('#{image_url 'shield.svg'}')"}
+      %span#boss-shield-percent
+      %span %
+    .boss-shield-outter-border.hidden
+    .boss-shield-inner-border.hidden
+    #shield-circle.boss-shield-fill.hidden
+  .boss-name-container
+    .boss-name= bot.boss.name
+  .boss-life-text
+    %span#boss-current-hp
+      = bot.boss.current_hp < 0 ? '0' : bot.boss.current_hp
+    %span#boss-max-hp
+      = bot.boss.max_hp
+  .boss-shield-text.hidden
+    %span#boss-current-shield
+      = bot.boss.current_shield
+    %span#boss-max-shield
+      = bot.boss.max_shield

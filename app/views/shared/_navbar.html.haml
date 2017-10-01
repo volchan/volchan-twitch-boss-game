@@ -1,0 +1,26 @@
+.navbar
+  .navbar-left
+    = link_to root_path, class: 'navbar-link' do
+      LOGO
+  .navbar-right
+    - if user_signed_in?
+      = link_to root_path, class: 'navbar-link' do
+        %i{class: 'fa fa-home'}
+        %span Home
+      = link_to edit_user_registration_path, class: 'navbar-link' do
+        %i{class: 'fa fa-user-circle'}
+        %span Profile
+      = link_to dashboard_root_path, class: 'navbar-link' do
+        %i{class: 'fa fa-line-chart'}
+        %span Dashboard
+      = link_to destroy_user_session_path, class: 'navbar-link', method: :delete do
+        %i{class: 'fa fa-sign-out'}
+        %span Log out
+    - else
+      = link_to new_user_registration_path, class: 'navbar-link' do
+        %i{class: 'fa fa-sign-in'}
+        %span Sign up
+      %span /
+      = link_to new_user_session_path, class: 'navbar-link' do
+        %i{class: 'fa fa-sign-in'}
+        %span Login
