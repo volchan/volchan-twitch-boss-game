@@ -5,7 +5,6 @@ class BossesController < ApplicationController
   skip_before_action :authenticate_user!
   skip_before_action :verify_authenticity_token, only: [:update]
 
-
   def update
     BossGameJob.perform_later(
       script_bosses_params,
@@ -16,7 +15,7 @@ class BossesController < ApplicationController
   private
 
   def set_boss
-    @boss = Boss.find(params[:id])
+    authorize @boss = Boss.find(params[:id])
   end
 
   def authenticate_token
@@ -25,6 +24,13 @@ class BossesController < ApplicationController
   end
 
   def script_bosses_params
-    params.require(:event).permit(:event_type, :channel, :username, :type, :plan, :amount, :month, :message).to_h
+    params.require(:event).permit(:event_type,
+                                  :channel,
+                                  :username,
+                                  :type,
+                                  :plan,
+                                  :amount,
+                                  :month,
+                                  :message).to_h
   end
 end
