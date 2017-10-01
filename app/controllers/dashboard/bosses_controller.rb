@@ -9,7 +9,6 @@ module Dashboard
           flash.now[:notice] = 'Successfully updated !'
           format.js { render 'dashboard/bosses/successfull_update' }
         else
-          p @boss.errors
           format.json { render json: @boss.errors, status: :unprocessable_entity }
           format.js { render layout: false, content_type: 'text/javascript' }
         end
@@ -40,11 +39,15 @@ module Dashboard
     end
 
     def set_boss
-      @boss = Boss.find(params[:id])
+      authorize @boss = Boss.find(params[:id])
     end
 
     def bosses_params
-      params.require(:boss).permit(:name, :current_hp, :max_hp, :current_shield, :max_shield)
+      params.require(:boss).permit(:name,
+                                   :current_hp,
+                                   :max_hp,
+                                   :current_shield,
+                                   :max_shield)
     end
   end
 end

@@ -3,13 +3,13 @@ module Dashboard
     before_action :set_bot, only: %i[update destroy]
 
     def new
+      skip_authorization
       @bot = Bot.new
     end
 
     def create
-      @bot = Bot.new(bot_params)
+      authorize @bot = Bot.new(bot_params)
       @bot.user = current_user
-
       if @bot.save
         Boss.create!(
           bot: @bot,
@@ -52,7 +52,7 @@ module Dashboard
     private
 
     def set_bot
-      @bot = Bot.find(params[:id])
+      authorize @bot = Bot.find(params[:id])
     end
 
     def bot_params
