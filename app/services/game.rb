@@ -84,8 +84,6 @@ class Game
   end
 
   def reset_hp
-    p @boss.name
-    p @bot.boss_min_hp
     if @boss.name == 'No boss yet!'
       @boss.max_hp = @bot.boss_min_hp
       @boss.current_hp = @boss.max_hp
@@ -105,6 +103,7 @@ class Game
     reset_hp
     name!(name)
     boss_avatar!(name)
+    @logger.new_boss_log
     update_boss
   end
 
@@ -125,19 +124,25 @@ class Game
     if damages > @boss.current_shield
       new_damages = damages - @boss.current_shield
       @boss.current_shield = 0
+      damages_to_log = @boss.current_shield
     else
       new_damages = 0
       @boss.current_shield -= damages
+      damages_to_log = damages
     end
     update_shield
+    @logger.dmg_shield_log(@attacker, damages_to_log)
     new_damages
   end
 
   def add_shield(amount)
     if @boss.current_shield + amount <= @boss.max_shield
       @boss.current_shield += amount
+      @logger.add_shield_log(amount)
     else
+      previous_shield = @boss.current_shield
       @boss.current_shield = @boss.max_shield
+      @logger.add_shield_log(@boss.current_shield - previous_shield)
     end
     update_shield
   end
@@ -149,6 +154,7 @@ class Game
     return unless damages.positive?
     @boss.current_hp -= damages
     @boss.current_hp = 0 if @boss.current_hp.negative?
+    @logger.dmg_hp_log(@attaker, damages)
     update_current_hp
   end
 
@@ -158,6 +164,7 @@ class Game
         add_shield_after_heal(amount)
       else
         @boss.current_hp += amount
+        @logger.heal_hp_log(amount)
         update_current_hp
       end
     else
@@ -167,7 +174,9 @@ class Game
 
   def add_shield_after_heal(heal)
     new_shield = (@boss.current_hp + heal) - @boss.max_hp
+    previous_current_hp = @boss.current_hp
     @boss.current_hp = @boss.max_hp
+    @logger.heal_hp_log(@boss.current_hp - previous_current_hp)
     update_current_hp
     add_shield(new_shield)
   end
