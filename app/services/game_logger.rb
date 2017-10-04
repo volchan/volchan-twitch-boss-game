@@ -75,11 +75,11 @@ class GameLogger
     create_log(log_attr)
   end
 
-  def log_kill(attacker)
-    log_attr(
+  def kill_log(attacker)
+    log_attr = {
       log_type: 'kill',
       username: attacker
-    )
+    }
     create_log(log_attr)
   end
 

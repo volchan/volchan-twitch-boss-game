@@ -41,6 +41,8 @@
 
 = content_for :after_js do
   :javascript
+    var logsWaitlist = [];
+    var logDelayed = false;
     App.cable.subscriptions.create(
       {
         channel: 'DashboardChannel',
@@ -62,11 +64,24 @@
             $('#bot-moderator').html(data['moderator']);
           } else if (data['log']) {
             let log = data['log'];
-            $('#logs').prepend(log);
-            $('.log').first().hide().slideDown();
+            logsWaitlist.unshift(log);
+            prependLog();
           }
         }
       }
     );
+
+    function prependLog () {
+      if (!logDelayed && logsWaitlist.length > 0) {
+        logDelayed = true;
+        let log = logsWaitlist.pop()
+        $('#logs').prepend(log);
+        $('.log').first().hide().slideDown();
+        setTimeout(function () {
+        logDelayed = false;
+        prependLog()
+        }, 500);
+      }
+    };
 
   = render 'bots/after_js_bot'
