@@ -10,6 +10,7 @@ class GameLogger
       log_type: attr[:type],
       sub_plan: attr[:plan],
       message: attr[:message],
+      month: attr[:month]
     }
     create_log(log_attr)
   end
@@ -19,8 +20,7 @@ class GameLogger
       username: attr[:username],
       log_type: attr[:event_type],
       bits_amount: attr[:amount],
-      message: attr[:message],
-      month: attr[:month]
+      message: attr[:message]
     }
     create_log(log_attr)
   end
@@ -80,6 +80,7 @@ class GameLogger
       log_type: 'kill',
       username: attacker
     )
+    create_log(log_attr)
   end
 
   def create_log(attr)
@@ -91,6 +92,39 @@ class GameLogger
       boss_current_shield: @boss.current_shield,
       boss_max_shield: @boss.max_shield
     }
-    Log.create!(log_attr.merge(attr))
+    new_log = Log.create!(log_attr.merge(attr))
+    send_to_view(new_log)
+  end
+
+  def send_to_view(log)
+    log_to_display = render_log(log)
+    ActionCable.server.broadcast(
+      "dashboard_#{log.bot.id}",
+      log: log_to_display
+    )
+  end
+
+  def render_log(log)
+    ApplicationController.new.render_to_string(
+      partial: log_partial(log),
+      locals: { log: log, user: log.bot.user },
+      layout: false
+    )
+  end
+
+  def log_partial(log)
+    if log.sub_plan == 'Prime'
+      prime_sub_or_resub(log)
+    else
+      "logs/#{log.log_type}"
+    end
+  end
+
+  def prime_sub_or_resub(log)
+    if log.log_type == 'sub'
+      'logs/prime'
+    else
+      'logs/resub_prime'
+    end
   end
 end

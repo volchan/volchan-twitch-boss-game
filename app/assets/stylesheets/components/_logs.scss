@@ -4,7 +4,7 @@
   p {
     margin: 0;
   }
-  &-sub, &-resub, &-prime {
+  &-sub, &-resub, &-prime, &-bits {
     margin-left: 10px;
   }
   &-dmg-hp, &-attack, &-dmg-shield {
@@ -15,6 +15,17 @@
       height: 16px;
       path {
         fill: $red;
+      }
+    }
+  }
+  &-add-shield {
+    margin-left: 10px;
+    color: $shield-blue;
+    svg {
+      width: 16px;
+      height: 16px;
+      path {
+        fill: $shield-blue;
       }
     }
   }

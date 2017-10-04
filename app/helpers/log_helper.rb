@@ -15,32 +15,18 @@ module LogHelper
   private
 
   def log_renderer(log)
-    case log.log_type
-    when 'sub' then sub_prime_or_dollars(log)
-    when 'resub' then resub_prime_or_dollars(log)
-    when 'bits' then render 'logs/bits', log: log
-    when 'attack' then render 'logs/attack', log: log
-    when 'dmg_shield' then render 'logs/dmg_shield', log: log
-    when 'dmg_hp' then render 'logs/dmg_hp', log: log
-    when 'add_shield' then render 'logs/add_shield', log: log
-    when 'heal_hp' then render 'logs/heal_hp', log: log
-    when 'new_boss' then render 'logs/new_boss', log: log
+    if log.sub_plan == 'Prime'
+      prime_sub_or_resub(log)
+    else
+      render "logs/#{log.log_type}", log: log, user: current_user
     end
   end
 
-  def sub_prime_or_dollars(log)
-    if log.sub_plan == 'Prime'
-      render 'logs/prime', log: log
+  def prime_sub_or_resub(log)
+    if log.log_type == 'sub'
+      render 'logs/prime', log: log, user: current_user
     else
-      render 'logs/sub', log: log
-    end
-  end
-
-  def resub_prime_or_dollars(log)
-    if log.sub_plan == 'Prime'
-      render 'logs/prime', log: log
-    else
-      render 'logs/resub', log: log
+      render 'logs/resub_prime', log: log, user: current_user
     end
   end
 end

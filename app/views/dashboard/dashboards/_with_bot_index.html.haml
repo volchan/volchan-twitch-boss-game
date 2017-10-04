@@ -60,6 +60,10 @@
           } else if (data['connected'] && data['moderator']) {
             $('#bot-connected').html(data['connected']);
             $('#bot-moderator').html(data['moderator']);
+          } else if (data['log']) {
+            let log = data['log'];
+            $('#logs').prepend(log);
+            $('.log').first().hide().slideDown();
           }
         }
       }

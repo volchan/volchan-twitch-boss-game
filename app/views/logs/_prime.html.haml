@@ -1,5 +1,5 @@
 .log
-  %strong [#{log.created_at.in_time_zone(current_user.time_zone).strftime('%F %H:%M')}]
+  %strong [#{log.created_at.in_time_zone(user.time_zone).strftime('%F %H:%M')}]
   .log-prime
     %p
       %strong
