@@ -5,6 +5,9 @@ $arrow-width: 10px;
   color: $layout-text;
   padding: 0;
   font-size: 1rem; /* 16/16 */
+  #logs-tab {
+    position: relative;
+  }
   &-tabs {
     .tab-link {
       padding: 10px;
@@ -14,7 +17,6 @@ $arrow-width: 10px;
       align-items: center;
       border-left: 4px solid transparent;
       transition: all 0.25s ease;
-      position: relative;
       &:hover {
         background-color: $tab-hover;
         border-left: 4px solid $tab-hover-border;
@@ -22,6 +24,7 @@ $arrow-width: 10px;
       }
       &.active{
         border-left: 4px solid $tab-active-border;
+        position: relative;
         &:after {
           content: "";
           position: absolute;

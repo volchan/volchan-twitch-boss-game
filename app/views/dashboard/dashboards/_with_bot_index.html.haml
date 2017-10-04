@@ -1,9 +1,10 @@
 .dashboard
   .dashboard-navbar
     .dashboard-navbar-tabs
-      .tab-link.active{data: {tab: 'logs'}}
+      .tab-link#logs-tab.active{data: {tab: 'logs'}}
         %i.fa.fa-file-text-o{aria: {hidden: 'true'}}
         &nbsp; Bot logs
+        %span#new-logs.hidden 0
       .tab-link{data: {tab: 'bot'}}
         %i.fa.fa-cog{aria: {hidden: 'true'}}
         &nbsp; Bot config
@@ -43,6 +44,7 @@
   :javascript
     var logsWaitlist = [];
     var logDelayed = false;
+    var logHiddenCounter = 0;
     App.cable.subscriptions.create(
       {
         channel: 'DashboardChannel',
@@ -74,9 +76,17 @@
     function prependLog () {
       if (!logDelayed && logsWaitlist.length > 0) {
         logDelayed = true;
-        let log = logsWaitlist.pop()
+        let log = logsWaitlist.pop();
         $('#logs').prepend(log);
         $('.log').first().hide().slideDown();
+
+        if (!$('#logs').is(':visible')) {
+          logHiddenCounter = logHiddenCounter + 1;
+          console.log(logHiddenCounter)
+          $('#new-logs').html(logHiddenCounter);
+          $('#new-logs').removeClass('hidden');
+        }
+
         setTimeout(function () {
         logDelayed = false;
         prependLog()
