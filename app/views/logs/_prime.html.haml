@@ -1,5 +1,8 @@
-.log-sub
+.log-prime
   %p
-    %span.log-sub-name= log.username
+    %strong [#{log.created_at.in_time_zone(current_user.time_zone).strftime('%F %H:%M')}]
+    %strong
+      %i.fa.fa-dollar
+    %strong= log.username
     just subscribed with
-    %span.log-sub-plan Amazon Prime.
+    %strong Amazon Prime.

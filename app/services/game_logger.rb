@@ -6,19 +6,16 @@ class GameLogger
 
   def sub_log(attr)
     log_attr = {
-      bot: @bot,
       username: attr[:username],
       log_type: attr[:type],
       sub_plan: attr[:plan],
       message: attr[:message],
-      month: attr[:month]
     }
     create_log(log_attr)
   end
 
   def bits_log(attr)
     log_attr = {
-      bot: @bot,
       username: attr[:username],
       log_type: attr[:event_type],
       bits_amount: attr[:amount],
@@ -30,7 +27,6 @@ class GameLogger
 
   def attack_log(attacker, amount)
     log_attr = {
-      bot: @bot,
       log_type: 'attack',
       username: attacker,
       amount: amount
@@ -40,7 +36,6 @@ class GameLogger
 
   def dmg_shield_log(attacker, amount)
     log_attr = {
-      bot: @bot,
       log_type: 'dmg_shield',
       username: attacker,
       amount: amount
@@ -50,7 +45,6 @@ class GameLogger
 
   def dmg_hp_log(attacker, amount)
     log_attr = {
-      bot: @bot,
       log_type: 'dmg_hp',
       username: attacker,
       amount: amount
@@ -60,7 +54,6 @@ class GameLogger
 
   def add_shield_log(amount)
     log_attr = {
-      bot: @bot,
       log_type: 'add_shield',
       amount: amount
     }
@@ -69,7 +62,6 @@ class GameLogger
 
   def heal_hp_log(amount)
     log_attr = {
-      bot: @bot,
       log_type: 'heal_hp',
       amount: amount
     }
@@ -78,14 +70,21 @@ class GameLogger
 
   def new_boss_log
     log_attr = {
-      bot: @bot,
       log_type: 'new_boss'
     }
     create_log(log_attr)
   end
 
+  def log_kill(attacker)
+    log_attr(
+      log_type: 'kill',
+      username: attacker
+    )
+  end
+
   def create_log(attr)
     log_attr = {
+      bot: @bot,
       boss_name: @boss.name,
       boss_max_hp: @boss.max_hp,
       boss_current_hp: @boss.current_hp,

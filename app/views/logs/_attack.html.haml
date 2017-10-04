@@ -1,1 +1,9 @@
-attack
+.log-attack
+  %p
+    %strong [#{log.created_at.in_time_zone(current_user.time_zone).strftime('%F %H:%M')}]
+    %strong
+      %i.fa.fa-exclamation
+    %strong= log.username
+    attacks
+    %strong= log.boss_name
+    !

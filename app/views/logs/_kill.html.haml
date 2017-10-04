@@ -1,9 +1,9 @@
-.log-sub
+.log-kill
   %p
     %strong [#{log.created_at.in_time_zone(current_user.time_zone).strftime('%F %H:%M')}]
     %strong
-      %i.fa.fa-dollar
+      %i.fa.fa-exclamation
     %strong= log.username
-    just resubscribed with a
-    %strong= sub_plan_display(log.sub_plan)
-    sub.
+    killed
+    %strong= log.boss_name
+    !

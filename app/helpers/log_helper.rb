@@ -40,7 +40,7 @@ module LogHelper
     if log.sub_plan == 'Prime'
       render 'logs/prime', log: log
     else
-      render 'logs/sub', log: log
+      render 'logs/resub', log: log
     end
   end
 end

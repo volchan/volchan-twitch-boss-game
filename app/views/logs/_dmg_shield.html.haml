@@ -1,1 +1,11 @@
-dmg_shield
+.log-dmg-shield
+  %p
+    %strong [#{log.created_at.in_time_zone(current_user.time_zone).strftime('%F %H:%M')}]
+    %strong
+      %i.fa.fa-exclamation
+    %strong= log.username
+    deals
+    %strong= log.amount
+    damages to
+    %strong #{log.boss_name}'s shield!
+    %span.log-boss-status (#{log.boss_current_shield}/#{log.boss_max_shield})
