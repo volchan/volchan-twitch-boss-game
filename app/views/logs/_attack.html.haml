@@ -1,0 +1,9 @@
+.log
+  %strong [#{log.created_at.in_time_zone(user.time_zone).strftime('%F %H:%M')}]
+  .log-attack
+    %p
+      %span= raw inline_svg('sword')
+      %strong= log.username
+      attacks
+      %strong= log.boss_name
+      !

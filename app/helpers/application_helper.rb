@@ -1,12 +1,4 @@
 module ApplicationHelper
-  def boss_image(boss)
-    if boss.avatar.blank?
-      'https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png'
-    else
-      boss.avatar
-    end
-  end
-
   def connected_in_chat?(channel)
     twitch_api_call = RestClient.get("http://tmi.twitch.tv/group/user/#{channel}/chatters")
     parsed_twitch_api_call = JSON.parse(twitch_api_call, object_class: OpenStruct)

@@ -1,0 +1,9 @@
+.log
+  %strong [#{log.created_at.in_time_zone(user.time_zone).strftime('%F %H:%M')}]
+  .log-new-boss
+    %p
+      %strong
+        %i.fa.fa-exclamation
+      %strong= log.boss_name
+      is the new boss !
+      %span.log-boss-status (#{log.boss_current_hp}/#{log.boss_max_hp})

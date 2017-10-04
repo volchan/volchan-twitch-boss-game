@@ -24,6 +24,10 @@ $(".tab-link").on("click", function(e){
   $(this).addClass('active');
   $('.tab-content').removeClass('active');
   $("#" + tab_id).addClass('active');
+  if (tab_id == 'logs') {
+    $('#new-logs').addClass('hidden').html('0');
+    logHiddenCounter = 0;
+  }
 });
 
 $(document).ready(function(){

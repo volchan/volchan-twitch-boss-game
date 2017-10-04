@@ -1,0 +1,12 @@
+.log
+  %strong [#{log.created_at.in_time_zone(user.time_zone).strftime('%F %H:%M')}]
+  .log-prime
+    %p
+      %strong
+        %i.fa.fa-dollar
+      %strong= log.username
+      just resubscribed with
+      %strong Amazon Prime
+      for
+      %strong #{log.month} months
+      in a row !

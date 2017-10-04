@@ -1,9 +1,10 @@
 .dashboard
   .dashboard-navbar
     .dashboard-navbar-tabs
-      .tab-link.active{data: {tab: 'logs'}}
+      .tab-link#logs-tab.active{data: {tab: 'logs'}}
         %i.fa.fa-file-text-o{aria: {hidden: 'true'}}
         &nbsp; Bot logs
+        %span#new-logs.hidden 0
       .tab-link{data: {tab: 'bot'}}
         %i.fa.fa-cog{aria: {hidden: 'true'}}
         &nbsp; Bot config
@@ -17,7 +18,7 @@
         %span#bot-connected{data: {channel: current_user.bot.channel}}
           %i.fa.fa-question-circle.text-warning{aria: {hidden: 'true'}}
       %p
-        %span= image_tag 'mod.png', id: 'mod'
+        %span#mod= raw inline_svg('sword')
         &nbsp;moderator:
         %span#bot-moderator{data: {channel: current_user.bot.channel}}
           %i.fa.fa-question-circle.text-warning{aria: {hidden: 'true'}}
@@ -30,7 +31,8 @@
           %button.btn.btn-sm.btn-primary.clipboard-btn{type: 'button', data: {container: 'body', content: 'Copied!', placement: 'bottom', toggle: 'popover', clipboard: {action: 'copy', target: '#link'}}} Copy link!
       %hr
     #logs.tab-content.active
-      %p Logs are coming soon ;)
+      - @logs.each do |log|
+        = log_display(log)
     #bot.tab-content
       = render 'dashboard/bots/bot_form', bot: @bot
     #boss.tab-content
@@ -40,6 +42,9 @@
 
 = content_for :after_js do
   :javascript
+    var logsWaitlist = [];
+    var logDelayed = false;
+    var logHiddenCounter = 0;
     App.cable.subscriptions.create(
       {
         channel: 'DashboardChannel',
@@ -59,9 +64,34 @@
           } else if (data['connected'] && data['moderator']) {
             $('#bot-connected').html(data['connected']);
             $('#bot-moderator').html(data['moderator']);
+          } else if (data['log']) {
+            let log = data['log'];
+            logsWaitlist.unshift(log);
+            prependLog();
           }
         }
       }
     );
+
+    function prependLog () {
+      if (!logDelayed && logsWaitlist.length > 0) {
+        logDelayed = true;
+        let log = logsWaitlist.pop();
+        $('#logs').prepend(log);
+        $('.log').first().hide().slideDown();
+
+        if (!$('#logs').is(':visible')) {
+          logHiddenCounter = logHiddenCounter + 1;
+          console.log(logHiddenCounter)
+          $('#new-logs').html(logHiddenCounter);
+          $('#new-logs').removeClass('hidden');
+        }
+
+        setTimeout(function () {
+        logDelayed = false;
+        prependLog()
+        }, 500);
+      }
+    };
 
   = render 'bots/after_js_bot'

@@ -48,7 +48,6 @@ function healBoss (data) {
 
   var current_hp_percent = (current_hp / max_hp) * 100;
   var new_hp_percent = (new_hp / max_hp) * 100;
-  console.log(new_hp_percent);
   $('#boss-life-percent').prop('number', current_hp_percent).animateNumber({number: new_hp_percent, easing: 'ease'}, 2000);
 
   var health_percentage = new_hp / max_hp;
@@ -85,7 +84,6 @@ function damageBoss (data) {
   var max_hp = $('#boss-max-hp').text();
   var current_hp_percent = (current_hp / max_hp) * 100;
   var new_hp_percent = (new_hp / max_hp) * 100;
-  console.log(new_hp_percent);
   var health_percentage = new_hp / max_hp;
 
   strikeAnim(current_hp - new_hp);
@@ -197,11 +195,9 @@ function changeBoss (data) {
 
   var current_hp_percent = (current_hp / max_hp) * 100;
   var new_hp_percent = (new_hp / new_max_hp) * 100;
-  console.log(new_hp_percent);
   $('#boss-life-percent').prop('number', current_hp_percent).animateNumber({number: new_hp_percent, easing: 'ease'}, 2000);
 
   var max_shield = data['boss_max_shield'];
-  console.log(max_shield);
   $('#boss-max-shield').text(max_shield);
 
   heal_bar.set(1);
@@ -240,9 +236,7 @@ function maxShieldHpFromDashboard(data) {
 function updateBoss () {
   if (!isDelayed && waitList.length > 0) {
     data = waitList.pop();
-    console.log(waitList);
     isDelayed = true;
-    console.log(data);
     if (data['heal']) {
       healBoss(data);
     } else if (data['damages']) {

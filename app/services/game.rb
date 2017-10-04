@@ -16,7 +16,9 @@ class Game
     else
       @attacker = attr[:username]
       attack_boss(amount)
-      new_boss(attr[:username]) if @boss.current_hp <= 0
+      return unless @boss.current_hp <= 0
+      @logger.kill_log(@attacker)
+      new_boss(attr[:username])
     end
   end
 
@@ -30,7 +32,9 @@ class Game
     else
       @attacker = attr[:username]
       attack_boss(amount)
-      new_boss(attr[:username]) if @boss.current_hp <= 0
+      return unless @boss.current_hp <= 0
+      @logger.kill_log(@attacker)
+      new_boss(attr[:username])
     end
   end
 
@@ -154,7 +158,7 @@ class Game
     return unless damages.positive?
     @boss.current_hp -= damages
     @boss.current_hp = 0 if @boss.current_hp.negative?
-    @logger.dmg_hp_log(@attaker, damages)
+    @logger.dmg_hp_log(@attacker, damages)
     update_current_hp
   end
 
