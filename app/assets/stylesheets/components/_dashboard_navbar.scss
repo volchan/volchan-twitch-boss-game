@@ -47,7 +47,13 @@ $arrow-width: 10px;
       margin: 0;
     }
     #mod {
-      width: 16px;
+      svg {
+        width: 16px;
+        height: 16px;
+        path {
+          fill: $layout-text;
+        }
+      }
     }
   }
 }

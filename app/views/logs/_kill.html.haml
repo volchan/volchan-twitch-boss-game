@@ -1,9 +1,9 @@
-.log-kill
-  %p
-    %strong [#{log.created_at.in_time_zone(current_user.time_zone).strftime('%F %H:%M')}]
-    %strong
-      %i.fa.fa-exclamation
-    %strong= log.username
-    killed
-    %strong= log.boss_name
-    !
+.log
+  %strong [#{log.created_at.in_time_zone(current_user.time_zone).strftime('%F %H:%M')}]
+  .log-kill
+    %p
+      %span= raw inline_svg('sword')
+      %strong= log.username
+      killed
+      %strong= log.boss_name
+      !

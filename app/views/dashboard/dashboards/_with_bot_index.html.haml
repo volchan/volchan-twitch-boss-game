@@ -17,7 +17,7 @@
         %span#bot-connected{data: {channel: current_user.bot.channel}}
           %i.fa.fa-question-circle.text-warning{aria: {hidden: 'true'}}
       %p
-        %span= image_tag 'mod.png', id: 'mod'
+        %span#mod= raw inline_svg('sword')
         &nbsp;moderator:
         %span#bot-moderator{data: {channel: current_user.bot.channel}}
           %i.fa.fa-question-circle.text-warning{aria: {hidden: 'true'}}

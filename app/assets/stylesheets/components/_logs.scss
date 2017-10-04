@@ -1,0 +1,32 @@
+.log {
+  display: flex;
+  margin: 10px 0;
+  p {
+    margin: 0;
+  }
+  &-sub, &-resub, &-prime {
+    margin-left: 10px;
+  }
+  &-dmg-hp, &-attack, &-dmg-shield {
+    color: $red;
+    margin-left: 10px;
+    svg {
+      width: 16px;
+      height: 16px;
+      path {
+        fill: $red;
+      }
+    }
+  }
+  &-heal-hp, &-new-boss {
+    margin-left: 10px;
+    color: $green;
+    svg {
+      width: 16px;
+      height: 16px;
+      path {
+        fill: $green;
+      }
+    }
+  }
+}
