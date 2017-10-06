@@ -1,5 +1,5 @@
 .log
-  %strong [#{log.created_at.in_time_zone(user.time_zone).strftime('%F %H:%M')}]
+  %strong [#{display_log_created_at(log, user)}]
   .log-dmg-hp
     %p
       %span= raw inline_svg('sword')

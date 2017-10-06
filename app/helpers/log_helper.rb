@@ -12,6 +12,10 @@ module LogHelper
     end
   end
 
+  def display_log_created_at(log, user)
+    log.created_at.in_time_zone(user.time_zone).strftime('%F %H:%M')
+  end
+
   private
 
   def log_renderer(log)
