@@ -8,22 +8,22 @@
 //= require_tree .
 
 $.fn.extend({
-    animateCss: function (animationName) {
-      let animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-      this.addClass('animated ' + animationName).one(animationEnd, function() {
-          $(this).removeClass('animated ' + animationName);
-          $('#strike-anim').remove();
-      });
-      return this
-    },
-    animateFlashes: function (animationName) {
-      let animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-      var flash = this
-      flash.addClass('animated ' + animationName);
-      setTimeout( function () {
-        flash.addClass('animated slideOutRight')
-      }, 5000);
-    }
+  animateCss: function (animationName) {
+    var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+    this.addClass('animated ' + animationName).one(animationEnd, function() {
+        $(this).removeClass('animated ' + animationName);
+        $('#strike-anim').remove();
+    });
+    return this
+  },
+  animateFlashes: function (animationName) {
+    var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+    var flash = this
+    flash.addClass('animated ' + animationName);
+    setTimeout( function () {
+      flash.addClass('animated slideOutRight')
+    }, 5000);
+  }
 });
 
 $(".tab-link").on("click", function(e){
