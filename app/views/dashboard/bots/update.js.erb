@@ -1,2 +1,3 @@
 $('#bot').html("<%= j render 'bot_form', bot: @bot %>");
 $('.site-content').prepend("<%= j render 'shared/flashes' %>");
+$('.alert').animateFlashes('slideInRight');

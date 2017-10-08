@@ -9,12 +9,20 @@
 
 $.fn.extend({
     animateCss: function (animationName) {
-        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-        this.addClass('animated ' + animationName).one(animationEnd, function() {
-            $(this).removeClass('animated ' + animationName)
-            $('#strike-anim').remove()
-        });
-        return this
+      let animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+      this.addClass('animated ' + animationName).one(animationEnd, function() {
+          $(this).removeClass('animated ' + animationName);
+          $('#strike-anim').remove();
+      });
+      return this
+    },
+    animateFlashes: function (animationName) {
+      let animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+      var flash = this
+      flash.addClass('animated ' + animationName);
+      setTimeout( function () {
+        flash.addClass('animated slideOutRight')
+      }, 5000);
     }
 });
 
@@ -30,6 +38,12 @@ $(".tab-link").on("click", function(e){
   }
 });
 
+function checkFlashes() {
+  if ($('.alert').length > 0) {
+    $('.alert').animateFlashes('slideInRight');
+  }
+}
+
 $(document).ready(function(){
   var clipboard = new Clipboard('.clipboard-btn');
 
@@ -38,4 +52,6 @@ $(document).ready(function(){
         $('.clipboard-btn').popover('hide');
     }, 2000);
   });
+
+  checkFlashes();
 });

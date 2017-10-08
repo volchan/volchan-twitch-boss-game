@@ -16,7 +16,6 @@ gem 'sidekiq-failures', '~> 1.0'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
-gem 'kronic'
 gem 'clipboard-rails'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
