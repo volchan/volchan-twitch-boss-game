@@ -1,16 +1,4 @@
 - if notice
-  .alert.alert-dismissible{:role => "alert"}
-    .alert-info
-      %i.fa.fa-bell-o{aria: {hidden: true}}
-    .alert-content
-      %p= notice
-      %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
-        %span{"aria-hidden" => "true"} &times;
+  = render 'flashes/notice', notice: notice
 - if alert
-  .alert.alert-dismissible{:role => "alert"}
-    .alert-warning
-      %i.fa.fa-bell-o{aria: {hidden: true}}
-    .alert-content
-      %p= alert
-      %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
-        %span{"aria-hidden" => "true"} &times;
+  = render 'flashes/alert', alert: alert

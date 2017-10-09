@@ -1,0 +1,7 @@
+.alert.alert-dismissible{role: 'alert'}
+  .alert-info
+    %i.fa.fa-bell-o{aria: {hidden: true}}
+  .alert-content
+    %p= notice
+    %button.close{aria: {label: 'Close'}, data: {dismiss: 'alert'}, type: 'button'}
+      %span{aria: {hidden: true}} &times;
