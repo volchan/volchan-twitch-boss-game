@@ -21,7 +21,9 @@ $.fn.extend({
     var flash = this
     flash.addClass('animated ' + animationName);
     setTimeout( function () {
-      flash.addClass('animated slideOutRight')
+      flash.addClass('animated slideOutRight').one(animationEnd, function () {
+        flash.remove();
+      });
     }, 5000);
   }
 });

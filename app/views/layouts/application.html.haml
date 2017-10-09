@@ -9,7 +9,8 @@
     = stylesheet_link_tag 'application', media: 'all'
   %body.site
     = render 'shared/navbar'
-    = render 'shared/flashes'
+    .alert-container
+      = render 'shared/flashes'
     .site-content
       = yield
     .site-footer
