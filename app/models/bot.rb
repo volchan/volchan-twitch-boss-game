@@ -28,7 +28,7 @@ class Bot < ApplicationRecord
   before_create :generate_token
 
   scope :find_bot, ->(id) { find_by(id: id) }
-  scope :find_by_user, ->(user) { find_by(user: user) }
+  scope :find_with_user, ->(user) { find_by(user: user) }
 
   private
 
