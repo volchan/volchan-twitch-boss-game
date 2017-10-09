@@ -15,7 +15,7 @@ class BossesController < ApplicationController
   private
 
   def set_boss
-    authorize @boss = Boss.find(params[:id])
+    authorize @boss = Boss.find_boss(params[:id])
   end
 
   def authenticate_token
