@@ -39,7 +39,7 @@ module Dashboard
     end
 
     def set_boss
-      authorize @boss = Boss.find(params[:id])
+      authorize @boss = Boss.find_boss(params[:id])
     end
 
     def bosses_params

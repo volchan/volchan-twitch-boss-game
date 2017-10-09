@@ -11,7 +11,7 @@ class BotsController < ApplicationController
   private
 
   def set_bot
-    authorize @bot = Bot.find(params[:id])
+    authorize @bot = Bot.find_bot(params[:id])
   end
 
   def check_token

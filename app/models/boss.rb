@@ -11,6 +11,8 @@ class Boss < ApplicationRecord
   before_create :generate_token
   after_update :broadcast_to_cable
 
+  scope :find_boss, ->(id) { find_by(id: id) }
+
   def generate_token
     self.token = loop do
       random_token = SecureRandom.urlsafe_base64(nil, false)
