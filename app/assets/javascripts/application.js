@@ -9,7 +9,6 @@
 
 $.fn.extend({
   animateCss: function (animationName) {
-    console.log('ùmqozhdmq');
     var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
     this.addClass("animated " + animationName).one(animationEnd, function() {
         $(this).removeClass("animated " + animationName);
@@ -20,7 +19,10 @@ $.fn.extend({
   animateFlashes: function (animationName) {
     var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
     var flash = this;
-    flash.addClass("animated" + animationName);
+    flash.removeClass("hidden");
+    flash.addClass("animated " + animationName).one(animationEnd, function () {
+      flash.removeClass("animated " + animationName);
+    });
     setTimeout( function () {
       flash.addClass("animated slideOutRight").one(animationEnd, function () {
         flash.remove();
