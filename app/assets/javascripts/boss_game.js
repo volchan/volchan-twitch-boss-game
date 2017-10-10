@@ -234,6 +234,7 @@ function maxShieldHpFromDashboard(data) {
 };
 
 function updateBoss () {
+  var data;
   if (!isDelayed && waitList.length > 0) {
     data = waitList.pop();
     isDelayed = true;
