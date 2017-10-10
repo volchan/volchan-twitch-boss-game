@@ -18,7 +18,7 @@ $.fn.extend({
   },
   animateFlashes: function (animationName) {
     var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
-    var flash = this
+    var flash = this;
     flash.addClass("animated" + animationName);
     setTimeout( function () {
       flash.addClass("animated slideOutRight").one(animationEnd, function () {
