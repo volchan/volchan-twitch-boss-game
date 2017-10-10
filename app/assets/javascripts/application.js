@@ -29,12 +29,12 @@ $.fn.extend({
 });
 
 $(".tab-link").on("click", function(e){
-  var tab_id = $(this).attr("data-tab");
+  var tabId = $(this).attr("data-tab");
   $(".tab-link").removeClass("active");
   $(this).addClass("active");
   $(".tab-content").removeClass("active");
-  $("#" + tab_id).addClass("active");
-  if (tab_id == "logs") {
+  $("#" + tabId).addClass("active");
+  if (tabId == "logs") {
     $("#new-logs").addClass("hidden").html("0");
     logHiddenCounter = 0;
   }
