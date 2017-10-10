@@ -33,7 +33,7 @@ function initBossBars () {
 
   $("#boss-life-percent").text(Math.floor(parseFloat(lifeBar.value()) * 100));
   $("#boss-shield-percent").text(Math.floor(parseFloat(shieldBar.value()) * 100));
-};
+}
 
 function healBoss (data) {
   var currentHp = $("#boss-current-hp").text();

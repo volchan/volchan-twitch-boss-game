@@ -9,13 +9,13 @@ class Game
   def sub_event(attr)
     @logger.sub_log(attr)
     amount = sub_damage_or_heal(attr[:plan])
-    game_dispatch(attr)
+    game_dispatch(attr, amount)
   end
 
   def bits_event(attr)
     @logger.bits_log(attr)
     amount = bits_damage_or_heal(attr[:amount].to_i)
-    game_dispatch(attr)
+    game_dispatch(attr, amount)
   end
 
   def update_from_dashboard(attr)
@@ -29,7 +29,7 @@ class Game
 
   private
 
-  def game_dispatch(attr)
+  def game_dispatch(attr, amount)
     if @boss.name == 'No boss yet!'
       new_boss(attr[:username])
     elsif attr[:username] == @boss.name
