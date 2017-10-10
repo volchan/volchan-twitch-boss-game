@@ -1,4 +1,6 @@
 class Boss < ApplicationRecord
+  include TokenConcern
+
   belongs_to :bot
 
   validates :name,
@@ -31,17 +33,9 @@ class Boss < ApplicationRecord
             numericality: { only_integer: true, equal_to: :max_hp },
             if: :max_hp
 
-  before_create :generate_token
   after_update :broadcast_to_cable
 
   scope :find_boss, ->(id) { find_by(id: id) }
-
-  def generate_token
-    self.token = loop do
-      random_token = SecureRandom.urlsafe_base64(nil, false)
-      break random_token unless Bot.exists?(token: random_token)
-    end
-  end
 
   private
 

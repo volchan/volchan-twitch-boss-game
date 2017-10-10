@@ -1,4 +1,6 @@
 class Bot < ApplicationRecord
+  include TokenConcern
+
   belongs_to :user
   has_one :boss, dependent: :destroy
   has_many :logs, dependent: :destroy
@@ -25,8 +27,6 @@ class Bot < ApplicationRecord
 
   validate :hp_step
 
-  before_create :generate_token
-
   scope :find_bot, ->(id) { find_by(id: id) }
   scope :find_with_user, ->(user) { find_by(user: user) }
 
@@ -36,12 +36,5 @@ class Bot < ApplicationRecord
     return if boss_max_hp.blank?
     return if boss_hp_step <= (boss_max_hp / 2)
     errors[:boss_hp_step] << "Have to be lower or equal to half of #{boss_max_hp} !"
-  end
-
-  def generate_token
-    self.token = loop do
-      random_token = SecureRandom.urlsafe_base64(nil, false)
-      break random_token unless Bot.exists?(token: random_token)
-    end
   end
 end
