@@ -1,12 +1,35 @@
 class Boss < ApplicationRecord
   belongs_to :bot
 
-  validates :name, presence: true
-  validates_presence_of :current_hp, :max_hp, :current_shield, :max_shield
-  validates :current_hp, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: :max_hp }, if: :max_hp
-  validates :max_hp, numericality: { only_integer: true, greater_than_or_equal_to: :current_hp }, if: :current_hp
-  validates :current_shield, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: :max_shield }, if: :max_shield
-  validates :max_shield, numericality: { only_integer: true, equal_to: :max_hp }, if: :max_hp
+  validates :name,
+            :current_hp,
+            :max_hp,
+            :current_shield,
+            :max_shield,
+            presence: true
+  validates :current_hp,
+            numericality: {
+              only_integer: true,
+              greater_than_or_equal_to: 0,
+              less_than_or_equal_to: :max_hp
+            },
+            if: :max_hp
+  validates :max_hp,
+            numericality: {
+              only_integer: true,
+              greater_than_or_equal_to: :current_hp
+            },
+            if: :current_hp
+  validates :current_shield,
+            numericality: {
+              only_integer: true,
+              greater_than_or_equal_to: 0,
+              less_than_or_equal_to: :max_shield
+            },
+            if: :max_shield
+  validates :max_shield,
+            numericality: { only_integer: true, equal_to: :max_hp },
+            if: :max_hp
 
   before_create :generate_token
   after_update :broadcast_to_cable
