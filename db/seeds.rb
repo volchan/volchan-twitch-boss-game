@@ -1,4 +1,6 @@
-print '> seeding...'
+logger = Logger.new(STDOUT)
+
+logger.info '> seeding...'
 User.destroy_all
 Bot.destroy_all
 
@@ -9,7 +11,7 @@ User.create!(
   time_zone: 'Paris',
   admin: true
 )
-print '.'
+logger.info '.'
 
 bot_data = YAML.safe_load(File.read('db/seed_data/bots.yml'))
 bot_data.each do |bot|
@@ -29,7 +31,7 @@ bot_data.each do |bot|
     current_shield: 0,
     max_shield: 1
   )
-  print '.'
+  logger.info '.'
 end
 
-puts 'Done!'
+logger.info 'Done!'
