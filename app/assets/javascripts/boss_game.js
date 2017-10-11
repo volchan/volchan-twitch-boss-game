@@ -24,7 +24,7 @@ function hideShieldUi() {
   $(".boss-life-inner-border").removeClass("hidden");
   $(".boss-life-fill").removeClass("hidden");
   $(".boss-life-text").removeClass("hidden");
-};
+}
 
 function textScrolling() {
   if ($(".boss-name-container")[0].scrollWidth < $(".boss-name")[0].scrollWidth) {
@@ -32,7 +32,7 @@ function textScrolling() {
   } else {
     $(".boss-name").removeClass("scrolling-text");
   }
-};
+}
 
 function initBossBars () {
   var bossCurrentHp = $("#boss-current-hp").text();
@@ -80,7 +80,7 @@ function healBoss (data) {
     updateBoss();
   });
   healAnim();
-};
+}
 
 function damageBoss (data) {
   if ($(".boss-shield-logo").is(":visible")) {
@@ -112,7 +112,7 @@ function damageBoss (data) {
       });
     }, 1000
   );
-};
+}
 
 function addShield (data) {
   if ($(".boss-life-logo").is(":visible")) {
@@ -136,7 +136,7 @@ function addShield (data) {
     isDelayed = false;
     updateBoss();
   });
-};
+}
 
 function damageShield (data) {
   var newShield = data["boss_current_shield"];
@@ -161,7 +161,7 @@ function damageShield (data) {
 
   strikeAnim(currentShield - newShield);
   $(".boss").animateCss("shake");
-};
+}
 
 function changeBoss (data) {
   $(".boss-name").text(data["boss_name"]);
@@ -196,7 +196,7 @@ function changeBoss (data) {
     isDelayed = false;
     updateBoss();
   });
-};
+}
 
 function nameFromDashbord(data) {
   $(".boss-name").text(data["boss_name"]);
@@ -209,7 +209,7 @@ function nameFromDashbord(data) {
   } else {
     $(".boss-avatar").css("background-image", "url('" + bossAvatar + "')");
   }
-};
+}
 
 function maxShieldHpFromDashboard(data) {
   var maxHp = data["boss_max_hp"];
@@ -217,7 +217,7 @@ function maxShieldHpFromDashboard(data) {
 
   var maxShield = data["boss_max_shield"];
   $("#boss-max-shield").text(maxShield);
-};
+}
 
 function updateBoss () {
   var data;
@@ -240,4 +240,4 @@ function updateBoss () {
       maxShieldHpFromDashboard(data);
     }
   }
-};
+}
