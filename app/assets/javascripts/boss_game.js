@@ -11,7 +11,7 @@ function hideLifeUi() {
   $(".boss-shield-inner-border").removeClass("hidden");
   $(".boss-shield-fill").removeClass("hidden");
   $(".boss-shield-text").removeClass("hidden");
-};
+}
 
 function hideShieldUi() {
   $(".boss-shield-logo").addClass("hidden");

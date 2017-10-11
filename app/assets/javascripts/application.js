@@ -16,19 +16,6 @@ $.fn.extend({
     });
     return this
   },
-  animateFlashes: function (animationName) {
-    var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
-    var flash = this;
-    flash.removeClass("hidden");
-    flash.addClass("animated " + animationName).one(animationEnd, function () {
-      flash.removeClass("animated " + animationName);
-    });
-    setTimeout( function () {
-      flash.addClass("animated slideOutRight").one(animationEnd, function () {
-        flash.remove();
-      });
-    }, 5000);
-  }
 });
 
 $(".tab-link").on("click", function(e){
@@ -43,12 +30,6 @@ $(".tab-link").on("click", function(e){
   }
 });
 
-function checkFlashes() {
-  if ($(".alert").length > 0) {
-    $(".alert").animateFlashes("slideInRight");
-  }
-}
-
 $(document).ready(function(){
   var clipboard = new Clipboard(".clipboard-btn");
 
@@ -58,5 +39,6 @@ $(document).ready(function(){
     }, 2000);
   });
 
-  checkFlashes();
+  checkNotifications();
+  closeNotification();
 });

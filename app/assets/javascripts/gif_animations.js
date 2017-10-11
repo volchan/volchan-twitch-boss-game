@@ -57,4 +57,4 @@ function healAnim () {
   imgTag = "<img src=''https://i.imgur.com/fOvRfRk.gif?a=" + Math.random() + "' id='heal-anim' style='position: absolute; z-index: 100; height: 150%; width: 150%;' alt=''>";
   $(".boss").prepend(imgTag);
   setTimeout(function () { $("#heal-anim").remove(); }, 1000);
-};
+}

@@ -1,63 +1,11 @@
-.alert-container {
-  overflow-x: hidden;
-  position: absolute;
-  top: 75px;
-  right: 0;
-  width: 390px;
-  z-index: 1000;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
 .alert {
-  color: #333;
-  background: white;
-  width: 370px;
-  height: 63px;
-  display: flex;
-  padding: 0;
-  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14),
-              0 1px 10px 0 rgba(0,0,0,0.12),
-              0 2px 4px -1px rgba(0,0,0,0.3);
-  border-radius: 4px;
-  border: none;
-  &-info {
-    background: $green;
-    flex: 2;
-    border-radius: 4px 0 0 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $layout-text;
-    font-size: 1.5rem;
-  }
-  &-warning {
-    background: $red;
-    flex: 2;
-    border-radius: 4px 0 0 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $layout-text;
-    font-size: 1.5rem;
-  }
-  &-content {
-    flex: 8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: inherit;
-    position: relative;
-    p {
-      margin: 0;
-    }
-  }
+  margin: 0;
+  text-align: center;
+  color: white;
 }
-
-
-.close {
-  position: absolute !important;
-  top: -1px !important;
-  right: 5px !important;
-  padding: 0 !important;
+.alert-info {
+  background: $green;
+}
+.alert-warning {
+  background: $red;
 }

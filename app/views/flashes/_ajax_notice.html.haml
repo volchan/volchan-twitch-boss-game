@@ -1,6 +1,8 @@
 .notification.hidden
   %button.close{aria: {label: 'Close'}, data: {dismiss: 'notification'}, type: 'button'} &times;
-  .notification-warning
-    %i.fa.fa-exclamation-triangle{aria: {hidden: 'true'}}
+  .notification-info
+    %i.fa.fa-bell-o{aria: {hidden: 'true'}}
   .notification-content
-    %p= alert
+    %p= notice
+  :javascript
+    closeNotification();

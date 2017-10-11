@@ -64,6 +64,8 @@
           } else if (data['connected'] && data['moderator']) {
             $('#bot-connected').html(data['connected']);
             $('#bot-moderator').html(data['moderator']);
+            $('.notification-container').prepend(data['alert']);
+            animateNotifications('slideInRight');
           } else if (data['log']) {
             let log = data['log'];
             logsWaitlist.unshift(log);
