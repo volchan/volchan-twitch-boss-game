@@ -18,10 +18,12 @@
   .boss-life-text
     %span#boss-current-hp
       = bot.boss.current_hp < 0 ? '0' : bot.boss.current_hp
+    \/
     %span#boss-max-hp
       = bot.boss.max_hp
   .boss-shield-text.hidden
     %span#boss-current-shield
       = bot.boss.current_shield
+    \/
     %span#boss-max-shield
       = bot.boss.max_shield
