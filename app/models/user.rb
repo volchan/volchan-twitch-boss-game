@@ -12,42 +12,50 @@ class User < ApplicationRecord
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    login = conditions.delete(:login)
+    if login
+      where(conditions).find_by(['lower(username) = :value OR lower(email) = :value', { value: login.downcase }])
+    elsif conditions[:username].nil?
+      find_by(conditions)
     else
-      if conditions[:username].nil?
-        where(conditions).first
-      else
-        where(username: conditions[:username]).first
-      end
+      find_by(username: conditions[:username])
     end
   end
 
   def password_complexity
-    return unless password.present? && !password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/)
-    errors.add :password, 'must be 6 character long, must include at least one lowercase letter, one uppercase letter, one digit and one special character'
+    return unless
+      password.present? &&
+      !password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/)
+    errors.add(
+      :password,
+      'must be 6 character long,
+      must include at least one lowercase letter,
+      one uppercase letter, one digit and one special character'
+    )
   end
 
-  protected
+  def self.send_reset_password_instructions(attributes = {})
+    recoverable = find_recoverable_or_initialize_with_errors(
+      reset_password_keys,
+      attributes, :not_found
+    )
 
-  def self.send_reset_password_instructions attributes = {}
-    recoverable = find_recoverable_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
     recoverable.send_reset_password_instructions if recoverable.persisted?
     recoverable
   end
 
-  def self.find_recoverable_or_initialize_with_errors required_attributes, attributes, error = :invalid
-    (case_insensitive_keys || []).each {|k| attributes[k].try(:downcase!)}
+  def self.find_recoverable_or_initialize_with_errors(required_attributes, attributes, error = :invalid)
+    (case_insensitive_keys || []).each { |k| attributes[k].try(:downcase!) }
 
     attributes = attributes.slice(*required_attributes)
-    attributes.delete_if {|_key, value| value.blank?}
+    attributes.delete_if { |_key, value| value.blank? }
 
     if attributes.size == required_attributes.size
       if attributes.key?(:login)
         login = attributes.delete(:login)
         record = find_record(login)
       else
-        record = where(attributes).first
+        record = find_by(attributes)
       end
     end
 
@@ -63,7 +71,7 @@ class User < ApplicationRecord
     record
   end
 
-  def self.find_record login
-    where(["username = :value OR email = :value", {value: login}]).first
+  def self.find_record(login)
+    find_by(['username = :value OR email = :value', { value: login }])
   end
 end
