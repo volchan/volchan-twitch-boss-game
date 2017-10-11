@@ -53,21 +53,68 @@ class Boss < ApplicationRecord
   end
 
   def broadcast_to_cable
-    if current_hp_was > current_hp && !name_changed? && !max_hp_changed? && !max_shield_changed?
+    if current_hp_was_supp_current_hp_and_nothing_changed
       damage_boss
-    elsif current_hp_was < current_hp && !name_changed? && !max_hp_changed? && !max_shield_changed?
+    elsif current_hp_was_less_current_hp_and_nothing_changed
       heal_boss
-    elsif current_shield_was < current_shield && current_hp == max_hp && !max_hp_changed? && !max_shield_changed?
+    elsif current_shield_was_less_current_shield_and_current_hp_eq_max_hp
       add_current_shield
-    elsif current_shield_was > current_shield && !max_hp_changed? && !max_shield_changed?
+    elsif current_shield_was_supp_current_shield_and_nothing_changed
       damage_current_shield
-    elsif !name_changed? && (max_shield_changed? || max_hp_changed?)
+    elsif name_not_changed_and_max_shield_or_max_hp_not_changed
       change_max_shield_hp_from_dashboard
-    elsif name_changed? && !current_hp_changed? && !max_hp_changed? && !current_shield_changed? && !max_shield_changed?
+    elsif name_changed_and_nothing_else
       change_name_from_dashboard
-    elsif name_changed? && current_hp_changed? && max_hp_changed? && max_shield_changed?
+    elsif everything_changed
       new_boss
     end
+  end
+
+  def current_hp_was_supp_current_hp_and_nothing_changed
+    current_hp_was > current_hp &&
+      !name_changed? &&
+      !max_hp_changed? &&
+      !max_shield_changed?
+  end
+
+  def current_hp_was_less_current_hp_and_nothing_changed
+    current_hp_was < current_hp &&
+      !name_changed? &&
+      !max_hp_changed? &&
+      !max_shield_changed?
+  end
+
+  def current_shield_was_less_current_shield_and_current_hp_eq_max_hp
+    current_shield_was < current_shield &&
+      current_hp == max_hp &&
+      !max_hp_changed? &&
+      !max_shield_changed?
+  end
+
+  def current_shield_was_supp_current_shield_and_nothing_changed
+    current_shield_was > current_shield &&
+      !max_hp_changed? &&
+      !max_shield_changed?
+  end
+
+  def name_not_changed_and_max_shield_or_max_hp_not_changed
+    !name_changed? &&
+      (max_shield_changed? || max_hp_changed?)
+  end
+
+  def name_changed_and_nothing_else
+    name_changed? &&
+      !current_hp_changed? &&
+      !max_hp_changed? &&
+      !current_shield_changed? &&
+      !max_shield_changed?
+  end
+
+  def everything_changed
+    name_changed? &&
+      current_hp_changed? &&
+      max_hp_changed? &&
+      max_shield_changed?
   end
 
   def change_max_shield_hp_from_dashboard
