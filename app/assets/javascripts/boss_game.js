@@ -1,28 +1,49 @@
 var isDelayed = false;
 
+function hideLifeUi() {
+  $(".boss-life-logo").addClass("hidden");
+  $(".boss-life-outter-border").addClass("hidden");
+  $(".boss-life-inner-border").addClass("hidden");
+  $(".boss-life-fill").addClass("hidden");
+  $(".boss-life-text").addClass("hidden");
+  $(".boss-shield-logo").removeClass("hidden");
+  $(".boss-shield-outter-border").removeClass("hidden");
+  $(".boss-shield-inner-border").removeClass("hidden");
+  $(".boss-shield-fill").removeClass("hidden");
+  $(".boss-shield-text").removeClass("hidden");
+};
+
+function hideShieldUi() {
+  $(".boss-shield-logo").addClass("hidden");
+  $(".boss-shield-outter-border").addClass("hidden");
+  $(".boss-shield-inner-border").addClass("hidden");
+  $(".boss-shield-fill").addClass("hidden");
+  $(".boss-shield-text").addClass("hidden");
+  $(".boss-life-logo").removeClass("hidden");
+  $(".boss-life-outter-border").removeClass("hidden");
+  $(".boss-life-inner-border").removeClass("hidden");
+  $(".boss-life-fill").removeClass("hidden");
+  $(".boss-life-text").removeClass("hidden");
+};
+
+function textScrolling() {
+  if ($(".boss-name-container")[0].scrollWidth < $(".boss-name")[0].scrollWidth) {
+    $(".boss-name").addClass("scrolling-text");
+  } else {
+    $(".boss-name").removeClass("scrolling-text");
+  }
+};
+
 function initBossBars () {
   var bossCurrentHp = $("#boss-current-hp").text();
   var bossMaxHp = $("#boss-max-hp").text();
   var bossCurrentShield = $("#boss-current-shield").text();
   var bossMaxShield = $("#boss-max-shield").text();
   if (bossCurrentShield > "0") {
-    $(".boss-life-logo").addClass("hidden");
-    $(".boss-life-outter-border").addClass("hidden");
-    $(".boss-life-inner-border").addClass("hidden");
-    $(".boss-life-fill").addClass("hidden");
-    $(".boss-life-text").addClass("hidden");
-    $(".boss-shield-logo").removeClass("hidden");
-    $(".boss-shield-outter-border").removeClass("hidden");
-    $(".boss-shield-inner-border").removeClass("hidden");
-    $(".boss-shield-fill").removeClass("hidden");
-    $(".boss-shield-text").removeClass("hidden");
+    hideLifeUi();
   }
 
-  if ($(".boss-name-container")[0].scrollWidth < $(".boss-name")[0].scrollWidth) {
-    $(".boss-name").addClass("scrolling-text");
-  } else {
-    $(".boss-name").removeClass("scrolling-text");
-  }
+  textScrolling();
 
   lifeBar.set(bossCurrentHp / bossMaxHp);
   healBar.set(bossCurrentHp / bossMaxHp);
@@ -63,16 +84,7 @@ function healBoss (data) {
 
 function damageBoss (data) {
   if ($(".boss-shield-logo").is(":visible")) {
-    $(".boss-shield-logo").addClass("hidden");
-    $(".boss-shield-outter-border").addClass("hidden");
-    $(".boss-shield-inner-border").addClass("hidden");
-    $(".boss-shield-fill").addClass("hidden");
-    $(".boss-shield-text").addClass("hidden");
-    $(".boss-life-logo").removeClass("hidden");
-    $(".boss-life-outter-border").removeClass("hidden");
-    $(".boss-life-inner-border").removeClass("hidden");
-    $(".boss-life-fill").removeClass("hidden");
-    $(".boss-life-text").removeClass("hidden");
+    hideShieldUi();
   }
 
   var currentHp = $("#boss-current-hp").text();
@@ -104,16 +116,7 @@ function damageBoss (data) {
 
 function addShield (data) {
   if ($(".boss-life-logo").is(":visible")) {
-    $(".boss-life-logo").addClass("hidden");
-    $(".boss-life-outter-border").addClass("hidden");
-    $(".boss-life-inner-border").addClass("hidden");
-    $(".boss-life-fill").addClass("hidden");
-    $(".boss-life-text").addClass("hidden");
-    $(".boss-shield-logo").removeClass("hidden");
-    $(".boss-shield-outter-border").removeClass("hidden");
-    $(".boss-shield-inner-border").removeClass("hidden");
-    $(".boss-shield-fill").removeClass("hidden");
-    $(".boss-shield-text").removeClass("hidden");
+    hideLifeUi();
   }
 
   var newShield = data["boss_current_shield"];
@@ -150,16 +153,7 @@ function damageShield (data) {
   shieldBar.set(shieldPercentage);
   shieldBarBg.animate(shieldPercentage, { duration: 2000 }, function () {
     if ($("#boss-current-shield").text() === "0") {
-      $(".boss-shield-logo").addClass("hidden");
-      $(".boss-shield-outter-border").addClass("hidden");
-      $(".boss-shield-inner-border").addClass("hidden");
-      $(".boss-shield-fill").addClass("hidden");
-      $(".boss-shield-text").addClass("hidden");
-      $(".boss-life-logo").removeClass("hidden");
-      $(".boss-life-outter-border").removeClass("hidden");
-      $(".boss-life-inner-border").removeClass("hidden");
-      $(".boss-life-fill").removeClass("hidden");
-      $(".boss-life-text").removeClass("hidden");
+      hideShieldUi();
     }
     isDelayed = false;
     updateBoss();
@@ -172,11 +166,7 @@ function damageShield (data) {
 function changeBoss (data) {
   $(".boss-name").text(data["boss_name"]);
 
-  if ($(".boss-name-container")[0].scrollWidth < $(".boss-name")[0].scrollWidth) {
-    $(".boss-name").addClass("scrolling-text");
-  } else {
-    $(".boss-name").removeClass("scrolling-text");
-  }
+  textScrolling();
 
   var bossAvatar = data["boss_avatar"]
   if (bossAvatar == null || bossAvatar == "") {
@@ -211,11 +201,7 @@ function changeBoss (data) {
 function nameFromDashbord(data) {
   $(".boss-name").text(data["boss_name"]);
 
-  if ($(".boss-name-container")[0].scrollWidth < $(".boss-name")[0].scrollWidth) {
-    $(".boss-name").addClass("scrolling-text");
-  } else {
-    $(".boss-name").removeClass("scrolling-text");
-  }
+  textScrolling();
 
   var bossAvatar = data["boss_avatar"]
   if (bossAvatar == null || bossAvatar == "") {
