@@ -1,6 +1,6 @@
 function animateNotifications(animationName) {
   var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
-  var flash = $('.notification-container').children().first();
+  var flash = $(".notification-container").children().first();
   flash.removeClass("hidden");
   flash.addClass("animated " + animationName).one(animationEnd, function () {
     flash.removeClass("animated " + animationName);
@@ -10,24 +10,16 @@ function animateNotifications(animationName) {
       flash.remove();
     });
   }, 5000);
-};
+}
 
 function checkNotifications() {
   if ($(".notification").length > 0) {
     animateNotifications("slideInRight");
   }
-};
-
-// $('.site').click(function (event) {
-//   var targetDataDismiss = event.target.dataset.dismiss;
-//   if (targetDataDismiss == "notification") {
-//     $(event.target).closest(".notification").remove();
-//   }
-// });
-//
+}
 
 function closeNotification() {
-  $('.close[data-dismiss="notification"]').click(function () {
+  $(".close[data-dismiss='notification']").click(function () {
     $(this).closest(".notification").remove();
   });
-};
+}
