@@ -1,3 +1,4 @@
 $('.site-content').html("<%= j render 'dashboard/dashboards/no_bot_index' %>")
 $('.notification-container').prepend("<%= j render 'shared/flashes' %>");
+closeNotification();
 animateNotifications('slideInRight');
