@@ -1,0 +1,66 @@
+.notification-container {
+  overflow: hidden;
+  position: absolute;
+  top: $notification-top-pos;
+  right: $notification-right-pos;
+  width: 390px;
+  max-height: calc(100vh - 70px);
+  z-index: 1000;
+  padding: 10px;
+}
+
+.notification {
+  position: relative;
+  color: #333;
+  background: white;
+  width: 370px;
+  height: 63px;
+  display: flex;
+  padding: 0;
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14),
+              0 1px 10px 0 rgba(0,0,0,0.12),
+              0 2px 4px -1px rgba(0,0,0,0.3);
+  border-radius: 4px;
+  border: none;
+  margin-bottom: 10px;
+  &-info {
+    background: $green;
+    flex: 2;
+    border-radius: 4px 0 0 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $layout-text;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  &-warning {
+    background: $red;
+    flex: 2;
+    border-radius: 4px 0 0 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $layout-text;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  &-content {
+    flex: 8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: inherit;
+    p {
+      margin: 0;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+  }
+  .close {
+    position: absolute !important;
+    top: -1px !important;
+    right: 5px !important;
+    padding: 0 !important;
+  }
+}

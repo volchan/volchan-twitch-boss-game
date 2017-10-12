@@ -9,33 +9,13 @@ class Game
   def sub_event(attr)
     @logger.sub_log(attr)
     amount = sub_damage_or_heal(attr[:plan])
-    if @boss.name == 'No boss yet!'
-      new_boss(attr[:username])
-    elsif attr[:username] == @boss.name
-      heal_boss(amount)
-    else
-      @attacker = attr[:username]
-      attack_boss(amount)
-      return unless @boss.current_hp <= 0
-      @logger.kill_log(@attacker)
-      new_boss(attr[:username])
-    end
+    game_dispatch(attr, amount)
   end
 
   def bits_event(attr)
     @logger.bits_log(attr)
     amount = bits_damage_or_heal(attr[:amount].to_i)
-    if @boss.name == 'No boss yet!'
-      new_boss(attr[:username])
-    elsif attr[:username] == @boss.name
-      heal_boss(amount)
-    else
-      @attacker = attr[:username]
-      attack_boss(amount)
-      return unless @boss.current_hp <= 0
-      @logger.kill_log(@attacker)
-      new_boss(attr[:username])
-    end
+    game_dispatch(attr, amount)
   end
 
   def update_from_dashboard(attr)
@@ -44,13 +24,35 @@ class Game
     dashboard_max_hp(attr) unless attr[:max_hp] == @boss.max_hp
     dashboard_current_shield(attr) unless attr[:current_shield] == @boss.current_shield
     dashboard_max_shield(attr) unless attr[:max_shield] == @boss.max_shield
-    ActionCable.server.broadcast(
-      "dashboard_#{@bot.id}",
-      html: ApplicationController.renderer.render(partial: 'dashboard/bosses/boss_form', locals: { boss: @boss }, layout: false)
-    )
+    send_to_dashboard
   end
 
   private
+
+  def game_dispatch(attr, amount)
+    if @boss.name == 'No boss yet!'
+      new_boss(attr[:username])
+    elsif attr[:username] == @boss.name
+      heal_boss(amount)
+    else
+      @attacker = attr[:username]
+      attack_boss(amount)
+      return unless @boss.current_hp <= 0
+      @logger.kill_log(@attacker)
+      new_boss(attr[:username])
+    end
+  end
+
+  def send_to_dashboard
+    ActionCable.server.broadcast(
+      "dashboard_#{@bot.id}",
+      html: ApplicationController.renderer.render(
+        partial: 'dashboard/bosses/boss_form',
+        locals: { boss: @boss },
+        layout: false
+      )
+    )
+  end
 
   def dashboard_new_boss(attr)
     @boss.update(name: name!(attr[:name]), avatar: boss_avatar!(attr[:name]))

@@ -1,5 +1,5 @@
 :javascript
-  var life_bar, heal_bar, damage_bar, shield_bar, shield_bar_bg;
+  var lifeBar, healBar, damageBar, shieldBar, shieldBarBg;
   var waitList = [];
 
   App.cable.subscriptions.create(
@@ -9,7 +9,7 @@
     },
     {
       connected: function(data) {
-        console.log("#{"[connected \#{@bot.id}]"}");
+        console.log("[connected #{@bot.id}]");
       },
       received: function(data) {
         waitList.unshift(data);
@@ -19,32 +19,32 @@
   );
 
   $(document).ready(function() {
-    shield_bar_green_bg = new ProgressBar.Circle('#shield-circle', {
+    shieldBarGreenBg = new ProgressBar.Circle('#shield-circle', {
       strokeWidth: 11,
       color: '#018404'
     });
 
-    shield_bar_bg = new ProgressBar.Circle('#shield-circle', {
+    shieldBarBg = new ProgressBar.Circle('#shield-circle', {
       strokeWidth: 11,
       color: '#006d96'
     });
 
-    shield_bar = new ProgressBar.Circle('#shield-circle', {
+    shieldBar = new ProgressBar.Circle('#shield-circle', {
       strokeWidth: 11,
       color: '#00aeef'
     });
 
-    damage_bar = new ProgressBar.Circle('#life-circle', {
+    damageBar = new ProgressBar.Circle('#life-circle', {
       strokeWidth: 11,
       color: '#940000'
     });
 
-    heal_bar = new ProgressBar.Circle('#life-circle', {
+    healBar = new ProgressBar.Circle('#life-circle', {
       strokeWidth: 11,
       color: '#0BC91D'
     });
 
-    life_bar = new ProgressBar.Circle('#life-circle', {
+    lifeBar = new ProgressBar.Circle('#life-circle', {
       strokeWidth: 11,
       color: '#018404'
     });

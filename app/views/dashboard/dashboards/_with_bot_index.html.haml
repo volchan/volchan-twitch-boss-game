@@ -64,6 +64,11 @@
           } else if (data['connected'] && data['moderator']) {
             $('#bot-connected').html(data['connected']);
             $('#bot-moderator').html(data['moderator']);
+            if (data['alert']) {
+              $('.notification-container').prepend(data['alert']);
+              closeNotification();
+              animateNotifications('slideInRight');
+            }
           } else if (data['log']) {
             let log = data['log'];
             logsWaitlist.unshift(log);

@@ -11,7 +11,7 @@ module Dashboard
       authorize @bot = Bot.new(bot_params)
       @bot.user = current_user
       if @bot.save
-        Boss.create!(
+        Boss.create(
           bot: @bot,
           name: 'No boss yet!',
           current_hp: 1,
@@ -31,6 +31,7 @@ module Dashboard
           flash.now[:notice] = 'Successfully updated !'
           format.js { render 'dashboard/bots/update' }
         else
+          flash.now[:alert] = 'Something went wrong !'
           format.json { render json: @bot.errors, status: :unprocessable_entity }
           format.js   { render layout: false, content_type: 'text/javascript' }
         end

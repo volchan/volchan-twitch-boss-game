@@ -1,7 +1,6 @@
-.alert.alert-dismissible{role: 'alert'}
-  .alert-warning
-    %i.fa.fa-bell-o{aria: {hidden: true}}
-  .alert-content
+.notification.hidden
+  %button.close{aria: {label: 'Close'}, data: {dismiss: 'notification'}, type: 'button'} &times;
+  .notification-warning
+    %i.fa.fa-exclamation-triangle{aria: {hidden: 'true'}}
+  .notification-content
     %p= alert
-    %button.close{aria: {label: 'Close'}, data: {dismiss: 'alert'}, type: 'button'}
-      %span{aria: {hidden: true}} &times;
