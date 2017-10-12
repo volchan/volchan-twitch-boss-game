@@ -7,7 +7,7 @@ class BotStatusJob < ApplicationJob
     viewer = viewer?(parsed_twitch_api_call)
     connected = moderator || viewer ? success : danger
     mod = moderator ? success : danger
-    alert = render_alert(moderator, viewer) unless moderator || viewer
+    alert = render_alert(moderator, viewer) if !moderator || !viewer
     send_to_dashboard(bot, connected, mod, alert)
   end
 
@@ -45,7 +45,7 @@ class BotStatusJob < ApplicationJob
 
   def alert_string(moderator, viewer)
     return "#{ENV['TWITCH_BOT_NAME']} is not connected !" unless viewer
-    "Please mod #{ENV['TWITCH_BOT_NAME']} in your chat !" unless moderator
+    return "Please mod #{ENV['TWITCH_BOT_NAME']} in your chat !" unless moderator
   end
 
   def send_to_dashboard(bot, connected, mod, alert)
