@@ -44,8 +44,9 @@ class BotStatusJob < ApplicationJob
   end
 
   def alert_string(moderator, viewer)
-    return "#{ENV['TWITCH_BOT_NAME']} is not connected !" unless viewer
-    return "Please mod #{ENV['TWITCH_BOT_NAME']} in your chat !" unless moderator
+    return "#{ENV['TWITCH_BOT_NAME']} is not connected!" unless viewer &&
+                                                                 moderator
+    return "Please mod #{ENV['TWITCH_BOT_NAME']} in your chat!" unless moderator
   end
 
   def send_to_dashboard(bot, connected, mod, alert)
