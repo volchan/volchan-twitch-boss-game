@@ -1,6 +1,6 @@
 default: &defaults
   erase logs:
-    cron: "20 13 * * *"
+    cron: "0 0 * * 1"
     class: "LogsEraserJob"
 
 development:
