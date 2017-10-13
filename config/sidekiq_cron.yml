@@ -1,0 +1,13 @@
+default: &defaults
+  erase logs:
+    cron: "0 0 * * 1"
+    class: "LogsEraserJob"
+
+development:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults
