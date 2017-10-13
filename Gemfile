@@ -12,6 +12,7 @@ gem 'rails', '5.0.3'
 gem 'redis', '~> 3.3'
 gem 'rest-client'
 gem 'sidekiq'
+gem 'sidekiq-cron-tasks'
 gem 'sidekiq-failures', '~> 1.0'
 
 gem 'autoprefixer-rails'
