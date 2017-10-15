@@ -12,7 +12,7 @@ module ApplicationHelper
     parsed_twitch_api_call = parse_call(twitch_api_call)
     moderator?(parsed_twitch_api_call)
   end
-  
+
   def api_call(link)
     RestClient.get(link)
   end
