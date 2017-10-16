@@ -1,4 +1,5 @@
 var isDelayed = false;
+var lifeBar, healBar, damageBar, shieldBar, shieldBarBg, shieldBarGreenBg;
 
 function hideLifeUi() {
   $(".boss-life-logo").addClass("hidden");
@@ -168,7 +169,7 @@ function changeBoss (data) {
 
   textScrolling();
 
-  var bossAvatar = data["boss_avatar"]
+  var bossAvatar = data["boss_avatar"];
   if (bossAvatar == null || bossAvatar == "") {
     $(".boss-avatar").css("background-image", "url('https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png')");
   } else {

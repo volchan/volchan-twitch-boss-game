@@ -1,3 +1,17 @@
+function getAnimLink(amount, power1, power100, power500, power1000, power3000) {
+  if (amount < 100) {
+    return power1[Math.floor(Math.random() * power1.length)];
+  } else if (amount < 500) {
+    return power100[Math.floor(Math.random() * power100.length)];
+  } else if (amount < 1000) {
+    return power500[Math.floor(Math.random() * power500.length)];
+  } else if (amount < 3000) {
+    return power1000[Math.floor(Math.random() * power1000.length)];
+  } else {
+    return power3000[Math.floor(Math.random() * power3000.length)];
+  }
+}
+
 function strikeAnim (amount) {
   var animLink;
   var imgTag;
@@ -37,24 +51,17 @@ function strikeAnim (amount) {
     "https://i.imgur.com/LCYgixP.gif"
   ];
 
-  if (amount < 100) {
-    animLink = power1[Math.floor(Math.random() * power1.length)];
-  } else if (amount < 500) {
-    animLink = power100[Math.floor(Math.random() * power100.length)];
-  } else if (amount < 1000) {
-    animLink = power500[Math.floor(Math.random() * power500.length)];
-  } else if (amount < 3000) {
-    animLink = power1000[Math.floor(Math.random() * power1000.length)];
-  } else {
-    animLink = power3000[Math.floor(Math.random() * power3000.length)];
-  }
+  animLink = getAnimLink(amount, power1, power100, power500, power1000, power3000);
 
   imgTag = "<img src='" + animLink + "?a=" + Math.random() + "' id='strike-anim' style='position: absolute; z-index: 100; height: 150%; width: 150%;' alt=''>";
   $(".boss").prepend(imgTag);
 }
 
 function healAnim () {
+  var imgTag;
+
   imgTag = "<img src=''https://i.imgur.com/fOvRfRk.gif?a=" + Math.random() + "' id='heal-anim' style='position: absolute; z-index: 100; height: 150%; width: 150%;' alt=''>";
   $(".boss").prepend(imgTag);
+
   setTimeout(function () { $("#heal-anim").remove(); }, 1000);
 }

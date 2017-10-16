@@ -8,13 +8,13 @@
 //= require_tree .
 
 $.fn.extend({
-  animateCss: function (animationName) {
+  animateCss (animationName) {
     var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
     this.addClass("animated " + animationName).one(animationEnd, function() {
         $(this).removeClass("animated " + animationName);
         $("#strike-anim").remove();
     });
-    return this
+    return this;
   },
 });
 
@@ -24,7 +24,7 @@ $(".tab-link").on("click", function(e){
   $(this).addClass("active");
   $(".tab-content").removeClass("active");
   $("#" + tabId).addClass("active");
-  if (tabId == "logs") {
+  if (tabId === "logs") {
     $("#new-logs").addClass("hidden").html("0");
     logHiddenCounter = 0;
   }

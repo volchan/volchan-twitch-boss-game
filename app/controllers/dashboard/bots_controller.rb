@@ -11,14 +11,7 @@ module Dashboard
       authorize @bot = Bot.new(bot_params)
       @bot.user = current_user
       if @bot.save
-        Boss.create(
-          bot: @bot,
-          name: 'No boss yet!',
-          current_hp: 1,
-          max_hp: 1,
-          current_shield: 0,
-          max_shield: 1
-        )
+        create_boss(@bot)
         redirect_to controller: :dashboards, action: :index
       else
         render :new
@@ -52,12 +45,32 @@ module Dashboard
 
     private
 
+    def create_boss(bot)
+      Boss.create(
+        bot: bot,
+        name: 'No boss yet!',
+        current_hp: 1,
+        max_hp: 1,
+        current_shield: 0,
+        max_shield: 1
+      )
+    end
+
     def set_bot
       authorize @bot = Bot.find_bot(params[:id])
     end
 
     def bot_params
-      params.require(:bot).permit(:boss_max_hp, :boss_min_hp, :boss_hp_step, :channel, :sub_prime_modifier, :sub_five_modifier, :sub_ten_modifier, :sub_twenty_five_modifier, :bits_modifier)
+      params.require(:bot)
+            .permit(:boss_max_hp,
+                    :boss_min_hp,
+                    :boss_hp_step,
+                    :channel,
+                    :sub_prime_modifier,
+                    :sub_five_modifier,
+                    :sub_ten_modifier,
+                    :sub_twenty_five_modifier,
+                    :bits_modifier)
     end
   end
 end
