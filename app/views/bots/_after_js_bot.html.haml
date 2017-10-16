@@ -1,6 +1,4 @@
 :javascript
-  var lifeBar, healBar, damageBar, shieldBar, shieldBarBg;
-  var waitList = [];
 
   App.cable.subscriptions.create(
     {
@@ -12,42 +10,12 @@
         console.log("[connected #{@bot.id}]");
       },
       received: function(data) {
-        waitList.unshift(data);
-        updateBoss(data);
+        addToWaitlist(data);
       }
     }
   );
 
   $(document).ready(function() {
-    shieldBarGreenBg = new ProgressBar.Circle('#shield-circle', {
-      strokeWidth: 11,
-      color: '#018404'
-    });
-
-    shieldBarBg = new ProgressBar.Circle('#shield-circle', {
-      strokeWidth: 11,
-      color: '#006d96'
-    });
-
-    shieldBar = new ProgressBar.Circle('#shield-circle', {
-      strokeWidth: 11,
-      color: '#00aeef'
-    });
-
-    damageBar = new ProgressBar.Circle('#life-circle', {
-      strokeWidth: 11,
-      color: '#940000'
-    });
-
-    healBar = new ProgressBar.Circle('#life-circle', {
-      strokeWidth: 11,
-      color: '#0BC91D'
-    });
-
-    lifeBar = new ProgressBar.Circle('#life-circle', {
-      strokeWidth: 11,
-      color: '#018404'
-    });
-
+    createBossBars();
     initBossBars();
   });

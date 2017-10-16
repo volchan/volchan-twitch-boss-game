@@ -1,5 +1,39 @@
 var isDelayed = false;
+var gameData;
 var lifeBar, healBar, damageBar, shieldBar, shieldBarBg, shieldBarGreenBg;
+var waitList = [];
+
+function createBossBars() {
+  shieldBarGreenBg = new ProgressBar.Circle('#shield-circle', {
+    strokeWidth: 11,
+    color: '#018404'
+  });
+
+  shieldBarBg = new ProgressBar.Circle('#shield-circle', {
+    strokeWidth: 11,
+    color: '#006d96'
+  });
+
+  shieldBar = new ProgressBar.Circle('#shield-circle', {
+    strokeWidth: 11,
+    color: '#00aeef'
+  });
+
+  damageBar = new ProgressBar.Circle('#life-circle', {
+    strokeWidth: 11,
+    color: '#940000'
+  });
+
+  healBar = new ProgressBar.Circle('#life-circle', {
+    strokeWidth: 11,
+    color: '#0BC91D'
+  });
+
+  lifeBar = new ProgressBar.Circle('#life-circle', {
+    strokeWidth: 11,
+    color: '#018404'
+  });
+}
 
 function hideLifeUi() {
   $(".boss-life-logo").addClass("hidden");
@@ -220,25 +254,32 @@ function maxShieldHpFromDashboard(data) {
   $("#boss-max-shield").text(maxShield);
 }
 
-function updateBoss () {
-  var data;
+function updateBoss() {
   if (!isDelayed && waitList.length > 0) {
-    data = waitList.pop();
+    gameData = waitList.pop();
     isDelayed = true;
-    if (data["heal"]) {
-      healBoss(data);
-    } else if (data["damages"]) {
-      damageBoss(data);
-    } else if (data["add_current_shield"]) {
-      addShield(data);
-    } else if (data["damage_current_shield"]) {
-      damageShield(data);
-    } else if (data["new_boss"]) {
-      changeBoss(data);
-    } else if (data["name_from_dashboard"]) {
-      nameFromDashbord(data);
-    } else if (data["max_shield_hp_from_dashboard"]) {
-      maxShieldHpFromDashboard(data);
+    console.log(gameData);
+    if (gameData["heal"]) {
+      healBoss(gameData);
+    } else if (gameData["damages"]) {
+      damageBoss(gameData);
+    } else if (gameData["add_current_shield"]) {
+      addShield(gameData);
+    } else if (gameData["damage_current_shield"]) {
+      damageShield(gameData);
+    } else if (gameData["new_boss"]) {
+      changeBoss(gameData);
+    } else if (gameData["name_from_dashboard"]) {
+      nameFromDashbord(gameData);
+    } else if (gameData["max_shield_hp_from_dashboard"]) {
+      maxShieldHpFromDashboard(gameData);
     }
+  }
+}
+
+function addToWaitlist(data) {
+  waitList.unshift(data);
+  if (!isDelayed && waitList.length > 0) {
+    updateBoss();
   }
 }
