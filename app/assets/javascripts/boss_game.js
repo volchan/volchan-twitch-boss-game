@@ -258,7 +258,6 @@ function updateBoss() {
   if (!isDelayed && waitList.length > 0) {
     gameData = waitList.pop();
     isDelayed = true;
-    console.log(gameData);
     if (gameData["heal"]) {
       healBoss(gameData);
     } else if (gameData["damages"]) {
