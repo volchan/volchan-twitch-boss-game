@@ -4,34 +4,34 @@ var lifeBar, healBar, damageBar, shieldBar, shieldBarBg, shieldBarGreenBg;
 var waitList = [];
 
 function createBossBars() {
-  shieldBarGreenBg = new ProgressBar.Circle('#shield-circle', {
+  shieldBarGreenBg = new ProgressBar.Circle("#shield-circle", {
     strokeWidth: 11,
-    color: '#018404'
+    color: "#018404"
   });
 
-  shieldBarBg = new ProgressBar.Circle('#shield-circle', {
+  shieldBarBg = new ProgressBar.Circle("#shield-circle", {
     strokeWidth: 11,
-    color: '#006d96'
+    color: "#006d96"
   });
 
-  shieldBar = new ProgressBar.Circle('#shield-circle', {
+  shieldBar = new ProgressBar.Circle("#shield-circle", {
     strokeWidth: 11,
-    color: '#00aeef'
+    color: "#00aeef"
   });
 
-  damageBar = new ProgressBar.Circle('#life-circle', {
+  damageBar = new ProgressBar.Circle("#life-circle", {
     strokeWidth: 11,
-    color: '#940000'
+    color: "#940000"
   });
 
-  healBar = new ProgressBar.Circle('#life-circle', {
+  healBar = new ProgressBar.Circle("#life-circle", {
     strokeWidth: 11,
-    color: '#0BC91D'
+    color: "#0BC91D"
   });
 
-  lifeBar = new ProgressBar.Circle('#life-circle', {
+  lifeBar = new ProgressBar.Circle("#life-circle", {
     strokeWidth: 11,
-    color: '#018404'
+    color: "#018404"
   });
 }
 
@@ -238,7 +238,7 @@ function nameFromDashbord(data) {
 
   textScrolling();
 
-  var bossAvatar = data["boss_avatar"]
+  var bossAvatar = data["boss_avatar"];
   if (bossAvatar == null || bossAvatar == "") {
     $(".boss-avatar").css("background-image", "url('https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png')");
   } else {
@@ -254,25 +254,29 @@ function maxShieldHpFromDashboard(data) {
   $("#boss-max-shield").text(maxShield);
 }
 
+function gameDispatch(gameData) {
+  if (gameData["heal"]) {
+    healBoss(gameData);
+  } else if (gameData["damages"]) {
+    damageBoss(gameData);
+  } else if (gameData["add_current_shield"]) {
+    addShield(gameData);
+  } else if (gameData["damage_current_shield"]) {
+    damageShield(gameData);
+  } else if (gameData["new_boss"]) {
+    changeBoss(gameData);
+  } else if (gameData["name_from_dashboard"]) {
+    nameFromDashbord(gameData);
+  } else if (gameData["max_shield_hp_from_dashboard"]) {
+    maxShieldHpFromDashboard(gameData);
+  }
+}
+
 function updateBoss() {
   if (!isDelayed && waitList.length > 0) {
     gameData = waitList.pop();
     isDelayed = true;
-    if (gameData["heal"]) {
-      healBoss(gameData);
-    } else if (gameData["damages"]) {
-      damageBoss(gameData);
-    } else if (gameData["add_current_shield"]) {
-      addShield(gameData);
-    } else if (gameData["damage_current_shield"]) {
-      damageShield(gameData);
-    } else if (gameData["new_boss"]) {
-      changeBoss(gameData);
-    } else if (gameData["name_from_dashboard"]) {
-      nameFromDashbord(gameData);
-    } else if (gameData["max_shield_hp_from_dashboard"]) {
-      maxShieldHpFromDashboard(gameData);
-    }
+    gameDispatch(gameData);
   }
 }
 
