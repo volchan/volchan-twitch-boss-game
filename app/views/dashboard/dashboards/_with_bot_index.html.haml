@@ -31,7 +31,7 @@
           %button.btn.btn-sm.btn-primary.clipboard-btn{type: 'button', data: {container: 'body', content: 'Copied!', placement: 'bottom', toggle: 'popover', clipboard: {action: 'copy', target: '#link'}}} Copy link!
       %hr
     #logs.tab-content.active
-      - @logs.each do |log|
+      - @bot.logs.each do |log|
         = log_display(log)
     #bot.tab-content
       = render 'dashboard/bots/bot_form', bot: @bot
@@ -59,9 +59,7 @@
           )
         },
         received: function(data) {
-          if (data['html']) {
-            $('#boss').html(data['html']);
-          } else if (data['connected'] && data['moderator']) {
+          if (data['connected'] && data['moderator']) {
             $('#bot-connected').html(data['connected']);
             $('#bot-moderator').html(data['moderator']);
             if (data['alert']) {
