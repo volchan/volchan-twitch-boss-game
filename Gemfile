@@ -14,6 +14,8 @@ gem 'rest-client'
 gem 'sidekiq'
 gem 'sidekiq-cron-tasks'
 gem 'sidekiq-failures', '~> 1.0'
+gem 'sprockets', '>= 3.0.0'
+gem 'sprockets-es6'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
