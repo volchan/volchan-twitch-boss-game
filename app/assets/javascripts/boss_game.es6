@@ -147,7 +147,7 @@ const damageBoss =  (data) => {
   strikeAnim(currentHp - newHp);
 
   setTimeout(() =>  {
-      $(".boss").animateCss("shake");
+      animateCss("shake");
       $("#boss-current-hp").prop("number", currentHp).animateNumber({number: newHp, easing: "ease"}, 2000);
       $("#boss-life-percent").prop("number", currentHpPercent).animateNumber({number: newHpPercent, easing: "ease"}, 2000);
       healBar.set(healthPercentage);
@@ -206,7 +206,7 @@ const damageShield =  (data) => {
   });
 
   strikeAnim(currentShield - newShield);
-  $(".boss").animateCss("shake");
+  animateCss("shake");
 }
 
 const changeBoss =  (data) => {
