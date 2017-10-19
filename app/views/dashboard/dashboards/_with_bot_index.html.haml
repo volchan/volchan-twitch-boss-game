@@ -51,14 +51,14 @@
         bot_id: #{@bot.id}
       },
       {
-        connected: function(data) {
+        connected: (data) => {
           console.log("#{"[connected dashboard #{@bot.id}]"}");
           $.get(
             "#{dashboard_bots_status_index_url}?bot_id=#{@bot.id}",
             null
           )
         },
-        received: function(data) {
+        received: (data) => {
           if (data['connected'] && data['moderator']) {
             $('#bot-connected').html(data['connected']);
             $('#bot-moderator').html(data['moderator']);
