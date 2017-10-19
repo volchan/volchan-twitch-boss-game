@@ -7,16 +7,16 @@
 //= require clipboard
 //= require_tree .
 
-function animateCss (animationName) {
+const animateCss = (animationName) => {
   var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
-  $(".boss").addClass("animated " + animationName).one(animationEnd, function() {
+  $(".boss").addClass("animated " + animationName).one(animationEnd, () => {
       $(".boss").removeClass("animated " + animationName);
       $("#strike-anim").remove();
   });
   return this;
 }
 
-$(".tab-link").on("click", function(e){
+$(".tab-link").on("click", (e) => {
   var tabId = $(this).attr("data-tab");
   $(".tab-link").removeClass("active");
   $(this).addClass("active");
@@ -31,8 +31,8 @@ $(".tab-link").on("click", function(e){
 $(document).ready(function(){
   var clipboard = new Clipboard(".clipboard-btn");
 
-  $(".clipboard-btn").popover().click(function () {
-    setTimeout(function () {
+  $(".clipboard-btn").popover().click(() => {
+    setTimeout(() => {
         $(".clipboard-btn").popover("hide");
     }, 2000);
   });

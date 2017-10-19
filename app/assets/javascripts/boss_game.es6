@@ -80,7 +80,7 @@ const textScrolling = () => {
   }
 }
 
-const initBossBars =  () => {
+const initBossBars = () => {
   currentHp = $("#boss-current-hp").text();
   maxHp = $("#boss-max-hp").text();
   currentShield = $("#boss-current-shield").text();
@@ -102,7 +102,7 @@ const initBossBars =  () => {
   $("#boss-shield-percent").text(Math.floor(parseFloat(shieldBar.value()) * 100));
 }
 
-const healBoss =  (data) => {
+const healBoss = (data) => {
   currentHp = $("#boss-current-hp").text();
   if (data["boss_current_hp"] < 0) {
     newHp = 0;
@@ -128,7 +128,7 @@ const healBoss =  (data) => {
   healAnim();
 }
 
-const damageBoss =  (data) => {
+const damageBoss = (data) => {
   if ($(".boss-shield-logo").is(":visible")) {
     hideShieldUi();
   }
@@ -160,7 +160,7 @@ const damageBoss =  (data) => {
   );
 }
 
-const addShield =  (data) => {
+const addShield = (data) => {
   if ($(".boss-life-logo").is(":visible")) {
     hideLifeUi();
   }
@@ -184,7 +184,7 @@ const addShield =  (data) => {
   });
 }
 
-const damageShield =  (data) => {
+const damageShield = (data) => {
   newShield = data["boss_current_shield"];
   maxShield = $("#boss-max-shield").text();
 
@@ -209,7 +209,7 @@ const damageShield =  (data) => {
   animateCss("shake");
 }
 
-const changeBoss =  (data) => {
+const changeBoss = (data) => {
   $(".boss-name").text(data["boss_name"]);
 
   textScrolling();

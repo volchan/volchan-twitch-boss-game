@@ -76,7 +76,7 @@
       }
     );
 
-    function prependLog () {
+    const prependLog = () => {
       if (!logDelayed && logsWaitlist.length > 0) {
         logDelayed = true;
         let log = logsWaitlist.pop();
@@ -90,7 +90,7 @@
           $('#new-logs').removeClass('hidden');
         }
 
-        setTimeout(function () {
+        setTimeout(() => {
         logDelayed = false;
         prependLog()
         }, 500);
