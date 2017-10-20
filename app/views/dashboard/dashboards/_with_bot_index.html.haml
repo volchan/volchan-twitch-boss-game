@@ -51,14 +51,14 @@
         bot_id: #{@bot.id}
       },
       {
-        connected: (data) => {
+        connected: function(data) {
           console.log("#{"[connected dashboard #{@bot.id}]"}");
           $.get(
             "#{dashboard_bots_status_index_url}?bot_id=#{@bot.id}",
             null
           )
         },
-        received: (data) => {
+        received: function(data) {
           if (data['connected'] && data['moderator']) {
             $('#bot-connected').html(data['connected']);
             $('#bot-moderator').html(data['moderator']);
@@ -68,7 +68,7 @@
               animateNotifications('slideInRight');
             }
           } else if (data['log']) {
-            let log = data['log'];
+            var log = data['log'];
             logsWaitlist.unshift(log);
             prependLog();
           }
@@ -76,10 +76,10 @@
       }
     );
 
-    const prependLog = () => {
+    const prependLog = function() {
       if (!logDelayed && logsWaitlist.length > 0) {
         logDelayed = true;
-        let log = logsWaitlist.pop();
+        var log = logsWaitlist.pop();
         $('#logs').prepend(log);
         $('.log').first().hide().slideDown();
 
@@ -90,7 +90,7 @@
           $('#new-logs').removeClass('hidden');
         }
 
-        setTimeout(() => {
+        setTimeout(function() {
         logDelayed = false;
         prependLog()
         }, 500);

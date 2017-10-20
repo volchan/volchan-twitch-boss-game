@@ -8,7 +8,7 @@
 //= require_tree .
 
 const animateCss = (animationName) => {
-  var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+  let animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
   $(".boss").addClass("animated " + animationName).one(animationEnd, () => {
       $(".boss").removeClass("animated " + animationName);
       $("#strike-anim").remove();
@@ -17,9 +17,9 @@ const animateCss = (animationName) => {
 }
 
 $(".tab-link").on("click", (e) => {
-  var tabId = $(this).attr("data-tab");
+  let tabId = $(e.target).attr("data-tab");
   $(".tab-link").removeClass("active");
-  $(this).addClass("active");
+  $(e.target).addClass("active");
   $(".tab-content").removeClass("active");
   $("#" + tabId).addClass("active");
   if (tabId === "logs") {
@@ -29,7 +29,7 @@ $(".tab-link").on("click", (e) => {
 });
 
 $(document).ready(function(){
-  var clipboard = new Clipboard(".clipboard-btn");
+  let clipboard = new Clipboard(".clipboard-btn");
 
   $(".clipboard-btn").popover().click(() => {
     setTimeout(() => {
