@@ -68,7 +68,7 @@
               animateNotifications('slideInRight');
             }
           } else if (data['log']) {
-            let log = data['log'];
+            var log = data['log'];
             logsWaitlist.unshift(log);
             prependLog();
           }
@@ -76,10 +76,10 @@
       }
     );
 
-    function prependLog () {
+    const prependLog = function() {
       if (!logDelayed && logsWaitlist.length > 0) {
         logDelayed = true;
-        let log = logsWaitlist.pop();
+        var log = logsWaitlist.pop();
         $('#logs').prepend(log);
         $('.log').first().hide().slideDown();
 
@@ -90,7 +90,7 @@
           $('#new-logs').removeClass('hidden');
         }
 
-        setTimeout(function () {
+        setTimeout(function() {
         logDelayed = false;
         prependLog()
         }, 500);

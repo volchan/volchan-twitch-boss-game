@@ -1,9 +1,20 @@
-var isDelayed = false;
-var gameData;
-var lifeBar, healBar, damageBar, shieldBar, shieldBarBg, shieldBarGreenBg;
-var waitList = [];
+let isDelayed = false;
 
-function createBossBars() {
+let gameData;
+
+let lifeBar, healBar, damageBar, shieldBar, shieldBarBg, shieldBarGreenBg;
+
+let waitList = [];
+
+let newHp, maxHp, newMaxHp;
+let currentHp, currentHpPercent, newHpPercent, healthPercentage;
+
+let newShield, maxShield;
+let currentShield, currentShieldPercent, newShieldPercent, shieldPercentage;
+
+let bossAvatar;
+
+const createBossBars = () => {
   shieldBarGreenBg = new ProgressBar.Circle("#shield-circle", {
     strokeWidth: 11,
     color: "#018404"
@@ -35,7 +46,7 @@ function createBossBars() {
   });
 }
 
-function hideLifeUi() {
+const hideLifeUi = () => {
   $(".boss-life-logo").addClass("hidden");
   $(".boss-life-outter-border").addClass("hidden");
   $(".boss-life-inner-border").addClass("hidden");
@@ -48,7 +59,7 @@ function hideLifeUi() {
   $(".boss-shield-text").removeClass("hidden");
 }
 
-function hideShieldUi() {
+const hideShieldUi = () => {
   $(".boss-shield-logo").addClass("hidden");
   $(".boss-shield-outter-border").addClass("hidden");
   $(".boss-shield-inner-border").addClass("hidden");
@@ -61,7 +72,7 @@ function hideShieldUi() {
   $(".boss-life-text").removeClass("hidden");
 }
 
-function textScrolling() {
+const textScrolling = () => {
   if ($(".boss-name-container")[0].scrollWidth < $(".boss-name")[0].scrollWidth) {
     $(".boss-name").addClass("scrolling-text");
   } else {
@@ -69,79 +80,79 @@ function textScrolling() {
   }
 }
 
-function initBossBars () {
-  var bossCurrentHp = $("#boss-current-hp").text();
-  var bossMaxHp = $("#boss-max-hp").text();
-  var bossCurrentShield = $("#boss-current-shield").text();
-  var bossMaxShield = $("#boss-max-shield").text();
-  if (bossCurrentShield > "0") {
+const initBossBars = () => {
+  currentHp = $("#boss-current-hp").text();
+  maxHp = $("#boss-max-hp").text();
+  currentShield = $("#boss-current-shield").text();
+  maxShield = $("#boss-max-shield").text();
+  if (currentShield > "0") {
     hideLifeUi();
   }
 
   textScrolling();
 
-  lifeBar.set(bossCurrentHp / bossMaxHp);
-  healBar.set(bossCurrentHp / bossMaxHp);
-  damageBar.set(bossCurrentHp / bossMaxHp);
-  shieldBar.set(bossCurrentShield / bossMaxShield);
-  shieldBarBg.set(bossCurrentShield / bossMaxShield);
+  lifeBar.set(currentHp / maxHp);
+  healBar.set(currentHp / maxHp);
+  damageBar.set(currentHp / maxHp);
+  shieldBar.set(currentShield / maxShield);
+  shieldBarBg.set(currentShield / maxShield);
   shieldBarGreenBg.set(1);
 
   $("#boss-life-percent").text(Math.floor(parseFloat(lifeBar.value()) * 100));
   $("#boss-shield-percent").text(Math.floor(parseFloat(shieldBar.value()) * 100));
 }
 
-function healBoss (data) {
-  var currentHp = $("#boss-current-hp").text();
+const healBoss = (data) => {
+  currentHp = $("#boss-current-hp").text();
   if (data["boss_current_hp"] < 0) {
-    var newHp = 0;
+    newHp = 0;
   } else {
-    var newHp = data["boss_current_hp"];
+    newHp = data["boss_current_hp"];
   }
   $("#boss-current-hp").prop("number", currentHp).animateNumber({number: newHp, easing: "ease"}, 2000);
 
-  var maxHp = $("#boss-max-hp").text();
+  maxHp = $("#boss-max-hp").text();
 
-  var currentHpPercent = (currentHp / maxHp) * 100;
-  var newHpPercent = (newHp / maxHp) * 100;
+  currentHpPercent = (currentHp / maxHp) * 100;
+  newHpPercent = (newHp / maxHp) * 100;
   $("#boss-life-percent").prop("number", currentHpPercent).animateNumber({number: newHpPercent, easing: "ease"}, 2000);
 
-  var healthPercentage = newHp / maxHp;
+  healthPercentage = newHp / maxHp;
 
   healBar.set(healthPercentage);
   damageBar.set(healthPercentage);
-  lifeBar.animate(healthPercentage, { duration: 2000 }, function () {
+  lifeBar.animate(healthPercentage, { duration: 2000 }, () =>  {
     isDelayed = false;
     updateBoss();
   });
   healAnim();
 }
 
-function damageBoss (data) {
+const damageBoss = (data) => {
   if ($(".boss-shield-logo").is(":visible")) {
     hideShieldUi();
   }
 
-  var currentHp = $("#boss-current-hp").text();
+  currentHp = $("#boss-current-hp").text();
   if (data["boss_current_hp"] < 0) {
-    var newHp = 0;
+    newHp = 0;
   } else {
-    var newHp = data["boss_current_hp"];
+    newHp = data["boss_current_hp"];
   }
-  var maxHp = $("#boss-max-hp").text();
-  var currentHpPercent = (currentHp / maxHp) * 100;
-  var newHpPercent = (newHp / maxHp) * 100;
-  var healthPercentage = newHp / maxHp;
+  maxHp = $("#boss-max-hp").text();
+  currentHpPercent = (currentHp / maxHp) * 100;
+  newHpPercent = (newHp / maxHp) * 100;
+  healthPercentage = newHp / maxHp;
 
   strikeAnim(currentHp - newHp);
 
-  setTimeout(function () {
-      $(".boss").animateCss("shake");
+  setTimeout(() =>  {
+      animateCss("shake");
       $("#boss-current-hp").prop("number", currentHp).animateNumber({number: newHp, easing: "ease"}, 2000);
       $("#boss-life-percent").prop("number", currentHpPercent).animateNumber({number: newHpPercent, easing: "ease"}, 2000);
       healBar.set(healthPercentage);
       lifeBar.set(healthPercentage);
-      damageBar.animate(healthPercentage, { duration: 2000 }, function () {
+      damageBar.animate(healthPercentage, { duration: 2000 }, () =>  {
         isDelayed = false;
         updateBoss();
       });
@@ -149,44 +160,44 @@ function damageBoss (data) {
   );
 }
 
-function addShield (data) {
+const addShield = (data) => {
   if ($(".boss-life-logo").is(":visible")) {
     hideLifeUi();
   }
 
-  var newShield = data["boss_current_shield"];
+  newShield = data["boss_current_shield"];
 
-  var currentShield = $("#boss-current-shield").text();
+  currentShield = $("#boss-current-shield").text();
   $("#boss-current-shield").prop("number", currentShield).animateNumber({number: newShield, easing: "ease"}, 2000);
 
-  var maxShield = $("#boss-max-shield").text();
+  maxShield = $("#boss-max-shield").text();
 
-  var currentShieldPercent = (currentShield / maxShield) * 100;
-  var newShieldPercent = ( newShield / maxShield) * 100;
+  currentShieldPercent = (currentShield / maxShield) * 100;
+  newShieldPercent = ( newShield / maxShield) * 100;
   $("#boss-shield-percent").prop("number", currentShieldPercent).animateNumber({number: newShieldPercent, easing: "ease"}, 2000);
 
-  var shieldPercentage = newShield / maxShield;
+  shieldPercentage = newShield / maxShield;
   shieldBarBg.set(shieldPercentage);
-  shieldBar.animate(shieldPercentage, { duration: 2000 }, function () {
+  shieldBar.animate(shieldPercentage, { duration: 2000 }, () =>  {
     isDelayed = false;
     updateBoss();
   });
 }
 
-function damageShield (data) {
-  var newShield = data["boss_current_shield"];
-  var maxShield = $("#boss-max-shield").text();
+const damageShield = (data) => {
+  newShield = data["boss_current_shield"];
+  maxShield = $("#boss-max-shield").text();
 
-  var currentShield = $("#boss-current-shield").text();
+  currentShield = $("#boss-current-shield").text();
   $("#boss-current-shield").prop("number", currentShield).animateNumber({number: newShield, easing: "ease"}, 2000);
 
-  var currentShieldPercent = (currentShield / maxShield) * 100;
-  var newShieldPercent = (newShield / maxShield) * 100;
+  currentShieldPercent = (currentShield / maxShield) * 100;
+  newShieldPercent = (newShield / maxShield) * 100;
   $("#boss-shield-percent").prop("number", currentShieldPercent).animateNumber({number: newShieldPercent, easing: "ease"}, 2000);
 
-  var shieldPercentage = newShield / maxShield;
+  shieldPercentage = newShield / maxShield;
   shieldBar.set(shieldPercentage);
-  shieldBarBg.animate(shieldPercentage, { duration: 2000 }, function () {
+  shieldBarBg.animate(shieldPercentage, { duration: 2000 }, () =>  {
     if ($("#boss-current-shield").text() === "0") {
       hideShieldUi();
     }
@@ -195,50 +206,50 @@ function damageShield (data) {
   });
 
   strikeAnim(currentShield - newShield);
-  $(".boss").animateCss("shake");
+  animateCss("shake");
 }
 
-function changeBoss (data) {
+const changeBoss = (data) => {
   $(".boss-name").text(data["boss_name"]);
 
   textScrolling();
 
-  var bossAvatar = data["boss_avatar"];
+  bossAvatar = data["boss_avatar"];
   if (bossAvatar == null || bossAvatar == "") {
     $(".boss-avatar").css("background-image", "url('https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png')");
   } else {
     $(".boss-avatar").css("background-image", "url('" + bossAvatar + "')");
   }
 
-  var currentHp = $("#boss-current-hp").text();
-  var newHp = data["boss_current_hp"];
+  currentHp = $("#boss-current-hp").text();
+  newHp = data["boss_current_hp"];
   $("#boss-current-hp").prop("number", currentHp).animateNumber({number: newHp, easing: "ease"}, 2000);
 
-  var maxHp = $("#boss-max-hp").text();
-  var newMaxHp = data["boss_max_hp"];
+  maxHp = $("#boss-max-hp").text();
+  newMaxHp = data["boss_max_hp"];
   $("#boss-max-hp").prop("number", maxHp).animateNumber({number: newMaxHp, easing: "ease"}, 2000);
 
-  var currentHpPercent = (currentHp / maxHp) * 100;
-  var newHpPercent = (newHp / newMaxHp) * 100;
+  currentHpPercent = (currentHp / maxHp) * 100;
+  newHpPercent = (newHp / newMaxHp) * 100;
   $("#boss-life-percent").prop("number", currentHpPercent).animateNumber({number: newHpPercent, easing: "ease"}, 2000);
 
-  var maxShield = data["boss_max_shield"];
+  maxShield = data["boss_max_shield"];
   $("#boss-max-shield").text(maxShield);
 
   healBar.set(1);
   damageBar.set(1);
-  lifeBar.animate(1, { duration: 2000 }, function () {
+  lifeBar.animate(1, { duration: 2000 }, () =>  {
     isDelayed = false;
     updateBoss();
   });
 }
 
-function nameFromDashbord(data) {
+const nameFromDashbord = (data) => {
   $(".boss-name").text(data["boss_name"]);
 
   textScrolling();
 
-  var bossAvatar = data["boss_avatar"];
+  bossAvatar = data["boss_avatar"];
   if (bossAvatar == null || bossAvatar == "") {
     $(".boss-avatar").css("background-image", "url('https://static-cdn.jtvnw.net/jtv_user_pictures/xarth/404_user_300x300.png')");
   } else {
@@ -246,15 +257,15 @@ function nameFromDashbord(data) {
   }
 }
 
-function maxShieldHpFromDashboard(data) {
-  var maxHp = data["boss_max_hp"];
+const maxShieldHpFromDashboard = (data) => {
+  maxHp = data["boss_max_hp"];
   $("#boss-max-hp").text(maxHp);
 
-  var maxShield = data["boss_max_shield"];
+  maxShield = data["boss_max_shield"];
   $("#boss-max-shield").text(maxShield);
 }
 
-function gameDispatch(gameData) {
+const gameDispatch = (gameData) => {
   if (gameData["heal"]) {
     healBoss(gameData);
   } else if (gameData["damages"]) {
@@ -272,7 +283,7 @@ function gameDispatch(gameData) {
   }
 }
 
-function updateBoss() {
+const updateBoss = () => {
   if (!isDelayed && waitList.length > 0) {
     gameData = waitList.pop();
     isDelayed = true;
@@ -280,7 +291,7 @@ function updateBoss() {
   }
 }
 
-function addToWaitlist(data) {
+const addToWaitlist = (data) => {
   waitList.unshift(data);
   if (!isDelayed && waitList.length > 0) {
     updateBoss();
