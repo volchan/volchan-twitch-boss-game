@@ -31,8 +31,9 @@
           %button.btn.btn-sm.btn-primary.clipboard-btn{type: 'button', data: {container: 'body', content: 'Copied!', placement: 'bottom', toggle: 'popover', clipboard: {action: 'copy', target: '#link'}}} Copy link!
       %hr
     #logs.tab-content.active
-      - @bot.logs.order(created_at: :desc).each do |log|
+      - @logs.each do |log|
         = log_display(log)
+      = paginate @logs, remote: true
     #bot.tab-content
       = render 'dashboard/bots/bot_form', bot: @bot
     #boss.tab-content
@@ -76,7 +77,7 @@
       }
     );
 
-    const prependLog = function() {
+    function prependLog() {
       if (!logDelayed && logsWaitlist.length > 0) {
         logDelayed = true;
         var log = logsWaitlist.pop();
@@ -96,5 +97,17 @@
         }, 500);
       }
     };
+
+    $(function() {
+      return $("#shops .page").infinitescroll({
+        loading: {
+          img: "http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif",
+          msgText: "ロード中..."
+        },
+        navSelector: "nav.pagination",
+        nextSelector: "nav.pagination a[rel=next]",
+        itemSelector: "#shops tr.shop"
+      });
+    });
 
   = render 'bots/after_js_bot'
