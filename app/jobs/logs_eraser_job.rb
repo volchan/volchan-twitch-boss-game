@@ -3,7 +3,7 @@ class LogsEraserJob < ApplicationJob
 
   def perform(*_)
     logger = Logger.new(STDOUT)
-    logger.info 'Deleting last weeks logs!'
+    logger.info 'Deleting two weeks old logs!'
     logs_to_delete = Log.two_weeks_ago
     counter = 0
     logs_to_delete.each do |log|
