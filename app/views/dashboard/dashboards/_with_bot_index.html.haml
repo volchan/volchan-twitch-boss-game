@@ -34,12 +34,12 @@
       #logs-container
         = render 'logs/logs_renderer', logs: @logs
       .pagination
-        = link_to_next_page @logs, 'Load more...', remote: true
+        = link_to_next_page(@logs, "Load #{@logs.page(@logs.next_page).length} more...", class: "next-page", remote: true)
     #bot.tab-content.scrollable
       = render 'dashboard/bots/bot_form', bot: @bot
     #boss.tab-content.scrollable
       = render 'dashboard/bosses/boss_form', boss: @bot.boss
-  .dashboard-boss.hidden
+  .dashboard-boss
     = render 'bots/boss_card', bot: @bot
 
 = content_for :after_js do
@@ -99,5 +99,18 @@
       }
     };
 
+    $(function() {
+      if ($('#logs-container').length > 0) {
+        $('#logs').on('scroll', function() {
+          var elem = $('#logs');
+          var moreLogsUrl = $('.next-page').attr('href');
+          var doneScrolling = elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight();
+          if (moreLogsUrl && doneScrolling) {
+            $('.pagination').html('Loading...');
+            $.getScript(moreLogsUrl);
+          }
+        });
+      }
+    });
 
   = render 'bots/after_js_bot'
