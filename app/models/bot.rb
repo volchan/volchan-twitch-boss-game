@@ -28,7 +28,7 @@ class Bot < ApplicationRecord
   validate :hp_step
 
   scope :find_bot, ->(id) { find_by(id: id) }
-  scope :find_with_user, ->(user) { includes(:logs).find_by(user: user) }
+  scope :find_with_user, ->(user) { includes(:boss).find_by(user: user) }
 
   private
 

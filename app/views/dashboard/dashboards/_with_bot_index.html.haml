@@ -30,12 +30,14 @@
         %span.input-group-btn
           %button.btn.btn-sm.btn-primary.clipboard-btn{type: 'button', data: {container: 'body', content: 'Copied!', placement: 'bottom', toggle: 'popover', clipboard: {action: 'copy', target: '#link'}}} Copy link!
       %hr
-    #logs.tab-content.active
-      - @bot.logs.order(created_at: :desc).each do |log|
-        = log_display(log)
-    #bot.tab-content
+    #logs.tab-content.active.scrollable
+      #logs-container
+        = render 'logs/logs_renderer', logs: @logs
+      .pagination
+        = link_to_next_page(@logs, "Load #{@logs.page(@logs.next_page).length} more...", class: "next-page", remote: true)
+    #bot.tab-content.scrollable
       = render 'dashboard/bots/bot_form', bot: @bot
-    #boss.tab-content
+    #boss.tab-content.scrollable
       = render 'dashboard/bosses/boss_form', boss: @bot.boss
   .dashboard-boss
     = render 'bots/boss_card', bot: @bot
@@ -76,7 +78,7 @@
       }
     );
 
-    const prependLog = function() {
+    function prependLog() {
       if (!logDelayed && logsWaitlist.length > 0) {
         logDelayed = true;
         var log = logsWaitlist.pop();
@@ -96,5 +98,19 @@
         }, 500);
       }
     };
+
+    $(function() {
+      if ($('#logs-container').length > 0) {
+        $('#logs').on('scroll', function() {
+          var elem = $('#logs');
+          var moreLogsUrl = $('.next-page').attr('href');
+          var doneScrolling = elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight();
+          if (moreLogsUrl && doneScrolling) {
+            $('.pagination').html('Loading...');
+            $.getScript(moreLogsUrl);
+          }
+        });
+      }
+    });
 
   = render 'bots/after_js_bot'

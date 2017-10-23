@@ -1,10 +1,10 @@
 .log
   %strong [#{display_log_created_at(log, user)}]
   .log-heal-hp
-      %p
-        %span= raw inline_svg('heart')
-        %strong= log.boss_name
-        heals himself for
-        %strong= log.amount
-        Hp !
-        %strong (#{log.boss_current_hp}/#{log.boss_max_hp})
+    %p
+      %span= raw inline_svg('heart')
+      %strong= log.boss_name
+      heals himself for
+      %strong= log.amount
+      Hp !
+      %strong (#{log.boss_current_hp}/#{log.boss_max_hp})

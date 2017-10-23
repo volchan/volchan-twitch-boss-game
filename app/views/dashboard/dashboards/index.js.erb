@@ -1,0 +1,9 @@
+$('#logs-container').append("<%= j render 'logs/logs_renderer', logs: @logs %>");
+
+<% if @logs.next_page %>
+  $('.pagination').html(
+    '<%=j link_to_next_page(@logs, "Load #{@logs.page(@logs.next_page).length} more...", class: "next-page", remote: true) %>'
+  );
+<% else %>
+  $('.pagination').html("That's all, folks!");
+<% end %>
