@@ -39,7 +39,7 @@
       = render 'dashboard/bots/bot_form', bot: @bot
     #boss.tab-content.scrollable
       = render 'dashboard/bosses/boss_form', boss: @bot.boss
-  .dashboard-boss
+  .dashboard-boss.hidden
     = render 'bots/boss_card', bot: @bot
 
 = content_for :after_js do
@@ -98,17 +98,5 @@
         }, 500);
       }
     };
-
-    if ($('#logs-container').length > 0) {
-      $('#logs').on('scroll', function() {
-        var elem = $('#logs');
-        var moreLogsUrl = $('.next-page').attr('href');
-        var doneScrolling = elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight();
-        if (moreLogsUrl && doneScrolling) {
-          $('.pagination').html('Loading...');
-          $.getScript(moreLogsUrl);
-        }
-      });
-    }
 
   = render 'bots/after_js_bot'

@@ -1,0 +1,28 @@
+.waiting-log {
+  height: 19px;
+  width: 100%;
+  border-radius: 9px;
+  margin: 10px 0;
+  position: relative;
+  overflow: hidden;
+  background: #e0e0e0;
+  &::after {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to right, #e0e0e0 0%,#eeeeee 50%,#e0e0e0 100%);
+    animation: loading 2s linear infinite;
+  }
+}
+
+@keyframes loading {
+  0% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(0%);
+  }
+}

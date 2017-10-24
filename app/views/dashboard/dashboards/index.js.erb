@@ -1,3 +1,4 @@
+$('.waiting-log').remove();
 $('#logs-container').append("<%= j render 'logs/logs_renderer', logs: @logs %>");
 
 <% if @logs.next_page %>
