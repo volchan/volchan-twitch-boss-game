@@ -28,7 +28,7 @@ $(".tab-link").on("click", (e) => {
   }
 });
 
-$(document).ready(function(){
+$(document).ready(() => {
   let clipboard = new Clipboard(".clipboard-btn");
 
   $(".clipboard-btn").popover().click(() => {

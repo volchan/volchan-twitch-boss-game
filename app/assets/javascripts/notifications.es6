@@ -19,7 +19,7 @@ const checkNotifications = () => {
 }
 
 const closeNotification = () => {
-  $(".close[data-dismiss='notification']").click( () => {
-    $(this).closest(".notification").remove();
+  $(".close[data-dismiss='notification']").click((e) => {
+    $(e.target).closest(".notification").remove();
   });
 }
