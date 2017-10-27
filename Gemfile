@@ -16,6 +16,7 @@ gem 'rest-client'
 gem 'sidekiq'
 gem 'sidekiq-cron-tasks'
 gem 'sidekiq-failures', '~> 1.0'
+gem 'stripe'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
