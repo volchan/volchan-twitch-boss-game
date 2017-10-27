@@ -39,7 +39,7 @@
       = render 'dashboard/bots/bot_form', bot: @bot
     #boss.tab-content.scrollable
       = render 'dashboard/bosses/boss_form', boss: @bot.boss
-  .dashboard-boss.hidden
+  .dashboard-boss
     = render 'bots/boss_card', bot: @bot
 
 = content_for :after_js do
