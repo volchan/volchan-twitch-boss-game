@@ -11,6 +11,28 @@ class User < ApplicationRecord
 
   validate :password_complexity
 
+  scope :find_for_twitch_oauth, lambda { |auth|
+    user_params = auth.slice(:provider, :uid)
+    user_params[:email] = auth.info.email
+    user_params[:username] = auth.info.name
+    user_params[:avatar] = auth.info.image
+    user_params[:token] = auth.credentials.token
+    user_params[:time_zone] = 'GMT'
+    user_params[:token_expiry] = nil
+    user_params = user_params.to_h
+
+    user = User.find_by(provider: auth.provider, uid: auth.uid)
+    user ||= User.find_by(email: auth.info.email) # User did a regular sign up in the past.
+    if user
+      user.update(user_params)
+    else
+      user = User.new(user_params)
+      user.password = Devise.friendly_token[0, 20] # Fake password for validation
+      user.save
+    end
+    user
+  }
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
