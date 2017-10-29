@@ -17,7 +17,7 @@ class User < ApplicationRecord
     user_params[:username] = auth.info.name
     user_params[:avatar] = auth.info.image
     user_params[:token] = auth.credentials.token
-    user_params[:time_zone] = 'GMT'
+    user_params[:time_zone] = 'UTC'
     user_params[:token_expiry] = nil
     user_params = user_params.to_h
 
