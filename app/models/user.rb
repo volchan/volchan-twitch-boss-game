@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   attr_accessor :login
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable,
+         :validatable, :omniauthable, omniauth_providers: [:twitch]
 
   has_one :bot, dependent: :destroy
 
@@ -9,6 +10,28 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
 
   validate :password_complexity
+
+  scope :find_for_twitch_oauth, lambda { |auth|
+    user_params = auth.slice(:provider, :uid)
+    user_params[:email] = auth.info.email
+    user_params[:username] = auth.info.name.downcase
+    user_params[:avatar] = auth.info.image
+    user_params[:token] = auth.credentials.token
+    user_params[:time_zone] = 'UTC'
+    user_params[:token_expiry] = nil
+    user_params = user_params.to_h
+
+    user = User.find_by(provider: auth.provider, uid: auth.uid)
+    user ||= User.find_by(email: auth.info.email) # User did a regular sign up in the past.
+    if user
+      user.update(user_params)
+    else
+      user = User.new(user_params)
+      user.password = SecureRandom.urlsafe_base64(nil, true) # Fake password for validation
+      user.save
+    end
+    user
+  }
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
