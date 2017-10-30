@@ -14,7 +14,7 @@ class User < ApplicationRecord
   scope :find_for_twitch_oauth, lambda { |auth|
     user_params = auth.slice(:provider, :uid)
     user_params[:email] = auth.info.email
-    user_params[:username] = auth.info.name
+    user_params[:username] = auth.info.name.downcase
     user_params[:avatar] = auth.info.image
     user_params[:token] = auth.credentials.token
     user_params[:time_zone] = 'UTC'
@@ -27,7 +27,7 @@ class User < ApplicationRecord
       user.update(user_params)
     else
       user = User.new(user_params)
-      user.password = Devise.friendly_token[0, 20] # Fake password for validation
+      user.password = SecureRandom.urlsafe_base64(nil, true) # Fake password for validation
       user.save
     end
     user
