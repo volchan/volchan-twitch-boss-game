@@ -1,0 +1,13 @@
+= form_tag dashboard_subscriptions_path do
+  %article
+    %label.amount
+      %span Amount: 4,99€
+  %script.stripe-button{data: {amount: '499',
+      currency: 'EUR',
+      description: 'Monthly subscription',
+      name: "#{current_user.username}",
+      email: "#{current_user.email}",
+      key: "#{Rails.configuration.stripe[:publishable_key]}",
+      locale: 'auto'},
+    class: 'stripe-button',
+    src: "https://checkout.stripe.com/checkout.js"}
