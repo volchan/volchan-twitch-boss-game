@@ -11,7 +11,8 @@ module Dashboard
       customer = stripe_api.find_or_create_custormer(params)
       stripe_api.create_subscription(customer)
 
-      redirect_to new_dashboard_bot_path
+      return redirect_to new_dashboard_bot_path if current_user.bot.nil?
+      redirect_to dashboard_root_path
     end
   end
 end

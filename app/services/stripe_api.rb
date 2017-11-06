@@ -37,7 +37,7 @@ class StripeApi
       email: params[:stripeEmail],
       source: params[:stripeToken]
     )
-
     @user.update(stripe_id: customer.id)
+    customer
   end
 end
