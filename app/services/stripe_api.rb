@@ -33,11 +33,20 @@ class StripeApi
   end
 
   def create_customer(params)
+    user_params = permit_user_params(params)
     customer = Stripe::Customer.create(
-      email: params[:stripeEmail],
+      email: user_params[:email],
       source: params[:stripeToken]
     )
     @user.update(stripe_id: customer.id)
     customer
+  end
+
+  def permit_user_params(params)
+    params.require(:user).permit(:first_name, :last_name, :email)
+  end
+
+  def user_full_name(params)
+    "#{params[:first_name].capitalize} #{params[:last_name].upcase}"
   end
 end

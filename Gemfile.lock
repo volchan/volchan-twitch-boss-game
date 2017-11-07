@@ -195,6 +195,7 @@ GEM
       rails-assets-jquery (>= 1.7.0)
     rails-assets-jquery-circle-progress (1.2.2)
       rails-assets-jquery
+    rails-assets-paymentfont (1.2.5)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -312,6 +313,7 @@ DEPENDENCIES
   rails (= 5.0.3)
   rails-assets-jquery-animatenumber!
   rails-assets-jquery-circle-progress!
+  rails-assets-paymentfont!
   redis (~> 3.3)
   rest-client
   sass-rails
