@@ -9,7 +9,6 @@ const initStripe = (stripeKey) => {
       fontFamily: '"Open Sans", Helvetica, sans-serif',
       fontSmoothing: 'antialiased',
       fontSize: '16px',
-      fontSmoothing: 'antialiased',
       '::placeholder': {
         color: '#aab7c4'
       }
@@ -19,7 +18,6 @@ const initStripe = (stripeKey) => {
       iconColor: '#EE5F5B'
     }
   };
-
 
   const setBrandIcon = (brand) => {
     let cardBrandToFaClass = {
@@ -46,6 +44,7 @@ const initStripe = (stripeKey) => {
 
   const card = elements.create('cardNumber', {style: style});
   card.mount('#card-number');
+  console.log(card.classList);
   card.addEventListener('change', (e) => {
     let displayError = document.getElementById('card-number-error');
 
@@ -71,7 +70,7 @@ const initStripe = (stripeKey) => {
     }
   });
 
-  const cardCvc = elements.create('cardCvc', {style: style});
+  const cardCvc = elements.create('cardCvc', {style: style, placeholder: '123'});
   cardCvc.mount('#card-cvc');
   cardCvc.addEventListener('change', ({error}) => {
     let displayError = document.getElementById('card-cvc-error');
@@ -82,7 +81,7 @@ const initStripe = (stripeKey) => {
     }
   });
 
-  function stripeTokenHandler(token) {
+  const stripeTokenHandler = (token) => {
     let form = document.getElementById('subscription-form');
     let hiddenInput = document.createElement('input');
     hiddenInput.setAttribute('type', 'hidden');
@@ -93,9 +92,10 @@ const initStripe = (stripeKey) => {
   }
 
 
-  let submitBtn = document.getElementById('submit-btn');
+  let submitBtn = document.getElementById('stripe-submit');
   let form = document.getElementById('subscription-form');
   submitBtn.addEventListener('click', (event) => {
+    event.preventDefault();
     stripe.createToken(card, {
       owner: {
         name: `${form[2].value} ${form[3].value}`,

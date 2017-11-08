@@ -18,41 +18,39 @@
 .modal.fade#subscriptionModal{tabindex: '-1', role: 'dialog', aria: {labelledby: 'subscriptionModalLabel'}}
   .modal-dialog{role: 'document'}
     .modal-content
-      .modal-header
-        %h5.modal-title 4,99€ Monthly Subscription
-        %button.close{type: 'button', data: {dismiss: 'modal'}, aria: {label: 'close'}}
-          %span{aria: {hidden: 'true'}} &times;
       .modal-body
-        .container
-          .row
-            .col
-              = simple_form_for :user, url: dashboard_subscriptions_path, html: {id: 'subscription-form'} do |f|
-                .row
-                  .col
-                    = f.input :first_name, label: false, placeholder: 'First Name'
-                  .col
-                    = f.input :last_name, label: false, placeholder: 'Last Name'
-                .row
-                  .col
-                    = f.input :email, label: false, placeholder: 'Email', input_html: {value: current_user.email}
-                .row
-                  .col
-                    #card-number-container
-                      #card-number
-                      %span.brand
-                        %i#brand-icon.fa.fa-credit-card
-                    #card-number-error{role: 'alert'}
-                .row
-                  .col
-                    #card-expiry
+        .sub-form
+          .sub-form-header
+            %h5 Monthly Subscription
+            %button.close{type: 'button', data: {dismiss: 'modal'}, aria: {label: 'close'}}
+              %span{aria: {hidden: 'true'}} &times;
+          = simple_form_for :user, url: dashboard_subscriptions_path, html: {id: 'subscription-form'} do |f|
+            .sub-form-user-infos
+              .sub-form-user-infos-top
+                = f.input :first_name, label: false, placeholder: 'First Name'
+                = f.input :last_name, label: false, placeholder: 'Last Name'
+              .sub-form-user-infos-bottom
+                = f.input :email, label: false, placeholder: 'Email', input_html: {value: current_user.email}
+            .sub-form-card-infos
+              .sub-form-card-infos-top
+                #card-input
+                  .brand
+                    %i#brand-icon.fa.fa-credit-card
+                  #card-number
+              #card-number-error{role: 'alert'}
+              .sub-form-card-infos-bottom
+                .sub-form-card-infos-bottom-left
+                  .expiry-container
+                    #card-expiry.form-control
                     #card-expiry-error{role: 'alert'}
-                  .col
-                    #card-cvc
+                .sub-form-card-infos-bottom-right
+                  .cvc-container
+                    #card-cvc.form-control
                     #card-cvc-error{role: 'alert'}
-      .modal-footer
-        %button.btn.btn-secondary{data: {dismiss: 'modal'}, type: 'button'} Close
-        %button#submit-btn.btn.btn-primary Submit
-
+            .sub-form-submit
+              %button{type: 'submit', class: 'btn btn-block btn-primary', id: 'stripe-submit'}
+                %i.fa.fa-lock{aria: {hidden: 'true'}}
+                Finish and Subscribe
 
 - content_for :after_js do
   :javascript
