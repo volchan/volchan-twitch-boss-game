@@ -1,6 +1,12 @@
 source 'https://rubygems.org'
 ruby '2.3.3'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery-animatenumber'
+  gem 'rails-assets-jquery-circle-progress'
+  gem 'rails-assets-paymentfont'
+end
+
 gem 'babel-transpiler'
 gem 'devise'
 gem 'figaro'
@@ -21,11 +27,9 @@ gem 'stripe'
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'clipboard-rails'
+gem 'country_select'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
-gem 'rails-assets-jquery-animatenumber', source: 'https://rails-assets.org'
-gem 'rails-assets-jquery-circle-progress', source: 'https://rails-assets.org'
-gem 'rails-assets-paymentfont', source: 'https://rails-assets.org'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'

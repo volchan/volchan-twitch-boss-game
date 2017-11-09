@@ -29,8 +29,15 @@
               .sub-form-user-infos-top
                 = f.input :first_name, label: false, placeholder: 'First Name'
                 = f.input :last_name, label: false, placeholder: 'Last Name'
-              .sub-form-user-infos-bottom
+              .sub-form-user-infos-middle
                 = f.input :email, label: false, placeholder: 'Email', input_html: {value: current_user.email}
+              .sub-form-user-infos-bottom
+                .sub-form-user-infos-bottom-top
+                  = f.input :address, label: false, placeholder: 'Address'
+                  = f.input :city, label: false, placeholder: 'City'
+                .sub-form-user-infos-bottom-bottom
+                  = f.input :postal_code, label: false, placeholder: 'Postal Code'
+                  = f.input :country, label: false, priority: form_priority_country, priority_divider: "~~~~~~"
             .sub-form-card-infos
               .sub-form-card-infos-top
                 #card-input

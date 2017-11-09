@@ -76,6 +76,14 @@ GEM
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
+    countries (2.1.2)
+      i18n_data (~> 0.8.0)
+      money (~> 6.9)
+      sixarm_ruby_unaccent (~> 1.1)
+      unicode_utils (~> 1.4)
+    country_select (3.1.1)
+      countries (~> 2.0)
+      sort_alphabetical (~> 1.0)
     crass (1.0.2)
     debug_inspector (0.0.3)
     devise (4.3.0)
@@ -117,6 +125,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.8.6)
+    i18n_data (0.8.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -150,6 +159,8 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
+    money (6.10.0)
+      i18n (>= 0.6.4, < 1.0)
     multi_json (1.12.2)
     multipart-post (2.0.0)
     net-scp (1.2.1)
@@ -190,6 +201,8 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 5.0.3)
       sprockets-rails (>= 2.0.0)
+    rails-assets-country-select-js (1.1.0)
+      rails-assets-jquery (>= 1.9.1)
     rails-assets-jquery (3.2.1)
     rails-assets-jquery-animatenumber (0.0.14)
       rails-assets-jquery (>= 1.7.0)
@@ -253,6 +266,9 @@ GEM
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
+    sixarm_ruby_unaccent (1.2.0)
+    sort_alphabetical (1.1.0)
+      unicode_utils (>= 1.2.2)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -281,6 +297,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.4)
+    unicode_utils (1.4.0)
     warden (1.2.7)
       rack (>= 1.0)
     websocket-driver (0.6.5)
@@ -297,6 +314,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap (~> 4.0.0.beta)
   clipboard-rails
+  country_select
   devise
   figaro
   font-awesome-sass
@@ -311,6 +329,7 @@ DEPENDENCIES
   puma
   pundit
   rails (= 5.0.3)
+  rails-assets-country-select-js!
   rails-assets-jquery-animatenumber!
   rails-assets-jquery-circle-progress!
   rails-assets-paymentfont!

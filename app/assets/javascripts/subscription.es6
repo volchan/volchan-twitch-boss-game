@@ -1,9 +1,9 @@
 const initStripe = (stripeKey) => {
-    const stripe = Stripe(stripeKey);
-    const elements = stripe.elements({locale: 'auto'});
+  const stripe = Stripe(stripeKey);
+  const elements = stripe.elements({locale: 'auto'});
 
-    const style = {
-      base: {
+  const style = {
+    base: {
       color: '#32325d',
       lineHeight: '24px',
       fontFamily: '"Open Sans", Helvetica, sans-serif',
@@ -70,7 +70,7 @@ const initStripe = (stripeKey) => {
     }
   });
 
-  const cardCvc = elements.create('cardCvc', {style: style, placeholder: '123'});
+  const cardCvc = elements.create('cardCvc', {style: style});
   cardCvc.mount('#card-cvc');
   cardCvc.addEventListener('change', ({error}) => {
     let displayError = document.getElementById('card-cvc-error');
@@ -92,14 +92,27 @@ const initStripe = (stripeKey) => {
   }
 
 
-  let submitBtn = document.getElementById('stripe-submit');
-  let form = document.getElementById('subscription-form');
   submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
+    
+    let submitBtn = document.getElementById('stripe-submit');
+    let form = document.getElementById('subscription-form');
+
+    let userFirstName = document.getElementById("user_first_name").value;
+    let userLastName = document.getElementById("user_last_name").value;
+    let userFullName = `${userFirstName} ${userLastName}`;
+
+    let userAddress = document.getElementById("user_address").value;
+    let userCity = document.getElementById("user_city").value;
+    let userZip = document.getElementById("user_postal_code").value;
+    let userCountry = document.getElementById("user_country").value;
+
     stripe.createToken(card, {
-      owner: {
-        name: `${form[2].value} ${form[3].value}`,
-      }
+      name: userFullName,
+      address_line1: userAddress,
+      address_city: userCity,
+      address_zip: userZip,
+      address_country: userCountry
     }).then((result) => {
       if (result.error) {
         let errorElement = document.getElementById('card-number-error');
