@@ -1,0 +1,12 @@
+.subscription
+  %p Monthly Subscription
+  %p 4,99€/month
+  %button.btn.btn-lg.btn-primary{data: {toggle: 'modal', target: '#subscriptionModal'}, type: 'button'} Subscribe
+
+= render 'form_modal'
+
+- content_for :after_js do
+  %script{src: 'https://js.stripe.com/v3/'}
+
+  :javascript
+    initStripe("#{Rails.configuration.stripe[:publishable_key]}");

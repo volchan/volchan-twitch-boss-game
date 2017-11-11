@@ -5,6 +5,8 @@
 //= require jquery-animatenumber
 //= require jquery-circle-progress
 //= require clipboard
+//= require rails.validations
+//= require rails.validations.simple_form
 //= require_tree .
 
 const animateCss = (animationName) => {

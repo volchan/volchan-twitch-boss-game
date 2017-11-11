@@ -91,12 +91,11 @@ const initStripe = (stripeKey) => {
     form.submit();
   }
 
+  let form = document.getElementById('subscription-form');
 
-  submitBtn.addEventListener('click', (event) => {
+  form.addEventListener('submit', (event) => {
     event.preventDefault();
-    
-    let submitBtn = document.getElementById('stripe-submit');
-    let form = document.getElementById('subscription-form');
+
 
     let userFirstName = document.getElementById("user_first_name").value;
     let userLastName = document.getElementById("user_last_name").value;
