@@ -4,7 +4,7 @@ ruby '2.3.3'
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery-animatenumber'
   gem 'rails-assets-jquery-circle-progress'
-  gem 'rails-assets-paymentfont'
+  gem 'rails-assets-jquery-validation'
 end
 
 gem 'babel-transpiler'

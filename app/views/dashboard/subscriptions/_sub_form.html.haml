@@ -9,7 +9,7 @@
         = f.input :first_name, label: false, placeholder: 'First Name'
         = f.input :last_name, label: false, placeholder: 'Last Name'
       .sub-form-user-infos-middle
-        = f.input :email, label: false, placeholder: 'Email', input_html: {value: current_user.email}
+        = f.input :email, label: false, placeholder: 'Email', input_html: {value: current_user.email, readonly: true}
       .sub-form-user-infos-bottom
         .sub-form-user-infos-bottom-top
           = f.input :address, label: false, placeholder: 'Address'
@@ -19,11 +19,11 @@
           = f.input :country, label: false, priority: form_priority_country, priority_divider: "~~~~~~"
     .sub-form-card-infos
       .sub-form-card-infos-top
-        #card-input
+        #card-input.form-control
           .brand
             %i#brand-icon.fa.fa-credit-card
           #card-number
-      #card-number-error{role: 'alert'}
+        #card-number-error{role: 'alert'}
       .sub-form-card-infos-bottom
         .sub-form-card-infos-bottom-left
           .expiry-container
