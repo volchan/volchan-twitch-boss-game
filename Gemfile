@@ -26,8 +26,6 @@ gem 'stripe'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
-gem 'client_side_validations'
-gem 'client_side_validations-simple_form'
 gem 'clipboard-rails'
 gem 'country_select'
 gem 'font-awesome-sass'
