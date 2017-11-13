@@ -114,6 +114,23 @@ const buildCardCvc = (elements) => {
   return cardCvc;
 };
 
+const formValidations= (form) => {
+  $.validator.addMethod("validateName", (value, element) => {
+    return /^[A-zÀ-ÿ\s\-]+$/.test(value);
+  }, "Please enter a valid First Name");
+
+  $(form).validate({
+    rules : {
+      "user[first_name]": "validateName",
+      "user[last_name]": "validateName"
+    },
+    errorElement: 'label',
+    errorPlacement: (error, element) => {
+      error.insertAfter(element);
+    }
+  });
+};
+
 const stripeTokenHandler = (token) => {
   let form = document.getElementById('subscription-form');
   let hiddenInput = document.createElement('input');
@@ -127,13 +144,14 @@ const stripeTokenHandler = (token) => {
 
 const initStripe = (stripeKey) => {
   const stripe = Stripe(stripeKey);
-  const elements = stripe.elements({locale: 'auto'});
+  const elements = stripe.elements({locale: 'en'});
 
   const card = buildCard(elements);
   const cardExpiry = buildCardExpiry(elements);
   const cardCvc = buildCardCvc(elements);
 
   let form = document.getElementById('subscription-form');
+  formValidations(form);
   form.addEventListener('submit', (event) => {
     event.preventDefault();
 

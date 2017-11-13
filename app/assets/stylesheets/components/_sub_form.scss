@@ -114,10 +114,12 @@
         flex-direction: column;
         .expiry-container {
           margin-right: 5%;
+          position: relative;
           #card-expiry-error {
             color: $red;
             font-size: 0.7rem;
             font-weight: 700;
+            position: absolute;
           }
         }
       }
@@ -127,16 +129,18 @@
         flex-direction: column;
         .cvc-container {
           margin-left: 5%;
+          position: relative;
           #card-cvc-error {
             color: $red;
             font-size: 0.7rem;
             font-weight: 700;
+            position: absolute;
           }
         }
       }
     }
   }
   &-submit {
-    margin-top: 0.75rem;
+    margin-top: 32px;
   }
 }
