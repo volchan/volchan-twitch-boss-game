@@ -144,3 +144,15 @@
     margin-top: 32px;
   }
 }
+
+.pac-container {
+  z-index: 20;
+}
+
+.modal {
+  z-index: 15;
+}
+
+.modal-backdrop {
+  z-index: 10;
+}

@@ -12,7 +12,7 @@
         = f.input :email, label: false, placeholder: 'Email', input_html: {value: current_user.email, readonly: true}
       .sub-form-user-infos-bottom
         .sub-form-user-infos-bottom-top
-          = f.input :address, label: false, placeholder: 'Address', input_html: {id: 'address-input'}
+          = f.input :address, label: false, input_html: {id: 'address-input'}
           = f.input :city, label: false, placeholder: 'City'
         .sub-form-user-infos-bottom-bottom
           = f.input :postal_code, label: false, placeholder: 'Postal Code'

@@ -154,31 +154,30 @@ const initStripe = (stripeKey) => {
   formValidations(form);
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    if ($(form).valid()) {
+      let userFirstName = document.getElementById("user_first_name").value;
+      let userLastName = document.getElementById("user_last_name").value;
+      let userFullName = `${userFirstName} ${userLastName}`;
 
-    let userFirstName = document.getElementById("user_first_name").value;
-    let userLastName = document.getElementById("user_last_name").value;
-    let userFullName = `${userFirstName} ${userLastName}`;
+      let userAddress = document.getElementById("user_address").value;
+      let userCity = document.getElementById("user_city").value;
+      let userZip = document.getElementById("user_postal_code").value;
+      let userCountry = document.getElementById("user_country").value;
 
-    let userAddress = document.getElementById("user_address").value;
-    let userCity = document.getElementById("user_city").value;
-    let userZip = document.getElementById("user_postal_code").value;
-    let userCountry = document.getElementById("user_country").value;
-
-    stripe.createToken(card, {
-      name: userFullName,
-      address_line1: userAddress,
-      address_city: userCity,
-      address_zip: userZip,
-      address_country: userCountry
-    }).then((result) => {
-      if ($(form).valid()) {
+      stripe.createToken(card, {
+        name: userFullName,
+        address_line1: userAddress,
+        address_city: userCity,
+        address_zip: userZip,
+        address_country: userCountry
+      }).then((result) => {
         if (result.error) {
           let errorElement = document.getElementById('card-number-error');
           errorElement.textContent = result.error.message;
         } else {
           stripeTokenHandler(result.token);
         }
-      }
-    });
+      });
+    }
   });
 };

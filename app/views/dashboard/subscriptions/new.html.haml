@@ -8,7 +8,5 @@
 - content_for :after_js do
   %script{src: 'https://js.stripe.com/v3/'}
   %script{src: "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}"}
-
   :javascript
     initStripe("#{Rails.configuration.stripe[:publishable_key]}");
-    initAddressAutocomplete();

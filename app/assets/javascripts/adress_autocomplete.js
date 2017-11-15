@@ -1,12 +1,148 @@
+// var autocomplete;
+//
+// function getAddressComponents(place) {
+//   // If you want lat/lng, you can look at:
+//   // - place.geometry.location.lat()
+//   // - place.geometry.location.lng()
+//
+//   // if (window.console && typeof console.log === "function") {
+//   //   console.log(place);
+//   // }
+//
+//   var street_number = null;
+//   var route = null;
+//   var zip_code = null;
+//   var city = null;
+//   var country_code = null;
+//   for (var i in place.address_components) {
+//     var component = place.address_components[i];
+//     for (var j in component.types) {
+//       var type = component.types[j];
+//       if (type === 'street_number') {
+//         street_number = component.long_name;
+//       } else if (type === 'route') {
+//         route = component.long_name;
+//       } else if (type === 'postal_code') {
+//         zip_code = component.long_name;
+//       } else if (type === 'locality') {
+//         city = component.long_name;
+//       } else if (type === 'postal_town' && city === null) {
+//         city = component.long_name;
+//       } else if (type === 'country') {
+//         country_code = component.short_name;
+//       }
+//     }
+//   }
+//
+//   return {
+//     address: street_number === null ? route : (street_number + ' ' + route),
+//     zip_code: zip_code,
+//     city: city,
+//     country_code: country_code
+//   };
+// }
+//
+// function onPlaceChanged(autocomplete) {
+//   console.log(autocomplete);
+//   var place = autocomplete.getPlace();
+//   console.log(place);
+//   var components = getAddressComponents(place);
+//
+//   console.log(components);
+//
+//   var addressInput = document.getElementById("address-input");
+//   addressInput.blur();
+//   addressInput.value = components.address;
+//
+//   document.getElementById("user_city").value = components.city;
+//   document.getElementById("user_postal_code").value = components.zip_code;
+//
+//   if (components.country_code) {
+//     var selector = '#user_country option[value="' + components.country_code + '"]';
+//     document.querySelector(selector).selected = true;
+//   }
+// };
+//
+// function initAddressAutocomplete() {
+//   document.addEventListener("DOMContentLoaded", function() {
+//     var addressInput = document.getElementById("address-input");
+//     autocomplete = new google.maps.places.Autocomplete(
+//       (addressInput),
+//       {types: ['geocode']});
+//
+//
+//     autocomplete.addListener("place_changed", function() {
+//       console.log(autocomplete);
+//       var place = autocomplete.getPlace();
+//       console.log(place);
+//       var components = getAddressComponents(place);
+//
+//       console.log(components);
+//
+//       var addressInput = document.getElementById("address-input");
+//       addressInput.blur();
+//       addressInput.value = components.address;
+//
+//       document.getElementById("user_city").value = components.city;
+//       document.getElementById("user_postal_code").value = components.zip_code;
+//
+//       if (components.country_code) {
+//         var selector = '#user_country option[value="' + components.country_code + '"]';
+//         document.querySelector(selector).selected = true;
+//       }
+//     });
+//     google.maps.event.addDomListener(addressInput, 'keydown', function(event) {
+//
+//       if (event.key === "Enter") {
+//         event.preventDefault();
+//       }
+//     });
+//   });
+//
+// };
+//
+// function geolocate() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       var geolocation = {
+//         lat: position.coords.latitude,
+//         lng: position.coords.longitude
+//       };
+//       var circle = new google.maps.Circle({
+//         center: geolocation,
+//         radius: position.coords.accuracy
+//       });
+//       autocomplete.setBounds(circle.getBounds());
+//     });
+//   }
+// };
+
+function onPlaceChanged() {
+  var place = this.getPlace();
+  var components = getAddressComponents(place);
+
+  var flatAddress = document.getElementById('address-input');
+  flatAddress.blur();
+  flatAddress.value = components.address;
+
+  document.getElementById('flat_zip_code').value = components.zip_code;
+  document.getElementById('flat_city').value = components.city;
+
+  if (components.country_code) {
+    var selector = '#flat_country option[value="' + components.country_code + '"]';
+    document.querySelector(selector).selected = true;
+  }
+}
+
 function getAddressComponents(place) {
   // If you want lat/lng, you can look at:
   // - place.geometry.location.lat()
   // - place.geometry.location.lng()
 
-  // if (window.console && typeof console.log === "function") {
-  //   console.log(place);
-  // }
-  //
+  if (window.console && typeof console.log === "function") {
+    console.log(place);
+  }
+
   var street_number = null;
   var route = null;
   var zip_code = null;
@@ -15,7 +151,7 @@ function getAddressComponents(place) {
   for (var i in place.address_components) {
     var component = place.address_components[i];
     for (var j in component.types) {
-      let type = component.types[j];
+      var type = component.types[j];
       if (type === 'street_number') {
         street_number = component.long_name;
       } else if (type === 'route') {
@@ -40,35 +176,16 @@ function getAddressComponents(place) {
   };
 }
 
-function onPlaceChanged() {
-  var place = this.getPlace();
-  var components = getAddressComponents(place);
+document.addEventListener("DOMContentLoaded", function() {
+  var flatAddress = document.getElementById('address-input');
 
-  console.log(components);
-
-  var addressInput = document.getElementById("address-input");
-  addressInput.blur();
-  addressInput.value = components.address;
-
-  document.getElementById("user_city").value = components.city;
-  document.getElementById("user_postal_code").value = components.zip_code;
-
-  if (components.country_code) {
-    var selector = '#user_country option[value="' + components.country_code + '"]';
-    document.querySelector(selector).selected = true;
+  if (flatAddress) {
+    var autocomplete = new google.maps.places.Autocomplete(flatAddress, { types: ['geocode'] });
+    google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
+    google.maps.event.addDomListener(flatAddress, 'keydown', function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault(); // Do not submit the form on Enter.
+      }
+    });
   }
-};
-
-function initAddressAutocomplete() {
-  var addressInput = document.getElementById("address-input");
-
-  var autocomplete = new google.maps.places.Autocomplete(addressInput);
-
-  google.maps.event.addListener(autocomplete, "place_changed", onPlaceChanged);
-  google.maps.event.addDomListener(addressInput, 'keydown', (event) => {
-
-    if (event.key === "Enter") {
-      event.preventDefault();
-    }
-  });
-};
+});
