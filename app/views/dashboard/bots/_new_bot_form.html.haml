@@ -3,7 +3,7 @@
     = simple_form_for [:dashboard, @bot] do |f|
       .row
         .col
-          = f.input :channel, input_html: { class: 'form-control-sm' }
+          = f.input :channel, input_html: { value: current_user.username, class: 'form-control-sm' }
       .row
         .col
           %hr

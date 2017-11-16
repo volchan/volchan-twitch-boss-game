@@ -7,7 +7,10 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+  
   root to: 'pages#home'
 
   resources :bots, only: :show
