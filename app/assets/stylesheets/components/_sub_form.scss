@@ -51,27 +51,7 @@
     }
     &-bottom {
       flex: 1;
-      &-top {
-        flex: 1;
-        padding: 10px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      &-bottom {
-        flex: 1;
-        padding: 10px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .user_postal_code {
-          flex: 1;
-        }
-        .user_country {
-          flex: 1;
-          margin-left: 5%;
-        }
-      }
+      padding: 10px 0;
     }
   }
   &-card-infos {
