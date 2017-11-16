@@ -19,3 +19,7 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 }
+
+.form-focus {
+	border-bottom: 1px solid lighten($purple, 25%) !important;
+}

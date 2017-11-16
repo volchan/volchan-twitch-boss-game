@@ -5,6 +5,7 @@
 //= require jquery-animatenumber
 //= require jquery-circle-progress
 //= require clipboard
+//= require jquery-validation
 //= require_tree .
 
 const animateCss = (animationName) => {

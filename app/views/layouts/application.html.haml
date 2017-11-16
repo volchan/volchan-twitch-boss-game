@@ -15,5 +15,7 @@
       = yield
     .site-footer
       = render 'shared/footer'
+
+    = yield(:before_js)
     = javascript_include_tag 'application'
     = yield(:after_js)

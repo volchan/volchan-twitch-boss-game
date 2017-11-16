@@ -1,0 +1,38 @@
+.sub-form
+  .sub-form-header
+    %h5 Monthly Subscription
+    %button.close{type: 'button', data: {dismiss: 'modal'}, aria: {label: 'close'}}
+      %span{aria: {hidden: 'true'}} &times;
+  = simple_form_for :user, url: dashboard_subscriptions_path, html: {id: 'subscription-form'} do |f|
+    .sub-form-user-infos
+      .sub-form-user-infos-top
+        = f.input :first_name, label: false, placeholder: 'First Name'
+        = f.input :last_name, label: false, placeholder: 'Last Name'
+      .sub-form-user-infos-middle
+        = f.input :email, label: false, placeholder: 'Email', input_html: {value: current_user.email, readonly: true}
+      .sub-form-user-infos-bottom
+        = f.input :full_address, label: false, placeholder: 'Address', input_html: {id: 'address-input', onFocus: 'geolocate()'}
+        = f.input :address, label: false, hidden: 'true', input_html: {class: 'd-none'}
+        = f.input :city, label: false, placeholder: 'City', input_html: {class: 'd-none'}
+        = f.input :postal_code, label: false, placeholder: 'Postal Code', input_html: {class: 'd-none'}
+        = f.input :country, label: false, input_html: {class: 'd-none'}
+    .sub-form-card-infos
+      .sub-form-card-infos-top
+        #card-input.form-control
+          .brand
+            %i#brand-icon.fa.fa-credit-card
+          #card-number
+        #card-number-error{role: 'alert'}
+      .sub-form-card-infos-bottom
+        .sub-form-card-infos-bottom-left
+          .expiry-container
+            #card-expiry.form-control
+            #card-expiry-error{role: 'alert'}
+        .sub-form-card-infos-bottom-right
+          .cvc-container
+            #card-cvc.form-control
+            #card-cvc-error{role: 'alert'}
+    .sub-form-submit
+      %button{type: 'submit', class: 'btn btn-block btn-primary', id: 'stripe-submit'}
+        %i.fa.fa-lock{aria: {hidden: 'true'}}
+        Finish and Subscribe
