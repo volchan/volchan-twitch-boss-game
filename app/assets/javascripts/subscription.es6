@@ -114,7 +114,7 @@ const buildCardCvc = (elements) => {
   return cardCvc;
 };
 
-const formValidations= (form) => {
+const formValidations = (form) => {
   $.validator.addMethod("validateName", (value, element) => {
     return /^[A-zÀ-ÿ\s\-]+$/.test(value);
   }, "Please enter a valid First Name");

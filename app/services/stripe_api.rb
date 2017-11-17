@@ -1,6 +1,7 @@
 class StripeApi
   def initialize(user)
     @user = user
+    @errors = []
   end
 
   def find_or_create_custormer(params)
@@ -16,8 +17,8 @@ class StripeApi
       ]
     )
   rescue Stripe::CardError => e
-    flash[:alerte] = e.message
-    redirect_to new_charge_path
+    @errors << e.message
+    false
   end
 
   def check_subscription
@@ -43,7 +44,7 @@ class StripeApi
   end
 
   def permit_user_params(params)
-    params.require(:user).permit(:first_name, :last_name, :email)
+    params.require(:user).permit(:email)
   end
 
   def user_full_name(params)
