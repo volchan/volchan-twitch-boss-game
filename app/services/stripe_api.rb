@@ -1,4 +1,6 @@
 class StripeApi
+  attr_reader :user, :errors
+
   def initialize(user)
     @user = user
     @errors = []
@@ -17,12 +19,14 @@ class StripeApi
       ]
     )
   rescue Stripe::CardError => e
-    @errors << e.message
-    false
+    add_error(e)
+  rescue Stripe::InvalidRequestError => e
+    add_error(e)
   end
 
   def check_subscription
     customer = find_customer
+    return false if customer.deleted
     return false if customer.subscriptions.data.empty?
     customer.subscriptions.data.first.status == 'active'
   end
@@ -34,20 +38,30 @@ class StripeApi
   end
 
   def create_customer(params)
-    user_params = permit_user_params(params)
+    user_params = user_params(params)
     customer = Stripe::Customer.create(
       email: user_params[:email],
-      source: params[:stripeToken]
+      source: params[:stripeToken],
+      description: customer_description(user_params)
     )
     @user.update(stripe_id: customer.id)
     customer
   end
 
-  def permit_user_params(params)
-    params.require(:user).permit(:email)
+  def user_params(params)
+    params.require(:user).permit(:email, :first_name, :last_name, :full_address)
   end
 
-  def user_full_name(params)
+  def customer_description(params)
+    "#{customer_full_name(params)}, #{params[:full_address]}"
+  end
+
+  def customer_full_name(params)
     "#{params[:first_name].capitalize} #{params[:last_name].upcase}"
+  end
+
+  def add_error(e)
+    @errors << e.message
+    false
   end
 end

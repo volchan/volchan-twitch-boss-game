@@ -10,14 +10,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  
+
   root to: 'pages#home'
 
   resources :bots, only: :show
   resources :bosses, only: :update
 
   namespace :dashboard do
-    root to: 'dashboards#index'
+    root to: 'dashboards#show'
     resources :bots, only: %i[new create edit update destroy]
     resources :bosses, only: %i[edit update]
     resources :bots_status, only: :index
