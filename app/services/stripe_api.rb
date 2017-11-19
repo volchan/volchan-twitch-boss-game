@@ -26,7 +26,7 @@ class StripeApi
 
   def check_subscription
     customer = find_customer
-    return false if customer.deleted
+    return false if customer.deleted?
     return false if customer.subscriptions.data.empty?
     customer.subscriptions.data.first.status == 'active'
   end

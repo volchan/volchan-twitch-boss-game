@@ -3,8 +3,8 @@ module Dashboard
     def show
       subscribed?
       return authorize current_user if current_user.bot.nil?
-      @bot = policy_scope(Bot.find_with_user(current_user))
-      @logs = policy_scope(Log.find_with_bot(@bot).page(params[:page]))
+      authorize @bot = Bot.find_with_user(current_user)
+      authorize @logs = Log.find_with_bot(@bot).page(params[:page])
     end
 
     private
