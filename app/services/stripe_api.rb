@@ -31,6 +31,11 @@ class StripeApi
     customer.subscriptions.data.first.status == 'active'
   end
 
+  def retrieve_subscription
+    customer = find_customer
+    customer.subscriptions.first
+  end
+
   private
 
   def find_customer

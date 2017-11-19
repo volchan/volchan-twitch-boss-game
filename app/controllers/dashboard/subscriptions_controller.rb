@@ -2,6 +2,9 @@ module Dashboard
   class SubscriptionsController < ApplicationController
     def new
       skip_authorization
+      return unless subscribed?
+      flash[:notice] = 'You are allready subscribed !'
+      redirect_to_dashboard
     end
 
     def create
@@ -27,6 +30,15 @@ module Dashboard
     def redirect_to_dashboard
       return redirect_to new_dashboard_bot_path if current_user.bot.nil?
       redirect_to dashboard_root_path
+    end
+
+    def subscribed?
+      check_user_subscription
+    end
+
+    def check_user_subscription
+      return false if current_user.stripe_id.nil?
+      StripeApi.new(current_user).check_subscription
     end
   end
 end

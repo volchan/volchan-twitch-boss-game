@@ -12,7 +12,7 @@ module Dashboard
       @bot.user = current_user
       if @bot.save
         create_boss(@bot)
-        redirect_to controller: :dashboards, action: :index
+        redirect_to dashboard_root_path
       else
         render :new
       end
