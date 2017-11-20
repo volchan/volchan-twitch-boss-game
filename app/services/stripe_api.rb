@@ -31,16 +31,11 @@ class StripeApi
     customer.subscriptions.data.first.status == 'active'
   end
 
-  def retrieve_subscription
-    customer = find_customer
-    customer.subscriptions.first
-  end
-
-  private
-
   def find_customer
     Stripe::Customer.retrieve(@user.stripe_id)
   end
+
+  private
 
   def create_customer(params)
     user_params = user_params(params)

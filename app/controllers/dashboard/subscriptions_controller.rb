@@ -14,7 +14,7 @@ module Dashboard
       customer = strp_api.find_or_create_custormer(params)
       return card_error(strp_api) unless strp_api.create_subscription(customer)
 
-      StripeMailer.subscription(current_user).deliver_now
+      # StripeMailer.subscription(current_user).deliver_now
       flash[:notice] = 'Thank you for subscribing'
       redirect_to_dashboard
     end
