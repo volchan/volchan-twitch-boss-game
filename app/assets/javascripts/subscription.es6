@@ -142,6 +142,25 @@ const stripeTokenHandler = (token) => {
   form.submit();
 };
 
+const loadingBtn = () => {
+  let submitBtn = document.getElementById("stripe-submit");
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = "<span class='loader'><span></span><span></span><span></span></span> Processing Subscription";
+}
+
+const normalBtn = () => {
+  let submitBtn = document.getElementById("stripe-submit");
+  submitBtn.disabled = false;
+  submitBtn.innerHTML = "<i aria-hidden='true' class='fa fa-lock'></i> Finish and Subscribe";
+}
+
+const doneBtn = () => {
+  let submitBtn = document.getElementById("stripe-submit");
+  submitBtn.classList.remove("btn-primary");
+  submitBtn.classList.add("btn-success");
+  submitBtn.innerHTML = "<i aria-hidden='true' class='fa fa-check'></i> Done, Thank you";
+}
+
 const initStripe = (stripeKey) => {
   const stripe = Stripe(stripeKey);
   const elements = stripe.elements({locale: 'en'});
@@ -164,6 +183,8 @@ const initStripe = (stripeKey) => {
       let userZip = document.getElementById("user_postal_code").value;
       let userCountry = document.getElementById("user_country").value;
 
+      loadingBtn();
+
       stripe.createToken(card, {
         name: userFullName,
         address_line1: userAddress,
@@ -174,7 +195,9 @@ const initStripe = (stripeKey) => {
         if (result.error) {
           let errorElement = document.getElementById('card-number-error');
           errorElement.textContent = result.error.message;
+          normalBtn();
         } else {
+          doneBtn();
           stripeTokenHandler(result.token);
         }
       });

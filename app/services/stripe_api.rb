@@ -26,16 +26,16 @@ class StripeApi
 
   def check_subscription
     customer = find_customer
-    return false if customer.deleted
+    return false if customer.deleted?
     return false if customer.subscriptions.data.empty?
     customer.subscriptions.data.first.status == 'active'
   end
 
-  private
-
   def find_customer
     Stripe::Customer.retrieve(@user.stripe_id)
   end
+
+  private
 
   def create_customer(params)
     user_params = user_params(params)
