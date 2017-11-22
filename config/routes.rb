@@ -23,4 +23,8 @@ Rails.application.routes.draw do
     resources :bots_status, only: :index
     resources :subscriptions, only: %i[new create]
   end
+
+  namespace :profile do
+    root to: 'profiles#show'
+  end
 end
