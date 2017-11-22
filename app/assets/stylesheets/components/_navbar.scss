@@ -30,3 +30,64 @@
     }
   }
 }
+
+.dashboard-navbar, .profile-navbar {
+  background-color: $layout-bg;
+  color: $layout-text;
+  padding: 0;
+  font-size: 1rem; /* 16/16 */
+  #logs-tab {
+    position: relative;
+  }
+  &-tabs {
+    .tab-link {
+      padding: 10px;
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      border-left: 4px solid transparent;
+      transition: all 0.25s ease;
+      &:hover {
+        background-color: $tab-hover;
+        border-left: 4px solid $tab-hover-border;
+        cursor: pointer;
+      }
+      &.active{
+        border-left: 4px solid $tab-active-border;
+        position: relative;
+        &:after {
+          content: "";
+          position: absolute;
+          border-width: $arrow-width;
+          border-style: solid;
+          border-color: transparent;
+          border-right-color: white;
+          right: -$arrow-width * 2;
+          top: 50%;
+          right: 0;
+          margin-top: -$arrow-width;
+        }
+      }
+    }
+  }
+  &-status {
+    padding: 0 14px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    p {
+      margin: 0;
+    }
+    #mod {
+      svg {
+        width: 16px;
+        height: 16px;
+        path {
+          fill: $layout-text;
+        }
+      }
+    }
+  }
+}

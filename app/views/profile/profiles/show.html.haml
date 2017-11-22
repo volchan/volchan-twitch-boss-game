@@ -1,0 +1,21 @@
+.profile
+  .profile-navbar
+    .profile-navbar-tabs
+      .tab-link.active{data: {tab: 'profile'}}
+        %i.fa.fa-user{aria: {hidden: true}}
+        &nbsp; Profile
+      .tab-link{data: {tab: 'subscription'}}
+        %i.fa.fa-dollar{aria: {hidden: true}}
+        &nbsp; Subscription
+  .profile-content
+    .tab-content#profile.active
+      = render 'profile_form', user: @user
+    .tab-content#subscription
+      = @subscription
+
+= link_to 'qoidmqoizhd', new_dashboard_bot_url, class: 'btn btn-primary', data: {toggle: 'modal', target: '#test-modal'}
+
+.modal.fade#test-modal{tabindex: '-1', role: 'dialog', aria: {labelledby: 'subscriptionModalLabel'}}
+  .modal-dialog{role: 'document'}
+    .modal-content
+      .modal-body

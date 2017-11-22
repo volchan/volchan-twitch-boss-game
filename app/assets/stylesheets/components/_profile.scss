@@ -1,0 +1,14 @@
+.profile {
+  flex: 1;
+  display: flex;
+  &-content {
+    .tab-content {
+      display: none;
+      flex: 9;
+      padding: 0 10px 10px 10px;
+      &.active {
+        display: block;
+      }
+    }
+  }
+}

@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
     dashboard_root_path
   end
 
+  def after_update_path_for(_)
+    profile_root_path
+  end
+
   def user_not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'
     redirect_to(root_path)

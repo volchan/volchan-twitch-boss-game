@@ -17,16 +17,37 @@ const animateCss = (animationName) => {
   return this;
 }
 
-$(".tab-link").on("click", (e) => {
-  let tabId = $(e.target).attr("data-tab");
-  $(".tab-link").removeClass("active");
-  $(e.target).addClass("active");
-  $(".tab-content").removeClass("active");
-  $("#" + tabId).addClass("active");
+// $(".tab-link").on("click", (e) => {
+//   let tabId = $(e.target).attr("data-tab");
+//   $(".tab-link").removeClass("active");
+//   $(e.target).addClass("active");
+//   $(".tab-content").removeClass("active");
+//   $("#" + tabId).addClass("active");
+//   if (tabId === "logs") {
+//     $("#new-logs").addClass("hidden").html("0");
+//     logHiddenCounter = 0;
+//   }
+// });
+
+const navbarEvent = (event) => {
+  let tabId = event.target.dataset.tab;
+  tabs.forEach((tab) => {tab.classList.remove("active")});
+  event.target.classList.add("active");
+  contentTabs.forEach((contentTab) => {contentTab.classList.remove("active")});
+  document.getElementById(tabId).classList.add("active");
+
   if (tabId === "logs") {
-    $("#new-logs").addClass("hidden").html("0");
+    let logNotif = document.getElementById("new-logs");
+    logNotif.classList.add("hidden");
+    logNotif.innerHTML("0");
     logHiddenCounter = 0;
   }
+};
+
+let contentTabs = document.querySelectorAll(".tab-content")
+let tabs = document.querySelectorAll(".tab-link");
+tabs.forEach((tab) => {
+  tab.addEventListener("click", navbarEvent)
 });
 
 $(document).ready(() => {

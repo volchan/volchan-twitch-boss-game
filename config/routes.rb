@@ -21,8 +21,9 @@ Rails.application.routes.draw do
     resources :bots, only: %i[new create edit update destroy]
     resources :bosses, only: %i[edit update]
     resources :bots_status, only: :index
-    resources :subscriptions, only: %i[new create]
   end
+
+  resources :subscriptions, only: %i[new create], path: 'subscription'
 
   namespace :profile do
     root to: 'profiles#show'

@@ -3,4 +3,4 @@
     .col-md-12
       = link_to 'Create your bot !', new_dashboard_bot_path, class: 'btn btn-lg btn-primary'
       - unless check_user_subscription(current_user)
-        = link_to 'Subscribe', new_dashboard_subscription_path, class: 'btn btn-lg btn-primary'
+        = link_to 'Subscribe', new_subscription_path, class: 'btn btn-lg btn-primary'

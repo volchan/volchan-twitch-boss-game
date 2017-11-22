@@ -3,7 +3,7 @@
     %h5 Monthly Subscription
     %button.close{type: 'button', data: {dismiss: 'modal'}, aria: {label: 'close'}}
       %span{aria: {hidden: 'true'}} &times;
-  = simple_form_for :user, url: dashboard_subscriptions_path, html: {id: 'subscription-form'} do |f|
+  = simple_form_for :user, url: subscriptions_path, html: {id: 'subscription-form'} do |f|
     .sub-form-user-infos
       .sub-form-user-infos-top
         = f.input :first_name, label: false, placeholder: 'First Name'

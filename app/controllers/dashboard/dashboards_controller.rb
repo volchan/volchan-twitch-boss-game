@@ -11,7 +11,7 @@ module Dashboard
 
     def subscribed?
       return if check_user_subscription
-      redirect_to new_dashboard_subscription_path
+      redirect_to new_subscription_path
     end
 
     def check_user_subscription
