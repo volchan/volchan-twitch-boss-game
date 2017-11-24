@@ -7,7 +7,7 @@
       .tab-link{data: {tab: 'subscription'}}
         %i.fa.fa-dollar{aria: {hidden: true}}
         &nbsp; Subscription
-  .profile-content
+  .profile-content.scrollable
     .tab-content#profile.active
       = render 'profile_form', user: @user
     .tab-content#subscription
