@@ -1,7 +1,7 @@
 module Dashboard
   class DashboardsController < ApplicationController
     def show
-      subscribed?
+      # subscribed?
       return authorize current_user if current_user.bot.nil?
       authorize @bot = Bot.find_with_user(current_user)
       authorize @logs = Log.find_with_bot(@bot).page(params[:page])

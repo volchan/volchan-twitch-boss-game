@@ -27,6 +27,7 @@ class BossesController < ApplicationController
     params.require(:event).permit(:event_type,
                                   :channel,
                                   :username,
+                                  :gifted_to,
                                   :type,
                                   :plan,
                                   :amount,

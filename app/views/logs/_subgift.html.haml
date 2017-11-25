@@ -1,0 +1,12 @@
+.log
+  %strong [#{display_log_created_at(log, user)}]
+  .log-sub
+    %p
+      %strong
+        %i.fa.fa-dollar
+      %strong= log.username
+      just gifted
+      %strong= log.gifted_to
+      a
+      %strong= sub_plan_display(log.sub_plan)
+      sub !
