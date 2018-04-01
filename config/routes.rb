@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   resources :bots, only: :show
   resources :bosses, only: :update
+  get :sub_goal, to: 'goals#show_sub_goal'
+  get :bits_goal, to: 'goals#show_bits_goal'
 
   namespace :dashboard do
     root to: 'dashboards#show'

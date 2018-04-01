@@ -3,15 +3,13 @@ closeNotification();
 animateNotifications('slideInRight');
 
 if ("<%= @goal.g_type %>" === "sub_goal") {
-  var form = "<%= j render 'dashboard/goals/sub_goal_form', sub_goal: @goal %>";
+  var form = "<%= j render 'dashboard/goals/sub_goal_form', sub_goal: nil %>";
   var subGoalContainer = document.querySelector(".sub-goal-form");
 
   subGoalContainer.innerHTML = form;
 } else {
-  var form = "<%= j render 'dashboard/goals/bits_goal_form', bits_goal: @goal %>";
+  var form = "<%= j render 'dashboard/goals/bits_goal_form', bits_goal: nil%>";
   var bitsGoalContainer = document.querySelector(".bits-goal-form");
 
   bitsGoalContainer.innerHTML = form;
 }
-
-$('#new-goal-modal').modal('hide');

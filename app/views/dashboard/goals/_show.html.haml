@@ -1,14 +1,13 @@
 .live-goals
   .live-sub-goal
   .live-bits-goal
+  %hr
 .goals-forms
   .sub-goal-form
     = render 'dashboard/goals/sub_goal_form', sub_goal: sub_goal
   .bits-goal-form
-    - if bits_goal.present?
-      = render 'dashboard/goals/edit', goal: bits_goal
-    - else
-      = link_to 'Create new Bits goal', dashboard_goals_new_bits_goal_path, remote: true, class: 'btn btn-primary'
+    = render 'dashboard/goals/bits_goal_form', bits_goal: bits_goal
 .old-goals
+  %hr
   .old-sub-goals
   .old-bits-goals

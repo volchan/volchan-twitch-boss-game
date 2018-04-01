@@ -1,0 +1,4 @@
+- if bits_goal.present?
+  = render 'dashboard/goals/edit_goal_form', goal: bits_goal
+- else
+  = link_to 'Create new Bits goal', dashboard_goals_new_bits_goal_path, remote: true, class: 'btn btn-primary'
