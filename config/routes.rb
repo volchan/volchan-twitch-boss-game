@@ -22,5 +22,8 @@ Rails.application.routes.draw do
     resources :bosses, only: %i[edit update]
     resources :bots_status, only: :index
     resources :subscriptions, only: %i[new create]
+    resources :goals, only: %i[create edit update destroy]
+    get 'goals/new/sub_goal', to: 'goals#new_sub_goal'
+    get 'goals/new/bits_goal', to: 'goals#new_bits_goal'
   end
 end

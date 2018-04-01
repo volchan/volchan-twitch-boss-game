@@ -27,6 +27,17 @@ $(".tab-link").on("click", (e) => {
     $("#new-logs").addClass("hidden").html("0");
     logHiddenCounter = 0;
   }
+
+  if (tabId === "goals") {
+    $(".link-container").removeClass("active");
+    $(".dashboard-boss").removeClass("active");
+    $("#goals-show-links").addClass("active");
+  } else {
+    $(".link-container").removeClass("active");
+    $("#bot-show-link").addClass("active")
+    $(".dashboard-boss").removeClass("active");
+    $(".dashboard-boss").addClass("active");
+  }
 });
 
 $(document).ready(() => {

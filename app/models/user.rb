@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :validatable, :omniauthable, omniauth_providers: [:twitch]
 
   has_one :bot, dependent: :destroy
+  has_many :goals, dependent: :destroy
 
   validates :time_zone, presence: true
   validates :username, presence: true, uniqueness: true
@@ -96,5 +97,13 @@ class User < ApplicationRecord
 
   def self.find_record(login)
     find_by(['username = :value OR email = :value', { value: login }])
+  end
+
+  def sub_goals
+    goals.sub_goal
+  end
+
+  def bits_goals
+    goals.bits_goal
   end
 end

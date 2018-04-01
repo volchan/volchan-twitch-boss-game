@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171125133757) do
+ActiveRecord::Schema.define(version: 20180401145629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 20171125133757) do
     t.index ["bot_id"], name: "index_bosses_on_bot_id"
   end
 
+  create_table "bot_threads", id: :serial, force: :cascade do |t|
+    t.integer "bot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "channel"
+    t.string "twitch_token"
+    t.index ["bot_id"], name: "index_bot_threads_on_bot_id"
+  end
+
   create_table "bots", id: :serial, force: :cascade do |t|
     t.string "channel"
     t.integer "user_id"
@@ -44,6 +54,18 @@ ActiveRecord::Schema.define(version: 20171125133757) do
     t.integer "sub_twenty_five_modifier", default: 3000
     t.integer "bits_modifier", default: 1
     t.index ["user_id"], name: "index_bots_on_user_id"
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.integer "g_type"
+    t.integer "required", default: 0
+    t.integer "current", default: 0
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.string "title"
+    t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "logs", id: :serial, force: :cascade do |t|
@@ -80,7 +102,7 @@ ActiveRecord::Schema.define(version: 20171125133757) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
-    t.boolean "admin", default: false
+    t.boolean "admin"
     t.string "time_zone"
     t.integer "uid"
     t.string "provider"
@@ -93,6 +115,8 @@ ActiveRecord::Schema.define(version: 20171125133757) do
   end
 
   add_foreign_key "bosses", "bots"
+  add_foreign_key "bot_threads", "bots"
   add_foreign_key "bots", "users"
+  add_foreign_key "goals", "users"
   add_foreign_key "logs", "bots"
 end

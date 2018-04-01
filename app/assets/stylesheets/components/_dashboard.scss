@@ -6,9 +6,21 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    .bot-show-link {
+    #bot-show-link {
+      display: none;
       flex: 1;
       padding: 10px 10px 0 10px;
+      &.active {
+        display: block;
+      }
+    }
+    #goals-show-links {
+      display: none;
+      flex: 1;
+      padding: 10px 10px 0 10px;
+      &.active {
+        display: block;
+      }
     }
     .tab-content {
       display: none;
@@ -20,7 +32,41 @@
     }
   }
   &-boss {
-    display: flex;
+    display: none;
     justify-content: center;
+    &.active {
+      display: flex;
+    }
+  }
+}
+
+.goals-container {
+  flex-direction: column;
+  &.active {
+    display: flex !important;
+  }
+  .live-goals {
+    flex: 1;
+    background: red;
+  }
+  .goals-forms {
+    flex: 2;
+    display: flex;
+    .sub-goal-form {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+    }
+    .bits-goal-form {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .old-goals {
+    flex: 7;
+    background: blue;
   }
 }
