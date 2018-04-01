@@ -15,6 +15,14 @@ class GoalPolicy < ApplicationPolicy
     true
   end
 
+  def show_sub_goal?
+    true
+  end
+
+  def show_bits_goal?
+    true
+  end
+
   def create?
     true
   end
