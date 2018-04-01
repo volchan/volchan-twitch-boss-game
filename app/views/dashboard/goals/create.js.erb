@@ -1,0 +1,14 @@
+$('.notification-container').prepend("<%= j render 'shared/flashes' %>");
+closeNotification();
+animateNotifications('slideInRight');
+
+if ("<%= @goal.g_type %>" === "sub_goal") {
+  var form = "<%= j render 'dashboard/goals/sub_goal_form', sub_goal: @goal %>";
+  var subGoalContainer = document.querySelector(".sub-goal-form");
+
+  subGoalContainer.innerHTML = form;
+} else {
+
+}
+
+$('#new-goal-modal').modal('hide');

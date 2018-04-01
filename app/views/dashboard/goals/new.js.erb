@@ -1,0 +1,21 @@
+$('.notification-container').prepend("<%= j render 'shared/flashes' %>");
+closeNotification();
+animateNotifications('slideInRight');
+
+if (document.getElementById("new-goal-modal")) {
+  var form = "<%= j render 'dashboard/goals/goal_form', goal: @goal %>"
+  var formContainer = document.getElementById("goal-modal-form");
+
+  formContainer.innerHTML = form;
+} else {
+  var modal = "<%= j render 'dashboard/goals/new_form_modal', goal: @goal %>";
+  var container = document.querySelector(".goals-container");
+
+  container.insertAdjacentHTML("beforeend", modal);
+
+  $('#new-goal-modal').modal('show');
+
+  $('#new-goal-modal').on('hidden.bs.modal', function (e) {
+    $('#new-goal-modal').remove();
+  });
+}

@@ -46,11 +46,11 @@
     display: flex !important;
   }
   .live-goals {
-    flex: 1;
+    flex: 2;
     background: red;
   }
   .goals-forms {
-    flex: 2;
+    flex: 4;
     display: flex;
     .sub-goal-form {
       display: flex;
@@ -66,7 +66,7 @@
     }
   }
   .old-goals {
-    flex: 7;
+    flex: 4;
     background: blue;
   }
 }

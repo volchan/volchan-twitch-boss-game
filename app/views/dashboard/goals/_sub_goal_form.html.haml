@@ -1,0 +1,4 @@
+- if sub_goal.present?
+  = render 'dashboard/goals/edit_goal_form', goal: sub_goal
+- else
+  = link_to 'Create new Sub goal', dashboard_goals_new_sub_goal_path, remote: true, class: 'btn btn-primary'

@@ -1,0 +1,12 @@
+= simple_form_for [:dashboard, goal], remote: true do |f|
+  .modal-body
+    .row
+      .col
+        = f.input :title
+    .row
+      .col
+        = f.input :required
+        = f.hidden_field :g_type, value: goal.g_type
+  .modal-footer
+    %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+    = f.submit "Create #{goal.g_type.humanize}", class: "btn btn-primary", data: { disable_with: "Creating..." }
