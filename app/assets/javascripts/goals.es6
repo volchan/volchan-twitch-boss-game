@@ -46,7 +46,9 @@ const initBitsGoalBar = () => {
 };
 
 const updateSubGoal = ({ title, current, required, status }) => {
+  const titleLine = document.getElementById("sub-goal-title");
   if (status === "in_progress") {
+    titleLine.innerHTML = title;
     if (current <= required) {
       subGoalBar.animate(current / required);
     }
@@ -54,9 +56,24 @@ const updateSubGoal = ({ title, current, required, status }) => {
 };
 
 const updateBitsGoal = ({ title, current, required, status }) => {
+  const titleLine = document.getElementById("bits-goal-title");
   if (status === "in_progress") {
+    titleLine.innerHTML = title;
     if (current <= required) {
       bitsGoalBar.animate(current / required);
     }
   }
+};
+
+const resetSubGoal = () => {
+  console.log("resetSubGoal");
+  const titleLine = document.getElementById("sub-goal-title");
+  titleLine.innerHTML = "No Sub goal yet!";
+  bitsGoalBar.animate(0);
+};
+
+const resetBitsGoal = () => {
+  const titleLine = document.getElementById("bits-goal-title");
+  titleLine.innerHTML = "No Bits goal yet!";
+  bitsGoalBar.animate(0);
 };

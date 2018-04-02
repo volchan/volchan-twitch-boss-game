@@ -1,17 +1,21 @@
-#bits-goal-card.goal-card{data: {current: goal.current, required: goal.required}}
+#bits-goal-card.goal-card{data: {current: goal ? goal.current : 0, required: goal ? goal.required : 0}}
 = content_for :after_js do
   :javascript
     App.cable.subscriptions.create(
       {
         channel: 'BitsGoalChannel',
-        user_id: #{goal.user.id}
+        user_id: #{goal ? goal.user.id : current_user.id}
       },
       {
         connected: function(data) {
-          console.log("[connected bits #{goal.user.id}]");
+          console.log("[connected bits #{goal ? goal.user.id : current_user.id}]");
         },
         received: function(data) {
-          updateBitsGoal(data);
+          if (data.deleted) {
+            resetBitsGoal();
+          } else {
+            updateBitsGoal(data);
+          }
         }
       }
     );

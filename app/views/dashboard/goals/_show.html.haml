@@ -2,11 +2,11 @@
   .row
     .col
       .live-sub-goal
-        %p= sub_goal.title
+        %p#sub-goal-title= sub_goal ? sub_goal.title : "No Sub goal yet!"
         = render 'goals/sub_card', goal: sub_goal
     .col
       .live-bits-goal
-        %p= bits_goal.title
+        %p#bits-goal-title= bits_goal ? bits_goal.title : "No Bits goal yet!"
         = render 'goals/bits_card', goal: bits_goal
   %hr
 .goals-forms
