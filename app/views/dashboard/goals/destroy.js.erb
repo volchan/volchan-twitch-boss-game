@@ -2,6 +2,10 @@ $('.notification-container').prepend("<%= j render 'shared/flashes' %>");
 closeNotification();
 animateNotifications('slideInRight');
 
+var linksContainer = document.getElementById("goals-show-links");
+var links = "<%= j render 'dashboard/dashboards/goals_links', sub_goal: current_user.sub_goals.in_progress.first, bits_goal: current_user.bits_goals.in_progress.first %>";
+linksContainer.innerHTML = links;
+
 if ("<%= @goal.g_type %>" === "sub_goal") {
   var form = "<%= j render 'dashboard/goals/sub_goal_form', sub_goal: nil %>";
   var subGoalContainer = document.querySelector(".sub-goal-form");

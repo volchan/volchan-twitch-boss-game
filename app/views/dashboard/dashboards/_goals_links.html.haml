@@ -1,0 +1,13 @@
+.row
+  .col
+    %label.string.optional{for: "bot_Boss health"} Sub goal link
+    .input-group
+      %input#sub-goal-link.form-control.form-control-sm.readonly{readonly: 'readonly', type: 'text', value: goals_link(sub_goal) }
+      %span.input-group-btn
+        %button.btn.btn-sm.btn-primary.clipboard-btn{type: 'button', data: {container: 'body', content: 'Copied!', placement: 'bottom', toggle: 'popover', clipboard: {action: 'copy', target: '#sub-goal-link'}}} Copy link!
+  .col
+    %label.string.optional{for: "bot_Boss health"} Bits goal link
+    .input-group
+      %input#bits-goal-link.form-control.form-control-sm.readonly{readonly: 'readonly', type: 'text', value: goals_link(bits_goal) }
+      %span.input-group-btn
+        %button.btn.btn-sm.btn-primary.clipboard-btn{type: 'button', data: {container: 'body', content: 'Copied!', placement: 'bottom', toggle: 'popover', clipboard: {action: 'copy', target: '#bits-goal-link'}}} Copy link!
