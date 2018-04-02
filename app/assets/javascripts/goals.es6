@@ -11,10 +11,17 @@ const initSubGoalBar = () => {
   });
 
   const subGoal = document.getElementById("sub-goal-card");
-  const current = subGoal.dataset.current;
-  const required = subGoal.dataset.required;
+  const current = parseInt(subGoal.dataset.current);
+  const required = parseInt(subGoal.dataset.required);
+  console.log(current);
+  console.log(required);
+  console.log(current > required);
 
-  subGoalBar.set(current / required);
+  if (current > required) {
+    subGoalBar.set(1);
+  } else {
+    subGoalBar.set(current / required);
+  }
 };
 
 const initBitsGoalBar = () => {
@@ -28,8 +35,28 @@ const initBitsGoalBar = () => {
   });
 
   const bitsGoal = document.getElementById("bits-goal-card");
-  const current = bitsGoal.dataset.current;
-  const required = bitsGoal.dataset.required;
+  const current = parseInt(bitsGoal.dataset.current);
+  const required = parseInt(bitsGoal.dataset.required);
 
-  bitsGoalBar.set(current / required);
+  if (current > required) {
+    bitsGoalBar.set(1);
+  } else {
+    bitsGoalBar.set(current / required);
+  }
+};
+
+const updateSubGoal = ({ title, current, required, status }) => {
+  if (status === "in_progress") {
+    if (current <= required) {
+      subGoalBar.animate(current / required);
+    }
+  }
+};
+
+const updateBitsGoal = ({ title, current, required, status }) => {
+  if (status === "in_progress") {
+    if (current <= required) {
+      bitsGoalBar.animate(current / required);
+    }
+  }
 };

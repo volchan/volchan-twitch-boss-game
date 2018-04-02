@@ -13,6 +13,16 @@ class Goal < ApplicationRecord
   private
 
   def broadcast_to_view
-    p 'HELLO'
+    if sub_goal?
+      ActionCable.server.broadcast(
+        "sub_goal_#{user.id}",
+        JSON.parse(to_json(only: %I[title current required status]))
+      )
+    else
+      ActionCable.server.broadcast(
+        "bits_goal_#{user.id}",
+        JSON.parse(to_json(only: %I[title current required status]))
+      )
+    end
   end
 end

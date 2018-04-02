@@ -1,6 +1,21 @@
 #bits-goal-card.goal-card{data: {current: goal.current, required: goal.required}}
 = content_for :after_js do
   :javascript
-      $(document).ready(function() {
-        initBitsGoalBar();
-      });
+    App.cable.subscriptions.create(
+      {
+        channel: 'BitsGoalChannel',
+        user_id: #{goal.user.id}
+      },
+      {
+        connected: function(data) {
+          console.log("[connected bits #{goal.user.id}]");
+        },
+        received: function(data) {
+          updateBitsGoal(data);
+        }
+      }
+    );
+
+    $(document).ready(function() {
+      initBitsGoalBar();
+    });
