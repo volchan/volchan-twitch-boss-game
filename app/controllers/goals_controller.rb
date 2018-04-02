@@ -5,12 +5,12 @@ class GoalsController < ApplicationController
   before_action :check_token, only: %i[show_sub_goal show_bits_goal]
 
   def show_sub_goal
-    authorize @sub_goal = @user.sub_goals.in_progress.first
+    authorize @goal = @user.sub_goals.in_progress.first
     render layout: 'on_stream'
   end
 
   def show_bits_goal
-    authorize @sub_goal = @user.bits_goals.in_progress.first
+    authorize @goal = @user.bits_goals.in_progress.first
     render layout: 'on_stream'
   end
 

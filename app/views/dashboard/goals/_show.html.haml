@@ -1,12 +1,22 @@
 .live-goals
-  .live-sub-goal
-  .live-bits-goal
+  .row
+    .col
+      .live-sub-goal
+        %p= sub_goal.title
+        = render 'goals/sub_card', goal: sub_goal
+    .col
+      .live-bits-goal
+        %p= bits_goal.title
+        = render 'goals/bits_card', goal: bits_goal
   %hr
 .goals-forms
-  .sub-goal-form
-    = render 'dashboard/goals/sub_goal_form', sub_goal: sub_goal
-  .bits-goal-form
-    = render 'dashboard/goals/bits_goal_form', bits_goal: bits_goal
+  .row
+    .col
+      .sub-goal-form
+        = render 'dashboard/goals/sub_goal_form', sub_goal: sub_goal
+    .col
+      .bits-goal-form
+        = render 'dashboard/goals/bits_goal_form', bits_goal: bits_goal
 .old-goals
   %hr
   .old-sub-goals

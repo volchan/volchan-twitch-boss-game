@@ -1,0 +1,19 @@
+.goal-card {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  &:before {
+    position: absolute;
+    border-radius: 4px;
+    overflow: hidden;
+    content: "";
+    top: 0;
+    bottom: 6px;
+    left: 0;
+    right: 0;
+    border: 2px solid #018404;
+  }
+  svg {
+    border-radius: 4px;
+  }
+}

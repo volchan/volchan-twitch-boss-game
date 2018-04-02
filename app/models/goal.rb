@@ -7,4 +7,12 @@ class Goal < ApplicationRecord
 
   enum g_type: { sub_goal: 0, bits_goal: 1 }
   enum status: { in_progress: 0, achieved: 1 }
+
+  after_update :broadcast_to_view
+
+  private
+
+  def broadcast_to_view
+    p 'HELLO'
+  end
 end

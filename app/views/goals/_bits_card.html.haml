@@ -1,0 +1,6 @@
+#bits-goal-card.goal-card{data: {current: goal.current, required: goal.required}}
+= content_for :after_js do
+  :javascript
+      $(document).ready(function() {
+        initBitsGoalBar();
+      });

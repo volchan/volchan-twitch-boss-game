@@ -63,7 +63,7 @@ module Dashboard
     end
 
     def goal_params
-      params.require(:goal).permit(:title, :g_type, :required)
+      params.require(:goal).permit(:title, :g_type, :required, :current)
     end
   end
 end
