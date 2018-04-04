@@ -77,8 +77,7 @@
               animateNotifications('slideInRight');
             }
           } else if (data['log']) {
-            var log = data['log'];
-            logsWaitlist.unshift(log);
+            logsWaitlist.unshift(data['log']);
             prependLog();
           }
         }
