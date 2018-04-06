@@ -9,7 +9,7 @@ class Game
   def sub_event(attr)
     @logger.sub_log(attr)
     sub_goal = @bot.user.sub_goals.in_progress.first
-    sub_goal.update(current: sub_goal.current + 1)
+    sub_goal.update(current: sub_goal.current + 1) if sub_goal
     amount = sub_damage_or_heal(attr[:plan])
     game_dispatch(attr, amount)
   end
@@ -17,7 +17,7 @@ class Game
   def bits_event(attr)
     @logger.bits_log(attr)
     bits_goal = @bot.user.bits_goals.in_progress.first
-    bits_goal.update(current: bits_goal.current + 1)
+    bits_goal.update(current: bits_goal.current + 1) if bits_goal
     amount = bits_damage_or_heal(attr[:amount].to_i)
     game_dispatch(attr, amount)
   end
