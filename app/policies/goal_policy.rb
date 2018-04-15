@@ -31,6 +31,10 @@ class GoalPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def pause?
+    record.user == user
+  end
+
   def destroy?
     record.user == user
   end

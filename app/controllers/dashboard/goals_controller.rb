@@ -1,6 +1,6 @@
 module Dashboard
   class GoalsController < ApplicationController
-    before_action :set_goal, only: %I[update destroy]
+    before_action :set_goal, only: %I[update destroy pause]
 
     def new_sub_goal
       authorize @goal = Goal.new(g_type: 0)
@@ -53,6 +53,20 @@ module Dashboard
           format.json { render json: @goal.errors, status: :unprocessable_entity }
           format.js   { render :update, layout: false, content_type: 'text/javascript' }
         end
+      end
+    end
+
+    def pause
+      case @goal.status
+      when 'in_progress'
+        flash.now[:notice] = "#{@goal.g_type.humanize} paused!"
+        @goal.paused!
+      else
+        flash.now[:notice] = "#{@goal.g_type.humanize} resumed!"
+        @goal.in_progress!
+      end
+      respond_to do |format|
+        format.js { render :update }
       end
     end
 

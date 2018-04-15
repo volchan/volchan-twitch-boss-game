@@ -103,7 +103,15 @@ class User < ApplicationRecord
     goals.sub_goal
   end
 
+  def current_sub_goal
+    goals.sub_goal.in_progress.first || goals.sub_goal.paused.first
+  end
+
   def bits_goals
     goals.bits_goal
+  end
+
+  def current_bits_goal
+    goals.bits_goal.in_progress.first || goals.bits_goal.paused.first
   end
 end

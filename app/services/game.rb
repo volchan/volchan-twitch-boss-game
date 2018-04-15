@@ -8,17 +8,17 @@ class Game
 
   def sub_event(attr)
     @logger.sub_log(attr)
-    sub_goal = @bot.user.sub_goals.in_progress.first
-    sub_goal.update(current: sub_goal.current + 1) if sub_goal
-    amount = sub_damage_or_heal(attr[:plan])
-    game_dispatch(attr, amount)
+    plan = sub_damage_or_heal(attr[:plan])
+    sub_goal = @bot.user.current_sub_goal
+    update_sub_goal(sub_goal, amount) if sub_goal&.in_progess?
+    game_dispatch(attr, plan)
   end
 
   def bits_event(attr)
     @logger.bits_log(attr)
-    bits_goal = @bot.user.bits_goals.in_progress.first
-    bits_goal.update(current: bits_goal.current + 1) if bits_goal
     amount = bits_damage_or_heal(attr[:amount].to_i)
+    bits_goal = @bot.user.current_bits_goal
+    bits_goal.update(current: bits_goal.current + amount) if bits_goal&.in_progess?
     game_dispatch(attr, amount)
   end
 
@@ -208,5 +208,14 @@ class Game
       max_shield: @boss.max_hp,
       avatar: @boss.avatar
     )
+  end
+
+  def update_sub_goal(goal, plan)
+    case plan
+    when 'Prime' then goal.update(current: goal.current + 1)
+    when '1000' then goal.update(current: goal.current + 1)
+    when '2000' then goal.update(current: goal.current + 2)
+    when '3000' then goal.update(current: goal.current + 6)
+    end
   end
 end

@@ -9,6 +9,10 @@
       = f.input :required
   .row
     .col
-      = link_to "Delete #{goal.g_type.humanize}", dashboard_goal_path(goal), method: :delete, data: { disable_with: "Deleting...", confirm: 'Are you sure ?' }, class: "btn btn-danger btn-block", remote: true
+      = link_to dashboard_goal_path(goal), method: :delete, data: { disable_with: "Deleting...", confirm: 'Are you sure ?' }, class: "btn btn-danger btn-block", remote: true do
+        %i.fa.fa-trash
+        = "Delete #{goal.g_type.humanize}"
+    .col
+      = display_pause_btn(goal)
     .col
       = f.submit "Update #{goal.g_type.humanize}", class: "btn btn-primary btn-block", data: { disable_with: "Updating..." }

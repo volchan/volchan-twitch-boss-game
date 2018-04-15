@@ -50,7 +50,7 @@ const updateSubGoal = ({ title, current, required, status }) => {
   if (titleLine) {
     titleLine.innerHTML = title;
   }
-  
+
   if (status === "in_progress") {
     if (current <= required) {
       subGoalBar.animate(current / required);
@@ -63,7 +63,7 @@ const updateBitsGoal = ({ title, current, required, status }) => {
   if (titleLine) {
     titleLine.innerHTML = title;
   }
-  
+
   if (status === "in_progress") {
     if (current <= required) {
       bitsGoalBar.animate(current / required);
