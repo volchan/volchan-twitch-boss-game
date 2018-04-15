@@ -2,13 +2,14 @@
   position: relative;
   border-radius: 4px;
   overflow: hidden;
+  flex: 8;
   &:before {
     position: absolute;
     border-radius: 4px;
     overflow: hidden;
     content: "";
     top: 0;
-    bottom: 6px;
+    bottom: 0;
     left: 0;
     right: 0;
     border: 2px solid #018404;
@@ -16,4 +17,47 @@
   svg {
     border-radius: 4px;
   }
+}
+
+.goal-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.live-sub-goal {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+
+.live-bits-goal {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+
+.goal-infos {
+  flex: 2;
+  padding: 10px;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  p {
+    margin: 0;
+  }
+}
+
+.sub-goal-infos {
+  @extend .goal-infos;
+}
+
+.bits-goal-infos {
+  @extend .goal-infos;
 }

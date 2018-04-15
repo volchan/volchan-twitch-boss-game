@@ -1,4 +1,11 @@
-#bits-goal-card.goal-card{data: {current: goal ? goal.current : 0, required: goal ? goal.required : 0}}
+.goal-container
+  #bits-goal-card.goal-card{data: {current: goal ? goal.current : 0, required: goal ? goal.required : 0}}
+  .bits-goal-infos
+    %p
+      %span.current-goal= goal ? goal.current : 0
+      \/
+      %span.required-goal= goal ? goal.required : 0
+
 = content_for :after_js do
   :javascript
     App.cable.subscriptions.create(
@@ -21,5 +28,5 @@
     );
 
     $(document).ready(function() {
-      initBitsGoalBar();
+      initBitsGoalBar("#{ goal&.status }");
     });

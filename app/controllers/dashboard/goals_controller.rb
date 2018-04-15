@@ -32,7 +32,10 @@ module Dashboard
 
     def update
       respond_to do |format|
-        if @goal.update(goal_params)
+        if @goal.paused?
+          flash.now[:notice] = "Can't update paused #{@goal.g_type.humanize}!"
+          format.js { render :update }
+        elsif @goal.update(goal_params)
           flash.now[:notice] = "#{@goal.g_type.humanize} updated!"
           format.js { render :update }
         else
