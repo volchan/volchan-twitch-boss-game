@@ -10,7 +10,7 @@ class Game
     @logger.sub_log(attr)
     plan = sub_damage_or_heal(attr[:plan])
     sub_goal = @bot.user.current_sub_goal
-    update_sub_goal(sub_goal, amount) if sub_goal&.in_progress?
+    update_sub_goal(sub_goal, plan) if sub_goal&.in_progress?
     game_dispatch(attr, plan)
   end
 
